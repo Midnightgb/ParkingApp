@@ -1,0 +1,21 @@
+name: Push to Backup
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  push-to-backup:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Push to Backup branch
+      run: |
+        git config --global user.email "github-actions@github.com"
+        git config --global user.name "GitHub Actions"
+        git checkout -b backup
+        git push origin backup
