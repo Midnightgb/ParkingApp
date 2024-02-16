@@ -15,7 +15,7 @@ jobs:
 
     - name: Push to Backup branch
       run: |
-        git config --global user.email "midnight342@gmail.com"
+        git config --global user.email "midnight3424@gmail.com"
         git config --global user.name "midnightgb"
         git checkout -b backup
         git push origin backup
