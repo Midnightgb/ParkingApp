@@ -1,4 +1,4 @@
-name: Push to Backup
+name: Merge to Backup
 
 on:
   push:
@@ -13,11 +13,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Push to Backup branch
+    - name: Merge to Backup branch
       run: |
-        git config --global user.email "midnight3424@gmail.com"
-        git config --global user.name "midnightgb"
-        git checkout -b backup
+        git config --global user.email "github-actions@github.com"
+        git config --global user.name "GitHub Actions"
+        git checkout backup
+        git merge development
         git push origin backup
       env:
-        GH_TOKEN: ${{ secrets.ACTION_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
