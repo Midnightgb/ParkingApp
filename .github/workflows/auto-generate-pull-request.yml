@@ -21,4 +21,6 @@ jobs:
         branch: ${{ github.event_name == 'push' && contains(github.event.ref, 'dev') && github.ref }}
         base: 'development'
         title: 'Auto-generated Pull Request'
-        body: 'This pull request was automatically created.'
+        body: 'This pull request was automatically created. by the user: ${{ github.actor }}'
+        labels: 'auto-generated'
+        assignees: 'midnightgb'
