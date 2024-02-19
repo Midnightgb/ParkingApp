@@ -24,4 +24,4 @@ jobs:
         body: 'This pull request was automatically created. by the user: ${{ github.actor }}'
         labels: 'auto-generated'
         assignees: 'midnightgb'
-        push: true
+
