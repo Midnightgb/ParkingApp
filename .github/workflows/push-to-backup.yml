@@ -20,4 +20,4 @@ jobs:
         git checkout -b backup
         git push origin backup
       env:
-        GH_TOKEN: ${{ secrets.ACTION_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
