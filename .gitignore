@@ -1,3 +1,5 @@
+__pycache__/
+
 # Compiled class files
 *.class
 
@@ -78,7 +80,9 @@ build/
 hs_err_pid*
 replay_pid*
 
+
 # Android files
+
 *.iml
 .gradle
 /local.properties
