@@ -1,7 +1,9 @@
-package com.example.appcamera;
+package com.example.camaraparqueadero;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
@@ -20,6 +22,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,16 +30,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.handshake.ServerHandshake;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,15 +69,28 @@ public class MainActivity extends AppCompatActivity {
     private CaptureRequest.Builder captureRequestBuilder;
     private ImageReader imageReader;
 
-    private File file;
+    private EditText campo_url_servidor;
+    private  EditText campo_nombre_camara;
+
+    private WebSocketClient mWebSocketClient;
+    private String url_back;
+    private String nombre_camara;
+
+    private Button btn_logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        SharedPreferences archivo = getSharedPreferences("app_camara", Context.MODE_PRIVATE);
+        url_back = archivo.getString("url_back", null);
+        nombre_camara = archivo.getString("nombre_camara", null);
+
         surfaceView = findViewById(R.id.surfaceView_1);
         captureButton = findViewById(R.id.captureButton_1);
+        btn_logout =  findViewById(R.id.btn_logout);
 
         captureButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +102,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cerrarSesion();
+            }
+        });
+
+        connectWebSocket();
     }
 
     @Override
@@ -108,13 +148,6 @@ public class MainActivity extends AppCompatActivity {
             outputSurfaces.add(imageReader.getSurface());
 
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
                 return;
             }
             manager.openCamera(cameraId, new CameraDevice.StateCallback() {
@@ -122,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onOpened(@NonNull CameraDevice camera) {
                     cameraDevice = camera;
                     createCameraPreview();
+                    captureImage(); 
                 }
 
                 @Override
@@ -172,4 +206,161 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    private void connectWebSocket() {
+        URI uri;
+        String url_construida = "ws://"+url_back+"/ws/"+nombre_camara;
+        System.out.println(url_construida);
+        try {
+            uri = new URI(url_construida);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        mWebSocketClient = new WebSocketClient(uri) {
+            @Override
+            public void onOpen(ServerHandshake serverHandshake) {
+                Log.i("WebSocket", "Conexión abierta");
+            }
+
+            @Override
+            public void onMessage(String s) {
+                Log.i("WebSocket", "Mensaje recibido: " + s);
+                if ("capture_photo".equals(s)) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            openCamera();
+                        }
+                    });
+                }
+            }
+
+
+            @Override
+            public void onClose(int i, String s, boolean b) {
+                Log.i("WebSocket", "Conexión cerrada");
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Log.e("WebSocket", "Error: " + e.getMessage());
+            }
+        };
+        mWebSocketClient.connect();
+    }
+
+    private void captureImage() {
+        if (cameraDevice != null) {
+            imageReader.setOnImageAvailableListener(new ImageReader.OnImageAvailableListener() {
+                @Override
+                public void onImageAvailable(ImageReader reader) {
+                    Image image = null;
+                    FileOutputStream outputStream = null;
+                    try {
+                        image = reader.acquireLatestImage();
+                        ByteBuffer buffer = image.getPlanes()[0].getBuffer();
+                        byte[] bytes = new byte[buffer.capacity()];
+                        buffer.get(bytes);
+
+                        // Guarda la imagen en un archivo temporal
+                        File imageFile = createTempImageFile();
+                        outputStream = new FileOutputStream(imageFile);
+                        outputStream.write(bytes);
+
+                        // Envía el archivo al servidor mediante una solicitud POST
+                        sendImageToServer(imageFile);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        if (image != null) {
+                            image.close();
+                        }
+                        if (outputStream != null) {
+                            try {
+                                outputStream.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            }, null);
+        } else {
+            Log.e(TAG, "La cámara no está inicializada");
+        }
+    }
+
+    private File createTempImageFile() throws IOException {
+        // Crea un archivo temporal en el directorio de caché de la aplicación
+        File cacheDir = getApplicationContext().getCacheDir();
+        String fileName = "temp_image.jpg";
+        return new File(cacheDir, fileName);
+    }
+
+    private void sendImageToServer(File imageFile) {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("file", "placa.jpg",
+                        RequestBody.create(MediaType.parse("image/jpeg"), imageFile))
+                .build();
+
+        Request request = new Request.Builder()
+                .url("http://"+url_back+"/upload/")
+                .post(requestBody)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    throw new IOException("Error al enviar la imagen: " + response);
+                }
+                // La imagen se ha enviado exitosamente
+                Log.d(TAG, "Imagen enviada exitosamente al servidor");
+
+                // Cerrar la sesión de captura de la cámara
+                closeCameraSession();
+            }
+        });
+    }
+
+    private void closeCameraSession() {
+        if (cameraCaptureSession != null) {
+            try {
+                cameraCaptureSession.close();
+            } finally {
+                cameraCaptureSession = null;
+            }
+        }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mWebSocketClient != null) {
+            mWebSocketClient.close();
+        }
+    }
+
+    public void cerrarSesion() {
+        SharedPreferences sharedPreferences = getSharedPreferences("app_camara", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+
+        Intent intencion = new Intent(getApplicationContext(), Login.class);
+        startActivity(intencion);
+        finish();
+    }
+
 }
