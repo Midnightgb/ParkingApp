@@ -1,8 +1,10 @@
-package com.example.parkingapp;
+package com.example.parkingapp.user.seller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.parkingapp.R;
 
 public class ParkingAssigned extends AppCompatActivity {
 
