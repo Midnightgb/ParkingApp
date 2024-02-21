@@ -80,6 +80,9 @@ build/
 hs_err_pid*
 replay_pid*
 
+
+# Android files
+
 *.iml
 .gradle
 /local.properties
@@ -95,3 +98,4 @@ replay_pid*
 .externalNativeBuild
 .cxx
 local.properties
+
