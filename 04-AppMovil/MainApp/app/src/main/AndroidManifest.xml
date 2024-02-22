@@ -13,6 +13,21 @@
         android:theme="@style/Theme.ParkingApp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.user.AddUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profile.UserProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.home.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.authentication.ResetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.authentication.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.authentication.LoginActivity"
             android:exported="true">
             <intent-filter>
