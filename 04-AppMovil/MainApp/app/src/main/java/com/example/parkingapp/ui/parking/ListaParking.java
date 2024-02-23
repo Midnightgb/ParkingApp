@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.parkingapp.R;
 
-public class CreateParking2 extends AppCompatActivity {
+public class ListaParking extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_parking2);
+        setContentView(R.layout.activity_lista_parking);
     }
 }

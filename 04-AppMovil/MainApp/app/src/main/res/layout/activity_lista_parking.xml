@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.parking.CreateParking">
+    tools:context=".ui.parking.ListaParking">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
