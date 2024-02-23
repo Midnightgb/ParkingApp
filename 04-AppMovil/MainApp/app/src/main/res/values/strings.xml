@@ -4,4 +4,5 @@
     <string name="cuenta">cuenta</string>
     <string name="email">Email</string>
     <string name="contrase_a">Contraseña</string>
+    <string name="iniciar_sesion">Iniciar sesión</string>
 </resources>
