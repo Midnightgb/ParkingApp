@@ -1,9 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.authentication.LoginActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/accede_a_tu"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:fontFamily="@font/baloo2_bold"
+        android:textColor="@color/black"
+        android:textSize="@dimen/title"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/cuenta"
+        android:fontFamily="@font/baloo2_bold"
+        android:textColor="@color/primary"
+        android:textSize="@dimen/title"
+        />
+    <Button
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        
+        />
+</LinearLayout>

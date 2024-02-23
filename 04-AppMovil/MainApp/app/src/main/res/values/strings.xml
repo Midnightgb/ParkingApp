@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ParkingApp</string>
+    <string name="accede_a_tu">Accede a tu </string>
+    <string name="cuenta">cuenta</string>
 </resources>
