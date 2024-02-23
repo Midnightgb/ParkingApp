@@ -74,7 +74,7 @@ def analysis_image():
         if read_result.status not in ['notStarted', 'running']:
             break
         time.sleep(1)
-    texto_placas = ""
+    texto_placas = None
     if read_result.status == OperationStatusCodes.succeeded:
         for text_result in read_result.analyze_result.read_results:
             for line in text_result.lines:

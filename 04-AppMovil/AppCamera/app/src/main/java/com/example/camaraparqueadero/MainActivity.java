@@ -306,13 +306,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mWebSocketClient != null) {
-            mWebSocketClient.close();
-        }
-    }
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        if (mWebSocketClient != null) {
+//            mWebSocketClient.close();
+//        }
+//    }
 
     public void cerrarSesion() {
         SharedPreferences sharedPreferences = getSharedPreferences("app_camara", Context.MODE_PRIVATE);
