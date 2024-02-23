@@ -30,7 +30,7 @@
                     android:layout_height="50dp"
                     android:padding="20dp"
                     app:cardCornerRadius="50dp"
-                    app:cardBackgroundColor="@color/blue"
+                    app:cardBackgroundColor="@color/primary"
                     android:layout_gravity="center"
                     >
                     <ImageView
