@@ -18,7 +18,6 @@ imgurpython==1.1.7
 isodate==0.6.1
 msrest==0.7.1
 oauthlib==3.2.2
-pillow==10.2.0
 pycparser==2.21
 pydantic==2.6.1
 pydantic_core==2.16.2
