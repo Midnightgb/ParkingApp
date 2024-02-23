@@ -4,5 +4,5 @@
     <solid android:color="@color/bg_light" />
     <size android:height="@dimen/form_h"/>
     <size android:width="@dimen/form_w"/>
-    <stroke android:width="2dp" android:color="@color/border_active" />
+    <stroke android:width="2dp" android:color="@color/secondary" />
 </shape>

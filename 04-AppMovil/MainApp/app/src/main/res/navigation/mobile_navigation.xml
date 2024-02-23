@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_vehicle"
-        android:name="com.example.parkingapp.ui.vehicle.VehicleFragment"
-        android:label="@string/title_vehicle"
-        tools:layout="@layout/fragment_vehicle" />
+        android:id="@+id/navigation_parking"
+        android:name="com.example.parkingapp.ui.parking.ParkingFragment"
+        android:label="@string/title_parking"
+        tools:layout="@layout/fragment_parking" />
 
     <fragment
         android:id="@+id/navigation_ticket"

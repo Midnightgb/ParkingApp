@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@color/white"
     android:padding="10dp"
-    tools:context=".user.seller.ParkingAssigned">
+    tools:context=".ui.parking.ParkingAssigned">
 
 
 

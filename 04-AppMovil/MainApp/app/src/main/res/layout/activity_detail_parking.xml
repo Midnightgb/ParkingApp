@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".user.seller.DetailParking"
-    android:orientation="vertical">
+    tools:context=".ui.parking.DetailParking"
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,18 +26,12 @@
 
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
             android:text="Detalle del parqueadero"
-            android:textSize="25sp"
-            android:textStyle="bold"
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
-            android:fontFamily="@font/baloo2_bold"
             android:layout_weight="0.9"
+            style="@style/TextSubtitle"
             />
-
-
 
     </LinearLayout>
 
@@ -44,44 +39,36 @@
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:layout_margin="10dp"
-        android:background="@color/blue"
+        android:background="@color/primary"
         />
 
     <TextView
         android:id="@+id/NameParking"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="Nombre del parqueadero"
-        android:textSize="25sp"
-        android:textStyle="bold"
         android:layout_margin="5dp"
-        android:fontFamily="@font/baloo2_bold"
+        style="@style/TextSubtitle"
+        android:layout_width="match_parent"
         />
 
     <TextView
         android:id="@+id/AddresParking"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="Direccion del parqueadero"
         android:textSize="20sp"
-        android:layout_marginLeft="10dp"
         android:fontFamily="@font/baloo2_regular"
+        style="@style/TextDefault"
         />
 
-
-        >
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="6-am -10pm"
+            android:text="@string/_6_am_10pm"
             android:gravity="center"
             android:layout_margin="10dp"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/blue"
+            android:textColor="@color/primary"
             android:background="@drawable/card_border"
-            android:fontFamily="@font/baloo2_bold"
-
+            style="@style/TextBold"
             />
 
     <LinearLayout
@@ -89,40 +76,30 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="20dp"
-        android:layout_marginTop="10dp"
-        >
+        android:layout_marginTop="10dp">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_weight="0.5"
-            >
+            android:layout_weight="0.5">
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Moto"
+                android:text="@string/moto"
                 android:textSize="20sp"
-                android:textStyle="bold"
                 android:layout_margin="5dp"
                 android:gravity="center"
-                android:fontFamily="@font/baloo2_bold"/>
-
-
+                style="@style/TextBold"/>
 
             <TextView
                 android:id="@+id/PriceMoto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="$ 00000"
-                android:textSize="30sp"
                 android:background="@drawable/border_radius_bg_blue"
                 android:layout_gravity="center"
-                android:textColor="@color/blue"
+                android:fontFamily="@font/baloo2_regular"
+                android:textColor="@color/primary"
                 android:layout_marginTop="10dp"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="5dp"
-
-                />
+                style="@style/TextTitle" />
 
 
         </LinearLayout>
@@ -150,7 +127,7 @@
                 android:textSize="30sp"
                 android:background="@drawable/border_radius_bg_blue"
                 android:layout_gravity="center"
-                android:textColor="@color/blue"
+                android:textColor="@color/primary"
                 android:layout_marginTop="10dp"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="5dp"
@@ -188,7 +165,7 @@
                 android:textSize="30sp"
                 android:background="@drawable/border_radius_bg_blue"
                 android:layout_gravity="center"
-                android:textColor="@color/blue"
+                android:textColor="@color/primary"
                 android:layout_marginTop="10dp"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="5dp"
@@ -219,7 +196,7 @@
                 android:textSize="30sp"
                 android:background="@drawable/border_radius_bg_blue"
                 android:layout_gravity="center"
-                android:textColor="@color/blue"
+                android:textColor="@color/primary"
                 android:layout_marginTop="10dp"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="5dp"

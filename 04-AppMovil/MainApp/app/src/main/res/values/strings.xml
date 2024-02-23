@@ -5,7 +5,7 @@
     <string name="email">Email</string>
     <string name="contrase_a">Contraseña</string>
 
-  <string name="nameParking">Nombre del Parqueadero</string>
+    <string name="nameParking">Nombre del Parqueadero</string>
     <string name="addressParking">Direccion del Parqueadero</string>
     <string name="priceParking">Tarifas:</string>
 
@@ -32,4 +32,7 @@
     <string name="title_ticket">Tiquetes</string>
     <string name="title_user">Usuarios</string>
     <string name="title_profile">Perfil</string>
+    <string name="_6_am_10pm">6am - 10pm</string>
+    <string name="moto">Moto</string>
+    <string name="title_parking">Parqueaderos</string>
 </resources>

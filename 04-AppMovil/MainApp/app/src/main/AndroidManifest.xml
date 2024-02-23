@@ -17,32 +17,16 @@
             android:exported="false" />
       
         <activity
-            android:name=".ui.user.EditSeller"
+            android:name=".ui.user.seller.EditSeller"
             android:exported="false" />
       
         <activity
-            android:name=".ui.user.CreateSeller"
+            android:name=".ui.user.seller.CreateSeller"
             android:exported="false" />
       
         <activity
             android:name=".ui.parking.CreateParking"
             android:exported="false"/>
-
-        <activity
-            android:name=".ui.parking.CreateParking2"
-            android:exported="false" />
-      
-        <activity
-            android:name=".ui.user.AddUserActivity"
-            android:exported="false" />
-      
-        <activity
-            android:name=".ui.profile.UserProfileActivity"
-            android:exported="false" />
-      
-        <activity
-            android:name=".ui.home.HomeActivity"
-            android:exported="false" />
 
         <activity
             android:name=".ui.authentication.ResetPasswordActivity"
@@ -57,12 +41,12 @@
             android:exported="false" />
 
         <activity
-            android:name=".user.seller.ParkingAssigned"
+            android:name=".ui.parking.ParkingAssigned"
             android:exported="false" />
       
         <activity
             android:name=".MainActivity"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
