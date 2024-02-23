@@ -4,4 +4,23 @@
     <string name="cuenta">cuenta</string>
     <string name="email">Email</string>
     <string name="contrase_a">Contraseña</string>
+
+    <string name="nameParking">Nombre del Parqueadero</string>
+    <string name="addressParking">Direccion del Parqueadero</string>
+    <string name="priceParking">Tarifas:</string>
+
+    <string name="priceCamioneta">Camioneta:</string>
+    <string name="priceCamion">Camion:</string>
+    <string name="priceCarro">Carro:</string>
+    <string name="priceMoto">Moto:</string>
+
+    <string name="nameSeller">Nombre del Vendedor</string>
+
+    <string-array name="roles">
+        <item>Rol 1</item>
+        <item>Rol 2</item>
+        <item>Rol 3</item>
+        <!-- Agrega más roles según sea necesario -->
+    </string-array>
+
 </resources>

@@ -4,4 +4,7 @@
     <dimen name="form_w">300dp</dimen>
     <dimen name="form_h">50dp</dimen>
     <dimen name="icons_sz">20dp</dimen>
+
+
+    <dimen name="titlePrice">19sp</dimen>
 </resources>

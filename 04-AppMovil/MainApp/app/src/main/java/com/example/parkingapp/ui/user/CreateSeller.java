@@ -1,4 +1,4 @@
-package com.example.parkingapp.ui.parking;
+package com.example.parkingapp.ui.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,9 +8,12 @@ import com.example.parkingapp.R;
 
 public class CreateSeller extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_seller);
+
+
     }
 }
