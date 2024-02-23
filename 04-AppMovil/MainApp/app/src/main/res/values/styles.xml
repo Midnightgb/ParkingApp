@@ -6,7 +6,44 @@
         <item name="android:ems">10</item>
         <item name="android:fontFamily">@font/baloo2_regular</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:background">@color/bg_form</item>
         <item name="android:padding">10dp</item>
-    </style>FormEditTextActive
+        <item name="android:drawablePadding">12dp</item>
+        <item name="android:drawableTint">@color/gray</item>
+        <item name="android:background">@drawable/status_default</item>
+    </style>
+    <style name="FormButtonInactive">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/form_h</item>
+        <item name="android:fontFamily">@font/baloo2_bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/btn_inactive</item>
+        <item name="android:elevation">24dp</item>
+    </style>
+    <style name="FormButtonActive">
+            <item name="android:layout_width">match_parent</item>
+            <item name="android:layout_height">@dimen/form_h</item>
+            <item name="android:fontFamily">@font/baloo2_bold</item>
+            <item name="android:textColor">@color/white</item>
+            <item name="android:background">@drawable/btn_active</item>
+            <item name="android:elevation">24dp</item>
+    </style>
+
+    <style name="TextDefault">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:fontFamily">@font/baloo2_regular</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="TextBold">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:fontFamily">@font/baloo2_bold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="Widget.Theme.ParkingApp.ButtonBar.Fullscreen" parent="">
+        <item name="android:background">@color/black_overlay</item>
+        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
+    </style>
 </resources>
