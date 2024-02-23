@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
+    android:background="@color/white"
     android:padding="10dp"
     tools:context=".user.seller.ParkingAssigned">
 
@@ -33,7 +33,7 @@
                     />
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="45dp"
                     android:hint="Parking"
                     android:inputType="text"
                     android:textSize="20sp"
@@ -62,6 +62,7 @@
             android:textStyle="bold"
             android:paddingLeft="10dp"
             android:textSize="18sp"
+            android:fontFamily="@font/baloo2_bold"
             />
         <TextView
             android:id="@+id/parkins_assigned_result"
@@ -70,6 +71,7 @@
             android:text="000)"
             android:paddingVertical="10dp"
             android:textSize="18sp"
+            android:fontFamily="@font/baloo2_bold"
 
             />
     </LinearLayout>
@@ -82,91 +84,5 @@
         android:padding="10dp" />
 
 
-    <!--<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        >
 
-        <Button
-            android:id="@+id/btn_home"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/white"
-            android:drawableBottom="@drawable/icon_home"
-            android:padding="0dp"
-            android:text="home"
-            android:textColor="@color/gray"
-            android:textSize="20sp"
-
-            />
-        <Button
-            android:id="@+id/btn_vehicle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/white"
-            android:drawableBottom="@drawable/icon_vehicles"
-            android:padding="0dp"
-            android:text="Parkings"
-            android:textColor="@color/gray"
-            android:textSize="20sp"
-
-            />
-
-        <Button
-            android:id="@+id/btn_ticket"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/white"
-            android:drawableBottom="@drawable/icon_tickets"
-            android:padding="0dp"
-            android:text="Tickets"
-            android:textColor="@color/gray"
-            android:textSize="20sp"
-
-            />
-
-        <Button
-            android:id="@+id/btn_users"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/white"
-            android:drawableBottom="@drawable/icon_users"
-            android:padding="0dp"
-            android:text="Users"
-            android:textColor="@color/gray"
-            android:textSize="20sp"
-
-            />
-
-        <Button
-            android:id="@+id/btn_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/white"
-            android:drawableBottom="@drawable/icon_users"
-            android:padding="0dp"
-            android:text="Profile"
-            android:textColor="@color/gray"
-            android:textSize="20sp"
-
-            />
-
-
-
-
-
-
-    </LinearLayout>
-    -->
 </LinearLayout>

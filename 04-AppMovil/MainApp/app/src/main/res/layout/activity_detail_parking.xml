@@ -32,7 +32,7 @@
             android:textStyle="bold"
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
-
+            android:fontFamily="@font/baloo2_bold"
             android:layout_weight="0.9"
             />
 
@@ -51,20 +51,21 @@
         android:id="@+id/NameParking"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nombre del parqueo"
+        android:text="Nombre del parqueadero"
         android:textSize="25sp"
         android:textStyle="bold"
         android:layout_margin="5dp"
+        android:fontFamily="@font/baloo2_bold"
         />
 
     <TextView
         android:id="@+id/AddresParking"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Direccion del parqueo"
+        android:text="Direccion del parqueadero"
         android:textSize="20sp"
         android:layout_marginLeft="10dp"
-
+        android:fontFamily="@font/baloo2_regular"
         />
 
 
@@ -79,6 +80,8 @@
             android:textStyle="bold"
             android:textColor="@color/blue"
             android:background="@drawable/card_border"
+            android:fontFamily="@font/baloo2_bold"
+
             />
 
     <LinearLayout
@@ -101,7 +104,10 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_margin="5dp"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:fontFamily="@font/baloo2_bold"/>
+
+
 
             <TextView
                 android:id="@+id/PriceMoto"
@@ -109,13 +115,15 @@
                 android:layout_height="wrap_content"
                 android:text="$ 00000"
                 android:textSize="30sp"
-                android:background="@color/light_blue"
+                android:background="@drawable/border_radius_bg_blue"
                 android:layout_gravity="center"
                 android:textColor="@color/blue"
                 android:layout_marginTop="10dp"
-
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
 
                 />
+
 
         </LinearLayout>
 
@@ -140,10 +148,12 @@
                 android:layout_height="wrap_content"
                 android:text="$ 00000"
                 android:textSize="30sp"
-                android:background="@color/light_blue"
+                android:background="@drawable/border_radius_bg_blue"
                 android:layout_gravity="center"
                 android:textColor="@color/blue"
                 android:layout_marginTop="10dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
                 />
 
         </LinearLayout>
@@ -176,10 +186,12 @@
                 android:layout_height="wrap_content"
                 android:text="$ 00000"
                 android:textSize="30sp"
-                android:background="@color/light_blue"
+                android:background="@drawable/border_radius_bg_blue"
                 android:layout_gravity="center"
                 android:textColor="@color/blue"
                 android:layout_marginTop="10dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
                 />
 
         </LinearLayout>
@@ -205,10 +217,12 @@
                 android:layout_height="wrap_content"
                 android:text="$ 00000"
                 android:textSize="30sp"
-                android:background="@color/light_blue"
+                android:background="@drawable/border_radius_bg_blue"
                 android:layout_gravity="center"
                 android:textColor="@color/blue"
                 android:layout_marginTop="10dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
                 />
 
         </LinearLayout>
