@@ -15,6 +15,7 @@ import android.media.Image;
 import android.media.ImageReader;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Base64;
 import android.util.Log;
 import android.util.Size;
 import android.view.Surface;
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         surfaceView = findViewById(R.id.surfaceView_1);
         captureButton = findViewById(R.id.captureButton_1);
         btn_logout =  findViewById(R.id.btn_logout);
-
+        connectWebSocket();
         captureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        connectWebSocket();
+
     }
 
     @Override
@@ -155,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onOpened(@NonNull CameraDevice camera) {
                     cameraDevice = camera;
                     createCameraPreview();
-                    captureImage(); 
+                    captureImage();
                 }
 
                 @Override
@@ -222,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onOpen(ServerHandshake serverHandshake) {
                 Log.i("WebSocket", "Conexión abierta");
+
             }
 
             @Override
@@ -257,33 +259,29 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onImageAvailable(ImageReader reader) {
                     Image image = null;
-                    FileOutputStream outputStream = null;
+                    ByteArrayOutputStream outputStream = null;
                     try {
                         image = reader.acquireLatestImage();
                         ByteBuffer buffer = image.getPlanes()[0].getBuffer();
-                        byte[] bytes = new byte[buffer.capacity()];
+                        byte[] bytes = new byte[buffer.remaining()];
                         buffer.get(bytes);
 
-                        // Guarda la imagen en un archivo temporal
-                        File imageFile = createTempImageFile();
-                        outputStream = new FileOutputStream(imageFile);
-                        outputStream.write(bytes);
+                        // Convertir los bytes de la imagen a Base64
+                        String base64Image = Base64.encodeToString(bytes, Base64.DEFAULT);
 
-                        // Envía el archivo al servidor mediante una solicitud POST
-                        sendImageToServer(imageFile);
+                        // Envía el string Base64 al servidor WebSocket
+                        mWebSocketClient.send(base64Image);
+
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {
                         if (image != null) {
                             image.close();
                         }
-                        if (outputStream != null) {
-                            try {
-                                outputStream.close();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
+
+                        // Cerrar la sesión de la cámara después de tomar una foto
+                        closeCameraSession();
                     }
                 }
             }, null);
@@ -292,45 +290,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private File createTempImageFile() throws IOException {
-        // Crea un archivo temporal en el directorio de caché de la aplicación
-        File cacheDir = getApplicationContext().getCacheDir();
-        String fileName = "temp_image.jpg";
-        return new File(cacheDir, fileName);
-    }
 
-    private void sendImageToServer(File imageFile) {
-        OkHttpClient client = new OkHttpClient();
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("file", "placa.jpg",
-                        RequestBody.create(MediaType.parse("image/jpeg"), imageFile))
-                .build();
 
-        Request request = new Request.Builder()
-                .url("http://"+url_back+"/upload/")
-                .post(requestBody)
-                .build();
 
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (!response.isSuccessful()) {
-                    throw new IOException("Error al enviar la imagen: " + response);
-                }
-                // La imagen se ha enviado exitosamente
-                Log.d(TAG, "Imagen enviada exitosamente al servidor");
-
-                // Cerrar la sesión de captura de la cámara
-                closeCameraSession();
-            }
-        });
-    }
 
     private void closeCameraSession() {
         if (cameraCaptureSession != null) {
