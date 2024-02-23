@@ -78,10 +78,12 @@
         style="@style/FormButtonInactive"
         android:focusable="true"
         android:layout_gravity="center"
-        android:layout_marginHorizontal="24dp">
+        android:layout_marginHorizontal="24dp"
+        android:onClick="search"
+        android:clickable="true">
         <!-- Aplicar cuando los campos esten llenos
         style="@style/FormButtonActive"
-        android:clickable="true"
+
         -->
 
         <TextView
