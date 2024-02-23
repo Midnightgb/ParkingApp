@@ -16,7 +16,22 @@
             android:name=".CreateParking2"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.user.AddUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profile.UserProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.home.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.authentication.ResetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.authentication.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.authentication.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".CreateParking"
