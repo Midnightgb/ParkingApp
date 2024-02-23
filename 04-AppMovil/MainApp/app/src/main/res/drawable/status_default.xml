@@ -2,7 +2,6 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <corners android:radius="10dp" />
     <solid android:color="@color/bg_form" />
-    <size android:height="45dp"/>
-    <size android:width="300dp"/>
-    <!--<stroke android:width="2dp" android:color="@color/border_active" />-->
+    <size android:height="@dimen/form_h"/>
+    <size android:width="@dimen/form_w"/>
 </shape>
