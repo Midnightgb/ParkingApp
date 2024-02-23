@@ -6,38 +6,52 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.authentication.LoginActivity"
-    android:layout_marginHorizontal="24dp"
     android:layout_marginVertical="48dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_marginBottom="24dp"
+            />
+
     <TextView
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/accede_a_tu"
         android:fontFamily="@font/baloo2_bold"
         android:textColor="@color/black"
-        android:textSize="@dimen/title"/>
+        android:textSize="@dimen/title"
+
+        />
     <TextView
+        android:id="@+id/tvTitle2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/cuenta"
         android:fontFamily="@font/baloo2_bold"
         android:textColor="@color/primary"
-        android:textSize="@dimen/title"
-        />
+        android:textSize="@dimen/title" />
+    </LinearLayout>
 
     <EditText
         android:id="@+id/etEmail"
         style="@style/FormEditText"
-        android:fontFamily="@font/baloo2_regular"
-        android:background="@drawable/status_default"
         android:autofillHints="emailAddress"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:layout_marginBottom="24dp"
         android:drawableStart="@drawable/sms_icon"
-        android:drawableTint="@color/gray"/>
+        android:layout_marginHorizontal="24dp"
+        />
 
     <EditText
         android:id="@+id/etPassw"
@@ -49,7 +63,8 @@
         android:inputType="textPassword"
         android:layout_marginBottom="24dp"
         android:drawableStart="@drawable/lock_icon"
-        android:drawableTint="@color/gray"/>
+        android:layout_marginHorizontal="24dp"
+        />
     <!-- Cuando este lleno con un dato y se pase a otro label, activar este color
      android:drawableTint="@color/black"
 
@@ -57,4 +72,38 @@
      android:background="@drawable/status_acti"
      android:drawableTint="@color/primary"
      -->
+
+    <LinearLayout
+        android:id="@+id/btnLogin"
+        style="@style/FormButtonInactive"
+        android:focusable="true"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="24dp"
+        android:onClick="search"
+        android:clickable="true">
+        <!-- Aplicar cuando los campos esten llenos
+        style="@style/FormButtonActive"
+
+        -->
+
+        <TextView
+            android:id="@+id/tvLogin"
+            style="@style/TextDefault"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:fontFamily="@font/baloo2_bold"
+            android:text="@string/iniciar_sesion"
+            android:textSize="@dimen/body"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvForgotPassw"
+        style="@style/TextDefault"
+        android:text="@string/has_olvidado_la_contrase_a"
+        android:textColor="@color/primary"
+        android:textSize="@dimen/body"
+        android:layout_marginTop="24dp"
+        />
+
 </LinearLayout>

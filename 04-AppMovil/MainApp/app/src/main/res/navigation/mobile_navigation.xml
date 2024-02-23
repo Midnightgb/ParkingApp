@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.parkingapp.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_vehicle"
+        android:name="com.example.parkingapp.ui.vehicle.VehicleFragment"
+        android:label="@string/title_vehicle"
+        tools:layout="@layout/fragment_vehicle" />
+
+    <fragment
+        android:id="@+id/navigation_ticket"
+        android:name="com.example.parkingapp.ui.ticket.TicketFragment"
+        android:label="@string/title_ticket"
+        tools:layout="@layout/fragment_ticket" />
+
+    <fragment
+        android:id="@+id/navigation_user"
+        android:name="com.example.parkingapp.ui.user.UserFragment"
+        android:label="@string/title_user"
+        tools:layout="@layout/fragment_user" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.parkingapp.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>
