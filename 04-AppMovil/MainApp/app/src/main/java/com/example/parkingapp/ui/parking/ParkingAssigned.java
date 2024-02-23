@@ -1,4 +1,4 @@
-package com.example.parkingapp.user.seller;
+package com.example.parkingapp.ui.user.seller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
