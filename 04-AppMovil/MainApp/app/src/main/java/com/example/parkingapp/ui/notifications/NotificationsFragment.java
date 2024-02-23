@@ -1,4 +1,4 @@
-package com.example.parkingapp.ui.home.ui.notifications;
+package com.example.parkingapp.ui.notifications;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

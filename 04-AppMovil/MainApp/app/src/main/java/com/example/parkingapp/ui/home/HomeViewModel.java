@@ -1,4 +1,4 @@
-package com.example.parkingapp.ui.home.ui.home;
+package com.example.parkingapp.ui.home;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

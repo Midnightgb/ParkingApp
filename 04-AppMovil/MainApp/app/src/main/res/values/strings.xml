@@ -5,4 +5,9 @@
     <string name="email">Email</string>
     <string name="contrase_a">Contraseña</string>
     <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="has_olvidado_la_contrase_a">¿Has olvidado la contraseña?</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

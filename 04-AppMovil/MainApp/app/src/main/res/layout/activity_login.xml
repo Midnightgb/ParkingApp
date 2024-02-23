@@ -8,6 +8,18 @@
     tools:context=".ui.authentication.LoginActivity"
     android:layout_marginVertical="48dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_marginBottom="24dp"
+            />
+
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
@@ -17,6 +29,7 @@
         android:fontFamily="@font/baloo2_bold"
         android:textColor="@color/black"
         android:textSize="@dimen/title"
+
         />
     <TextView
         android:id="@+id/tvTitle2"
@@ -27,6 +40,7 @@
         android:fontFamily="@font/baloo2_bold"
         android:textColor="@color/primary"
         android:textSize="@dimen/title" />
+    </LinearLayout>
 
     <EditText
         android:id="@+id/etEmail"
@@ -62,20 +76,32 @@
     <LinearLayout
         android:id="@+id/btnLogin"
         style="@style/FormButtonInactive"
-        android:clickable="true"
         android:focusable="true"
         android:layout_gravity="center"
         android:layout_marginHorizontal="24dp">
-        <!-- android:background="@drawable/btn_inactive" -->
+        <!-- Aplicar cuando los campos esten llenos
+        style="@style/FormButtonActive"
+        android:clickable="true"
+        -->
 
         <TextView
             android:id="@+id/tvLogin"
             style="@style/TextDefault"
+            android:layout_weight="1"
+            android:gravity="center"
             android:fontFamily="@font/baloo2_bold"
             android:text="@string/iniciar_sesion"
             android:textSize="@dimen/body"
             />
-
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvForgotPassw"
+        style="@style/TextDefault"
+        android:text="@string/has_olvidado_la_contrase_a"
+        android:textColor="@color/primary"
+        android:textSize="@dimen/body"
+        android:layout_marginTop="24dp"
+        />
 
 </LinearLayout>

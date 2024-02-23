@@ -1,4 +1,4 @@
-package com.example.parkingapp.ui.home;
+package com.example.parkingapp;
 
 import android.os.Bundle;
 

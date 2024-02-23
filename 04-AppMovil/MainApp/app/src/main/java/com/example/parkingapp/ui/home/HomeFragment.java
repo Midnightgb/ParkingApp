@@ -1,4 +1,4 @@
-package com.example.parkingapp.ui.home.ui.home;
+package com.example.parkingapp.ui.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.parkingapp.databinding.FragmentHomeBinding;
+import com.example.parkingapp.ui.home.HomeViewModel;
 
 public class HomeFragment extends Fragment {
 
