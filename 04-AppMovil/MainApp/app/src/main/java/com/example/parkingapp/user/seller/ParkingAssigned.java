@@ -1,4 +1,4 @@
-package com.example.parkingapp.ui.profile;
+package com.example.parkingapp.user.seller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.parkingapp.R;
 
-public class UserProfileActivity extends AppCompatActivity {
+public class ParkingAssigned extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile);
+        setContentView(R.layout.activity_parking_assigned);
     }
 }

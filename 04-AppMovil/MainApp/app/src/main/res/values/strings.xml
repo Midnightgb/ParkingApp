@@ -5,7 +5,7 @@
     <string name="email">Email</string>
     <string name="contrase_a">Contraseña</string>
 
-    <string name="nameParking">Nombre del Parqueadero</string>
+  <string name="nameParking">Nombre del Parqueadero</string>
     <string name="addressParking">Direccion del Parqueadero</string>
     <string name="priceParking">Tarifas:</string>
 
@@ -23,4 +23,13 @@
         <!-- Agrega más roles según sea necesario -->
     </string-array>
 
+
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="has_olvidado_la_contrase_a">¿Has olvidado la contraseña?</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_vehicle">Vehiculos</string>
+    <string name="title_ticket">Tiquetes</string>
+    <string name="title_user">Usuarios</string>
+    <string name="title_profile">Perfil</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.parkingapp.ui.home;
+package com.example.parkingapp.user.seller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.parkingapp.R;
 
-public class HomeActivity extends AppCompatActivity {
+public class DetailParking extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_detail_parking);
     }
 }
