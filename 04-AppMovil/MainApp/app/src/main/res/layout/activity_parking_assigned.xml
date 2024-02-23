@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="10dp"
-                android:background="@color/gray">
+                android:background="@color/gray_dark">
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
