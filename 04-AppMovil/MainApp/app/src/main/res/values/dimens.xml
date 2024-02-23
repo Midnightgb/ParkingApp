@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="title">32sp</dimen>
+    <dimen name="form_w">300dp</dimen>
+    <dimen name="form_h">50dp</dimen>
+    <dimen name="icons_sz">20dp</dimen>
+</resources>
