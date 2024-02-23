@@ -1,8 +1,10 @@
-package com.example.parkingapp;
+package com.example.parkingapp.ui.parking;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.parkingapp.R;
 
 public class CreateParking extends AppCompatActivity {
 
