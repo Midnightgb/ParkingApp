@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
+    <color name="black">#212121</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#9e9e9e</color>
+    <color name="primary">#407bff</color>
+    <color name="secondary">#4d5dfa</color>
+    <color name="icon">#6472fd</color>
+    <color name="red">#f75555</color>
+    <color name="bg_form">#e6ecfb</color>
+    <color name="bg_light">#fdfeff</color>
+
+    <color name="bg_form_active">#fdfeff</color>
+    <color name="border_active">#4D5DFA</color>
+
+    <color name="btn_inactive">#e6ecfb</color>
+
 </resources>
