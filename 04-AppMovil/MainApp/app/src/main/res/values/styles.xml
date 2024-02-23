@@ -42,4 +42,8 @@
         <item name="android:fontFamily">@font/baloo2_bold</item>
         <item name="android:textColor">@color/white</item>
     </style>
+    <style name="Widget.Theme.ParkingApp.ButtonBar.Fullscreen" parent="">
+        <item name="android:background">@color/black_overlay</item>
+        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
+    </style>
 </resources>
