@@ -7,77 +7,77 @@
     android:orientation="vertical"
     android:background="@color/white"
     android:padding="10dp"
-    tools:context=".ui.parking.ParkingAssigned">
-
-
-
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="20dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:background="@color/gray_dark">
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_gravity="center"
-                android:src="@drawable/search_icon" />
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:hint="Ingrese el nombre del parqueadero"
-                android:inputType="text"
-                android:textSize="16sp"
-                android:textStyle="bold"
-
-                />
-        </LinearLayout>
-
-
-    </androidx.cardview.widget.CardView>
-
-
+    tools:context=".ui.parking.ParkingFragment">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginVertical="15dp"
-        >
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="40dp">
+
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Resultados: ("
-            android:paddingVertical="10dp"
+            android:layout_height="wrap_content"
+            android:text="Parqueaderos"
             android:textStyle="bold"
-            android:paddingLeft="10dp"
-            android:textSize="18sp"
-            android:fontFamily="@font/baloo2_bold"
-            />
-        <TextView
-            android:id="@+id/parkins_assigned_result"
+            android:textSize="20sp"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/icon_menu" />
+    </LinearLayout>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="000)"
-            android:paddingVertical="10dp"
-            android:textSize="18sp"
-            android:fontFamily="@font/baloo2_bold"
 
-            />
-    </LinearLayout>
+            android:background="@color/gray_dark"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="10dp"
+                android:src="@drawable/search_icon" />
+
+            <EditText
+                android:id="@+id/fildSearchParking"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="Ingrese el nombre del parqueadero"
+                android:inputType="text"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_parking_assigned"
         android:layout_width="match_parent"
-        android:layout_height="421dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="560dp"
+        android:layout_marginTop="20dp"
         android:padding="10dp" />
 
 
