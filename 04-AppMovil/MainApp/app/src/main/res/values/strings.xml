@@ -38,6 +38,6 @@
     <string name="camioneta">Camnioneta</string>
     <string name="camion">Camion</string>
     <string name="title_parking">Parqueaderos</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="continuar">Continuar</string>
+    <string name="olvid_mi_contrase_a">Olvidé mi contraseña</string>
 </resources>

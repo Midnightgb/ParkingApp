@@ -18,10 +18,10 @@
         tools:layout="@layout/fragment_parking" />
 
     <fragment
-        android:id="@+id/navigation_ticket"
-        android:name="com.example.parkingapp.ui.ticket.TicketFragment"
-        android:label="@string/title_ticket"
-        tools:layout="@layout/fragment_ticket" />
+        android:id="@+id/navigation_vehicle"
+        android:name="com.example.parkingapp.ui.vehicle.VehicleFragment"
+        android:label="@string/title_vehicle"
+        tools:layout="@layout/fragment_vehicle" />
 
     <fragment
         android:id="@+id/navigation_user"
