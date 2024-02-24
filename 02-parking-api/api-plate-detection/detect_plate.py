@@ -74,13 +74,13 @@ def analysis_image():
         if read_result.status not in ['notStarted', 'running']:
             break
         time.sleep(1)
-    texto_placas = None
+    texto_placas = []
     if read_result.status == OperationStatusCodes.succeeded:
         for text_result in read_result.analyze_result.read_results:
             for line in text_result.lines:
                 print(line.text)
                 if len(line.text) == 7 and (line.text[3] == ' ' or line.text[3] == '-'):
-                    texto_placas = texto_placas+line.text+","
+                    texto_placas.append(line.text)
                     print("Placa encontrada:", line.text)
-    return texto_placas
+    return texto_placas, url_azure
 
