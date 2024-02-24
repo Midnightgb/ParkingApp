@@ -7,40 +7,40 @@
     android:orientation="vertical"
     tools:context=".ui.authentication.LoginActivity"
     android:paddingVertical="48dp"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:windowSoftInputMode="adjustResize">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="119dp">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@mipmap/ic_launcher"
-            android:layout_marginBottom="24dp"
-            />
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/accede_a_tu"
-        android:fontFamily="@font/baloo2_bold"
-        android:textColor="@color/black"
-        android:textSize="@dimen/title"
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/accede_a_tu"
+                android:fontFamily="@font/baloo2_bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/title"
 
-        />
-    <TextView
-        android:id="@+id/tvTitle2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/cuenta"
-        android:fontFamily="@font/baloo2_bold"
-        android:textColor="@color/primary"
-        android:textSize="@dimen/title" />
+                />
+            <TextView
+                android:id="@+id/tvTitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cuenta"
+                android:fontFamily="@font/baloo2_bold"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/title" />
+        </LinearLayout>
     </LinearLayout>
 
     <EditText
@@ -52,6 +52,7 @@
         android:layout_marginBottom="24dp"
         android:drawableStart="@drawable/sms_icon"
         android:layout_marginHorizontal="24dp"
+        android:focusable="true"
         />
 
     <EditText
@@ -64,6 +65,7 @@
         android:inputType="textPassword"
         android:layout_marginBottom="24dp"
         android:drawableStart="@drawable/lock_icon"
+        android:drawableEnd="@drawable/ic_eye_pass"
         android:layout_marginHorizontal="24dp"
         />
     <!-- Cuando este lleno con un dato y se pase a otro label, activar este color
@@ -90,6 +92,7 @@
         <TextView
             android:id="@+id/tvLogin"
             style="@style/TextDefault"
+            android:textColor="@color/white"
             android:layout_weight="1"
             android:gravity="center"
             android:fontFamily="@font/baloo2_bold"
@@ -105,6 +108,8 @@
         android:textColor="@color/primary"
         android:textSize="@dimen/body"
         android:layout_marginTop="24dp"
-        />
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="forgotPassword"/>
 
 </LinearLayout>
