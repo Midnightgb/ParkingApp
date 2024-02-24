@@ -68,13 +68,6 @@
         android:drawableEnd="@drawable/ic_eye_pass"
         android:layout_marginHorizontal="24dp"
         />
-    <!-- Cuando este lleno con un dato y se pase a otro label, activar este color
-     android:drawableTint="@color/black"
-
-     Cuando este focus el label, activar este estilo y color al icono
-     android:background="@drawable/status_acti"
-     android:drawableTint="@color/primary"
-     -->
 
     <LinearLayout
         android:id="@+id/btnLogin"

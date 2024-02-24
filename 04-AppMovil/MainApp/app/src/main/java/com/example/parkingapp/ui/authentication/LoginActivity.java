@@ -50,6 +50,10 @@ public class LoginActivity extends AppCompatActivity {
                             System.out.println("Correo válido");
                             etEmail.getCompoundDrawables()[0].setTint(ContextCompat.getColor(getApplicationContext(), R.color.green));
                             etEmail.setBackgroundResource(R.drawable.status_success);
+
+                            if (!etEmailText.isEmpty() && !etPasswordText.isEmpty()){
+                                btnLogin.setBackgroundResource(R.drawable.btn_active);
+                            }
                         }
                     } else {
                         etEmail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sms_icon, 0, 0, 0);
