@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="title">32sp</dimen>
+    <dimen name="title">48sp</dimen>
     <dimen name="subtitle">24sp</dimen>
     <dimen name="body">16sp</dimen>
     <dimen name="form_w">300dp</dimen>
