@@ -111,26 +111,25 @@
             android:layout_weight="0.5"
             >
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Carro"
+                android:text="@string/carro"
                 android:textSize="20sp"
-                android:textStyle="bold"
                 android:layout_margin="5dp"
-                android:gravity="center"/>
+                android:gravity="center"
+                style="@style/TextBold"/>
 
             <TextView
                 android:id="@+id/PriceCar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+
                 android:text="$ 00000"
                 android:textSize="30sp"
                 android:background="@drawable/border_radius_bg_blue"
                 android:layout_gravity="center"
+                android:fontFamily="@font/baloo2_regular"
                 android:textColor="@color/primary"
                 android:layout_marginTop="10dp"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="5dp"
+                style="@style/TextTitle"
                 />
 
         </LinearLayout>
@@ -149,26 +148,25 @@
             android:layout_weight="0.5"
             >
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Camioneta"
+                android:text="@string/camioneta"
                 android:textSize="20sp"
-                android:textStyle="bold"
                 android:layout_margin="5dp"
-                android:gravity="center"/>
+                android:gravity="center"
+                style="@style/TextBold"/>
 
             <TextView
                 android:id="@+id/PriceVan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+
                 android:text="$ 00000"
                 android:textSize="30sp"
                 android:background="@drawable/border_radius_bg_blue"
                 android:layout_gravity="center"
                 android:textColor="@color/primary"
+                android:fontFamily="@font/baloo2_regular"
                 android:layout_marginTop="10dp"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="5dp"
+                style="@style/TextTitle"
                 />
 
         </LinearLayout>
@@ -180,26 +178,24 @@
             android:layout_weight="0.5"
             >
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Camion"
+                android:text="@string/camion"
                 android:textSize="20sp"
-                android:textStyle="bold"
                 android:layout_margin="5dp"
-                android:gravity="center"/>
+                android:gravity="center"
+                style="@style/TextBold"/>
 
             <TextView
                 android:id="@+id/PriceTruck"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="$ 00000"
                 android:textSize="30sp"
                 android:background="@drawable/border_radius_bg_blue"
+                android:fontFamily="@font/baloo2_regular"
                 android:layout_gravity="center"
                 android:textColor="@color/primary"
                 android:layout_marginTop="10dp"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="5dp"
+                style="@style/TextTitle"
                 />
 
         </LinearLayout>
