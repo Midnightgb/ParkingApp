@@ -17,5 +17,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void search(View view) {
         
+        
     }
 }
