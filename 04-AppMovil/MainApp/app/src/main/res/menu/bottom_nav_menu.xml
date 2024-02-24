@@ -8,13 +8,13 @@
 
     <item
         android:id="@+id/navigation_parking"
-        android:icon="@drawable/ic_parking"
+        android:icon="@drawable/p_icon"
         android:title="@string/title_parking" />
 
     <item
-        android:id="@+id/navigation_ticket"
-        android:icon="@drawable/ic_tickets"
-        android:title="@string/title_ticket" />
+        android:id="@+id/navigation_vehicle"
+        android:icon="@drawable/ic_car"
+        android:title="@string/title_vehicle" />
 
     <item
         android:id="@+id/navigation_user"
