@@ -39,4 +39,8 @@
     <string name="olvid_mi_contrase_a">Olvidé mi contraseña</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="via_sms">via SMS:</string>
+    <string name="ingrese_su_n_mero_de_tel_fono">Ingrese su número de teléfono</string>
+    <string name="via_email">via Email:</string>
+    <string name="ingrese_su_correo_electr_nico">Ingrese su correo electrónico</string>
 </resources>
