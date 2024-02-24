@@ -5,10 +5,217 @@
     android:layout_height="match_parent"
     tools:context=".ui.ticket.resume_ticket">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:background="@color/white"
+            >
+
+            <Button
+                android:layout_width="10dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="0.1"
+                android:backgroundTint="@color/white"
+                android:drawableBottom="@drawable/icon_back"
+                android:layout_marginRight="15dp"/>
+
+
+            <TextView
+                android:text="Resumen Ticket"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="0.9"
+                style="@style/TextTitle"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:text="Parqueadero"
+                android:layout_width="115dp"
+                android:layout_weight="1"
+                style="@style/TextSubtitle"
+                android:fontFamily="@font/baloo2_bold"
+                android:layout_gravity="start"
+                android:textColor="@color/gray"
+                android:textSize="20sp"
+
+                />
+
+            <TextView
+                android:id="@+id/address_parking"
+
+
+                android:layout_marginLeft="10dp"
+                android:text="XXXXXXXXXXXX"
+                android:textSize="20sp"
+
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                style="@style/TextBold"
+                android:fontFamily="@font/baloo2_bold"
+
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/white">
+
+            <TextView
+                style="@style/TextSubtitle"
+                android:layout_width="115dp"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo2_bold"
+                android:text="Direccion"
+                android:textColor="@color/gray"
+
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/NameParking"
+
+
+                android:layout_marginLeft="10dp"
+                android:text="XXXXXXXXXXXX"
+                android:textSize="20sp"
+
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                style="@style/TextBold"
+                android:fontFamily="@font/baloo2_bold"
+
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/white">
+
+            <TextView
+                style="@style/TextSubtitle"
+                android:layout_width="115dp"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo2_bold"
+                android:text="Placa"
+                android:textColor="@color/gray"
+
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/Plate_vehicle"
+
+
+                android:layout_marginLeft="10dp"
+                android:text="XXXXXXXXXXXX"
+                android:textSize="20sp"
+
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                style="@style/TextBold"
+                android:fontFamily="@font/baloo2_bold"
+
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/white">
+
+            <TextView
+                style="@style/TextSubtitle"
+                android:layout_width="115dp"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo2_bold"
+                android:text="Fecha"
+                android:textColor="@color/gray"
+
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/date_entry"
+
+
+                android:layout_marginLeft="10dp"
+                android:text="XXXXXXXXXXXX"
+                android:textSize="20sp"
+
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                style="@style/TextBold"
+                android:fontFamily="@font/baloo2_bold"
+
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/white">
+
+            <TextView
+                style="@style/TextSubtitle"
+                android:layout_width="115dp"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo2_bold"
+                android:text="Duracion"
+                android:textColor="@color/gray"
+
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/durarion"
+
+
+                android:layout_marginLeft="10dp"
+                android:text="XXXXXXXXXXXX"
+                android:textSize="20sp"
+
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                style="@style/TextBold"
+                android:fontFamily="@font/baloo2_bold"
+
+
+                />
+        </LinearLayout>
+    </LinearLayout>
+
 
 </FrameLayout>
