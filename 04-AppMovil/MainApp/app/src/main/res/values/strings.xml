@@ -40,4 +40,12 @@
     <string name="title_parking">Parqueaderos</string>
     <string name="continuar">Continuar</string>
     <string name="olvid_mi_contrase_a">Olvidé mi contraseña</string>
+    <string name="via_email">Email:</string>
+    <string name="ingrese_su_correo_electr_nico">Ingrese su correo electrónico</string>
+    <string name="ingrese_su_correo_electr_nico_para_enviarle_un_c_digo_de_recuperaci_n_de_contrase_a">Ingrese su correo electrónico para enviarle un código de recuperación de contraseña.</string>
+    <string name="verificar">Verificar</string>
+    <string name="el_c_digo_se_ha_enviado_a">El código se ha enviado a</string>
+    <string name="reenviar_c_digo_en">Reenviar código en</string>
+    <string name="imagen_de_persona_pensando_en_la_contrase_a">imagen de persona pensando en la contraseña</string>
+
 </resources>

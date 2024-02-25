@@ -5,25 +5,41 @@ header("Access-Control-Allow-Headers: Content-Type");
 
 include '../connection.php';
 
-if (!empty($_GET['iduser'])) {
-    $iduser = $_GET['iduser'];
-    $consulta = $DB->prepare("SELECT * FROM user WHERE id = :idsr");
-    $consulta->bindParam(':idsr', $iduser);
-    $consulta->execute();
-    $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
-
-
-    if (empty($datos)) {
-        $respuesta = [
-            'status' => false,
-            'message' => "<html>Cedula no registrada<html>",
-            '$_GET' => $_GET,
-            '$_POST' => $_POST
-        ];
-        echo json_encode($respuesta);
-        return;
+if (!empty($_GET['iduser']) || !empty($_GET['email'])) {
+    if (!empty($_GET['iduser'])) {
+        $iduser = $_GET['iduser'];
+        $consulta = $DB->prepare("SELECT * FROM user WHERE id = :idusr");
+        $consulta->bindParam(':idusr', $iduser);
+        $consulta->execute();
+        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        if (empty($datos)) {
+            $respuesta = [
+                'status' => false,
+                'message' => "<html>Cedula no registrada<html>",
+                '$_GET' => $_GET,
+            ];
+            echo json_encode($respuesta);
+            return;
+        }
+        $email = $datos[0]['email'];
     }
-
+    if (!empty($_GET['email'])) {
+        $email = $_GET['email'];
+        $consulta = $DB->prepare("SELECT * FROM user WHERE email = :emusr");
+        $consulta->bindParam(':emusr', $email);
+        $consulta->execute();
+        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        if (empty($datos)) {
+            $respuesta = [
+                'status' => false,
+                'message' => "<html>Cedula no registrada<html>",
+                '$_GET' => $_GET,
+            ];
+            echo json_encode($respuesta);
+            return;
+        }
+        $iduser = $datos[0]['id'];
+    }
     // verificar si el usuario es admin o seller para obtener el parking_id correspondiente al usuario
     $role = $datos[0]['rol'];
     if ($role != "admin") {
