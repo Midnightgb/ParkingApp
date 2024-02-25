@@ -11,16 +11,37 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.parkingapp.MainActivity;
 import com.example.parkingapp.R;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
-    LinearLayout llEmail;
-    ImageView btnBack;
+    LinearLayout llEmail;//llEmail is visible
+    LinearLayout btnContinue;//btnContinue is visible
+    TextView textHelperEmail;//textHelperEmail is visible
     EditText etEmail;
-    LinearLayout btnContinue;
+
+    ImageView btnBack;
+
+    
     Context context;
+    
+    //section code helper
+    LinearLayout llCode;//llCode is gone
+    LinearLayout textLlCode;//textLlCode is gone
+    LinearLayout btnConfirmCode;//btnConfirmCode is gone
+    LinearLayout llResendCode;
+
+    TextView tvUserEmail;
+    TextView timerResendCode;
+
+    EditText firstDigit;
+    EditText secondDigit;
+    EditText thirdDigit;
+    EditText fourthDigit;
+
+    //onclick functions to add "sendCode" , "goBack", "confirmCode"
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
