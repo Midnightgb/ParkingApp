@@ -1,4 +1,4 @@
-package com.example.parkingapp;
+package com.example.parkingapp.utils;
 
 import android.content.Context;
 
@@ -10,12 +10,17 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import com.example.parkingapp.utils.Config;
 
-public class utils {
+public class Request {
+    Config dataConfig;
+
     public void requestApi(Context context, String endpoint, int method, JSONObject requestBody, ApiCallback callback) {
         System.out.println("Iniciando consumo");
         RequestQueue queue = Volley.newRequestQueue(context);
-        JsonObjectRequest request = new JsonObjectRequest(method, endpoint, requestBody, new Response.Listener<JSONObject>() {
+        dataConfig = new Config(context);
+        String url = dataConfig.getEndPoint(endpoint);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, requestBody, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 System.out.println("El servidor responde OK");
