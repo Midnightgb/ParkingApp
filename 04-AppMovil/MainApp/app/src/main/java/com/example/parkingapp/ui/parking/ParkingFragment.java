@@ -16,11 +16,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +32,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+
 import com.example.parkingapp.R;
 import com.example.parkingapp.databinding.FragmentParkingBinding;
 
@@ -155,6 +155,7 @@ public class ParkingFragment extends Fragment {
             }
         });
 
+
         btnAgregarParking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -178,6 +179,7 @@ public class ParkingFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 filterParking( editText.getText().toString(),pakings_array);
+
             }
         });
 

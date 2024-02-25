@@ -11,8 +11,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
 import com.example.parkingapp.MainActivity;
 import com.example.parkingapp.R;
+import com.example.parkingapp.utils.Tools;
+
+import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -24,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     String etPasswordText;
     Boolean emailValid = false;
     Context context;
-
+    Tools request;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,8 +73,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
-
         etPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -103,10 +106,36 @@ public class LoginActivity extends AppCompatActivity {
     public void authenticateUser(View view) {
         System.out.println("Autenticando usuario");
         if (emailValid && !etEmailText.isEmpty() && !etPasswordText.isEmpty()){
-            System.out.println("Usuario autenticado");
+            String endpoint = "/GetUser.php";
+            int method = Request.Method.POST;
             context = getApplicationContext();
+            request = new Tools();
+            JSONObject requestBody = new JSONObject();
+            JSONObject userData = new JSONObject();
+            try {
+                requestBody.put("email", etEmailText);
+                requestBody.put("password", etPasswordText);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             Intent intention = new Intent(context, MainActivity.class);
             startActivity(intention);
+/*             request.requestApi(context, endpoint, method, requestBody, new Tools.ApiCallback() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    System.out.println("El servidor responde OK");
+                    System.out.println(response.toString());
+
+                    Intent intention = new Intent(context, MainActivity.class);
+                    startActivity(intention);
+                }
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("El servidor responde con un error:");
+                    System.out.println(error.getMessage());
+                }
+            }); */
         }
     }
     public void forgotPassword(View view) {
