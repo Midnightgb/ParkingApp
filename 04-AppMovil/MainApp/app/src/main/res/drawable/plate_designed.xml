@@ -1,0 +1,12 @@
+<!-- plate_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!-- Fondo amarillo -->
+    <solid android:color="#FFFF00" />
+    <!-- Borde con grosor de 2dp y color gris -->
+    <stroke
+        android:width="2dp"
+        android:color="#808080" />
+    <!-- Esquinas redondeadas con un radio de 4dp -->
+    <corners android:radius="4dp" />
+</shape>
