@@ -1,2 +1,5 @@
-package com.example.parkingapp;public class utils {
+package com.example.parkingapp;
+
+public class utils {
+
 }
