@@ -2,6 +2,7 @@ package com.example.parkingapp.utils;
 
 import android.content.Context;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -10,9 +11,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import com.example.parkingapp.utils.Config;
 
-public class Request {
+public class Tools {
     Config dataConfig;
 
     public void requestApi(Context context, String endpoint, int method, JSONObject requestBody, ApiCallback callback) {
@@ -20,7 +20,7 @@ public class Request {
         RequestQueue queue = Volley.newRequestQueue(context);
         dataConfig = new Config(context);
         String url = dataConfig.getEndPoint(endpoint);
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, requestBody, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(method, url, requestBody, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 System.out.println("El servidor responde OK");
