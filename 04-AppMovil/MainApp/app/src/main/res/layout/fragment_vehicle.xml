@@ -10,42 +10,872 @@
     tools:context=".ui.vehicle.VehicleFragment">
 
 
-    <androidx.cardview.widget.CardView
+    <LinearLayout
+        android:id="@+id/layout_vehicles"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:background="@color/gray_dark">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/search_icon" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:hint="Placa del vehiculo"
+                    android:inputType="text"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+
+                    />
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_vehicles"
+            android:layout_width="match_parent"
+            android:layout_height="421dp"
+            android:layout_marginTop="5dp"
+            android:padding="10dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layout_resume_ticket"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="20dp">
+        android:orientation="vertical"
+        android:visibility="gone"
+
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="10dp"
-            android:background="@color/gray_dark">
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginHorizontal="10dp"
+            android:background="@color/white"
+            >
+
+            <Button
+                android:layout_width="10dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:src="@drawable/search_icon" />
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:hint="Placa del vehiculo"
-                android:inputType="text"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:layout_weight="0.1"
+                android:backgroundTint="@color/white"
+                android:drawableBottom="@drawable/icon_back"
+                android:layout_marginRight="15dp"/>
+
+
+            <TextView
+                android:text="Resumen Ticket"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="0.9"
+                style="@style/TextTitle"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:text="Parqueadero"
+                android:layout_width="115dp"
+                android:layout_weight="1"
+                style="@style/TextSubtitle"
+                android:fontFamily="@font/baloo2_bold"
+                android:layout_gravity="start"
+                android:textColor="@color/gray"
+                android:textSize="20sp"
+
+                />
+
+            <TextView
+                android:id="@+id/address_parking2"
+
+
+                android:layout_marginLeft="10dp"
+                android:text="XXXXXXXXXXXX"
+                android:textSize="20sp"
+
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                style="@style/TextBold"
+                android:fontFamily="@font/baloo2_bold"
+
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/white">
+
+            <TextView
+                style="@style/TextSubtitle"
+                android:layout_width="115dp"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo2_bold"
+                android:text="Direccion"
+                android:textColor="@color/gray"
+
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/NameParking2"
+
+
+                android:layout_marginLeft="10dp"
+                android:text="XXXXXXXXXXXX"
+                android:textSize="20sp"
+
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                style="@style/TextBold"
+                android:fontFamily="@font/baloo2_bold"
+
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/white">
+
+            <TextView
+                style="@style/TextSubtitle"
+                android:layout_width="115dp"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo2_bold"
+                android:text="Placa"
+                android:textColor="@color/gray"
+
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/Plate_vehicle2"
+
+
+                android:layout_marginLeft="10dp"
+                android:text="XXXXXXXXXXXX"
+                android:textSize="20sp"
+
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                style="@style/TextBold"
+                android:fontFamily="@font/baloo2_bold"
+
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/white">
+
+            <TextView
+                style="@style/TextSubtitle"
+                android:layout_width="115dp"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo2_bold"
+                android:text="Fecha"
+                android:textColor="@color/gray"
+
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/date_entry2"
+
+
+                android:layout_marginLeft="10dp"
+                android:text="XXXXXXXXXXXX"
+                android:textSize="20sp"
+
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                style="@style/TextBold"
+                android:fontFamily="@font/baloo2_bold"
+
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/white">
+
+            <TextView
+                style="@style/TextSubtitle"
+                android:layout_width="115dp"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo2_bold"
+                android:text="Duracion"
+                android:textColor="@color/gray"
+
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/durarion2"
+
+
+                android:layout_marginLeft="10dp"
+                android:text="XXXXXXXXXXXX"
+                android:textSize="20sp"
+
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                style="@style/TextBold"
+                android:fontFamily="@font/baloo2_bold"
+
 
                 />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/white"
+            android:layout_marginVertical="40dp">
 
-    </androidx.cardview.widget.CardView>
+            <TextView
+                style="@style/TextSubtitle"
+                android:layout_width="115dp"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo2_bold"
+                android:text="Total"
+                android:textColor="@color/gray"
+
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/total"
 
 
+                android:layout_marginLeft="10dp"
+                android:text="XXXXXXXXXXXX"
+                android:textSize="20sp"
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_vehicles"
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                style="@style/TextBold"
+                android:fontFamily="@font/baloo2_bold"
+
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="20dp"
+            >
+            <Button
+                android:id="@+id/btn_back2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Atras"
+                android:layout_marginHorizontal="15dp"
+
+                android:textColor="@color/primary"
+                android:backgroundTint="@color/blue_buton"
+                />
+            <Button
+                android:id="@+id/btn_Confirm_cheged"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Confirmar Pago"
+                android:layout_marginHorizontal="15dp"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/primary"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layout_ticket"
         android:layout_width="match_parent"
-        android:layout_height="421dp"
-        android:layout_marginTop="5dp"
-        android:padding="10dp" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            >
+
+            <Button
+                android:layout_width="10dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="0.1"
+                android:backgroundTint="@color/white"
+                android:drawableBottom="@drawable/icon_back"
+                android:layout_marginRight="15dp"/>
+
+
+            <TextView
+                android:text="@string/title_ticket"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="0.9"
+                style="@style/TextTitle"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:background="@drawable/circle"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/time"
+                android:layout_gravity="center"
+
+                android:text="13  :  59  :  59"
+                android:gravity="center_vertical"
+
+                style="@style/TextSubtitle"
+                android:fontFamily="@font/baloo2_bold"
+
+                />
+            <TextView
+                android:id="@+id/textView"
+                android:fontFamily="@font/baloo2_regular"
+
+                android:text="horas  : minutos : segundos"
+                android:gravity="center"
+                style="@style/TextDefault"
+                android:textColor="@color/gray"
+
+
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:text="Parqueadero"
+                android:layout_width="115dp"
+                android:layout_weight="1"
+                style="@style/TextSubtitle"
+                android:fontFamily="@font/baloo2_bold"
+                android:layout_gravity="start"
+                android:textColor="@color/gray"
+                android:textSize="20sp"
+
+                />
+
+            <TextView
+                android:id="@+id/address_parking"
+
+
+                android:layout_marginLeft="10dp"
+                android:text="XXXXXXXXXXXX"
+                android:textSize="20sp"
+
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                style="@style/TextBold"
+                android:fontFamily="@font/baloo2_bold"
+
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextSubtitle"
+                android:layout_width="115dp"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo2_bold"
+                android:text="Direccion"
+                android:textColor="@color/gray"
+
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/NameParking"
+
+
+                android:layout_marginLeft="10dp"
+                android:text="XXXXXXXXXXXX"
+                android:textSize="20sp"
+
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                style="@style/TextBold"
+                android:fontFamily="@font/baloo2_bold"
+
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextSubtitle"
+                android:layout_width="115dp"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo2_bold"
+                android:text="Placa"
+                android:textColor="@color/gray"
+
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/Plate_vehicle"
+
+
+                android:layout_marginLeft="10dp"
+                android:text="XXXXXXXXXXXX"
+                android:textSize="20sp"
+
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                style="@style/TextBold"
+                android:fontFamily="@font/baloo2_bold"
+
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextSubtitle"
+                android:layout_width="115dp"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo2_bold"
+                android:text="Fecha"
+                android:textColor="@color/gray"
+
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/date_entry"
+
+
+                android:layout_marginLeft="10dp"
+                android:text="XXXXXXXXXXXX"
+                android:textSize="20sp"
+
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                style="@style/TextBold"
+                android:fontFamily="@font/baloo2_bold"
+
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextSubtitle"
+                android:layout_width="115dp"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo2_bold"
+                android:text="Duracion"
+                android:textColor="@color/gray"
+
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/durarion"
+
+
+                android:layout_marginLeft="10dp"
+                android:text="XXXXXXXXXXXX"
+                android:textSize="20sp"
+
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                style="@style/TextBold"
+                android:fontFamily="@font/baloo2_bold"
+
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="20dp"
+            >
+            <Button
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Atras"
+                android:layout_marginHorizontal="15dp"
+
+                android:textColor="@color/primary"
+                android:backgroundTint="@color/blue_buton"
+                />
+            <Button
+                android:id="@+id/btn_charge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cobrar"
+                android:layout_marginHorizontal="15dp"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/primary"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_payment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:background="@color/white"
+            >
+
+            <Button
+                android:layout_width="10dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="0.1"
+                android:backgroundTint="@color/white"
+                android:drawableBottom="@drawable/icon_back"
+                android:layout_marginRight="15dp"/>
+
+
+            <TextView
+                android:text="Tickete"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="0.9"
+                style="@style/TextSubtitle"
+                />
+
+        </LinearLayout>
+
+            <ImageView
+                android:id="@+id/codigo"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+
+
+                android:background="@color/gray"
+                />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/white">
+
+           <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+                android:orientation="vertical"
+               >
+               <TextView
+                   style="@style/TextSubtitle"
+                   android:layout_gravity="start"
+                   android:layout_marginLeft="10dp"
+                   android:layout_weight="1"
+                   android:fontFamily="@font/baloo2_bold"
+                   android:text="Parqueadero"
+                   android:textColor="@color/gray"
+                   android:textSize="20sp"
+
+
+                   />
+
+               <TextView
+                   android:id="@+id/NameParking3"
+
+                   android:layout_marginLeft="10dp"
+                   android:text="XXXXXXXXXXXX"
+                   android:textSize="20sp"
+                   android:layout_gravity="start"
+                   android:layout_weight="1"
+                   style="@style/TextBold"
+                   android:fontFamily="@font/baloo2_bold"
+
+
+                   />
+           </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    style="@style/TextSubtitle"
+                    android:layout_gravity="start"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/baloo2_bold"
+                    android:text="Vehiculo"
+                    android:textColor="@color/gray"
+                    android:textSize="20sp"
+
+
+                    />
+
+                <TextView
+                    android:id="@+id/Plate_vehicle3"
+
+                    android:layout_marginLeft="10dp"
+                    android:text="XXXXXXXXXXXX"
+                    android:textSize="20sp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    style="@style/TextBold"
+                    android:fontFamily="@font/baloo2_bold"
+
+
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    style="@style/TextSubtitle"
+                    android:layout_gravity="start"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/baloo2_bold"
+                    android:text="Duration"
+                    android:textColor="@color/gray"
+                    android:textSize="20sp"
+
+
+                    />
+
+                <TextView
+                    android:id="@+id/durarion3"
+
+                    android:layout_marginLeft="10dp"
+                    android:text="XXXXXXXXXXXX"
+                    android:textSize="20sp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    style="@style/TextBold"
+                    android:fontFamily="@font/baloo2_bold"
+
+
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    style="@style/TextSubtitle"
+                    android:layout_gravity="start"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/baloo2_bold"
+                    android:text="Fecha entrada"
+                    android:textColor="@color/gray"
+                    android:textSize="20sp"
+
+
+                    />
+
+                <TextView
+                    android:id="@+id/date_entry3"
+
+                    android:layout_marginLeft="10dp"
+                    android:text="XXXXXXXXXXXX"
+                    android:textSize="20sp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    style="@style/TextBold"
+                    android:fontFamily="@font/baloo2_bold"
+
+
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    style="@style/TextSubtitle"
+                    android:layout_gravity="start"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/baloo2_bold"
+                    android:text="Horas"
+                    android:textColor="@color/gray"
+                    android:textSize="20sp"
+
+
+                    />
+
+                <TextView
+                    android:id="@+id/hours3"
+
+                    android:layout_marginLeft="10dp"
+                    android:text="XXXXXXXXXXXX"
+                    android:textSize="20sp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    style="@style/TextBold"
+                    android:fontFamily="@font/baloo2_bold"
+
+
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    style="@style/TextSubtitle"
+                    android:layout_gravity="start"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/baloo2_bold"
+                    android:text="Fecha salida"
+                    android:textColor="@color/gray"
+                    android:textSize="20sp"
+
+
+                    />
+
+                <TextView
+                    android:id="@+id/date_exit"
+
+                    android:layout_marginLeft="10dp"
+                    android:text="XXXXXXXXXXXX"
+                    android:textSize="20sp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    style="@style/TextBold"
+                    android:fontFamily="@font/baloo2_bold"
+
+
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
 </LinearLayout>
