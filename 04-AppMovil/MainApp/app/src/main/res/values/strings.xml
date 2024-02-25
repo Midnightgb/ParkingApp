@@ -17,9 +17,9 @@
     <string name="nameSeller">Nombre del Vendedor</string>
 
     <string-array name="roles">
-        <item>Rol 1</item>
-        <item>Rol 2</item>
-        <item>Rol 3</item>
+        <item>seller</item>
+        <item>admin</item>
+
         <!-- Agrega más roles según sea necesario -->
     </string-array>
 
