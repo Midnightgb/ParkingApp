@@ -8,21 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+//import com.android.volley.Request;
+//import com.android.volley.Response;
+//import com.android.volley.VolleyError;
+//import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.parkingapp.R;
 import com.example.parkingapp.databinding.FragmentParkingBinding;
 
@@ -42,7 +37,7 @@ public class ParkingFragment extends Fragment {
         View root = binding.getRoot();
         context = root.getContext();
         recyclerView = root.findViewById(R.id.recycler_view_parking_assigned);
-        consumoParkings(context);
+//        consumoParkings(context);
 
         EditText editText = root.findViewById(R.id.fildSearchParking);;
 
@@ -64,7 +59,7 @@ public class ParkingFragment extends Fragment {
             public void afterTextChanged(Editable s) {
                 long currentTime = System.currentTimeMillis();
                 if (currentTime - lastTextEditTime > DELAY) {
-                    filterParking();
+                    //filterParking();
                 }
                 lastTextEditTime = currentTime;
             }
@@ -81,35 +76,35 @@ public class ParkingFragment extends Fragment {
 
 
 
-    public void consumoParkings(Context context){
-        System.out.println("Iniciando consumo");
-
-        RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "http://192.168.1.1/api-php/parking/getParkings.php";
-
-        JsonObjectRequest solicitud =  new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                System.out.println("El servidor responde OK");
-                System.out.println(response.toString());
-                try {
-                    adapter = new AdapterListParking(response.getJSONArray("parkings"));
-                    recyclerView.setLayoutManager(new LinearLayoutManager(context));
-                    recyclerView.setAdapter(adapter);
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println("El servidor responde con un error:");
-                System.out.println(error.getMessage());
-            }
-        });
-
-        queue.add(solicitud);
-    }
+//    public void consumoParkings(Context context){
+//        System.out.println("Iniciando consumo");
+//
+//        //RequestQueue queue = Volley.newRequestQueue(context);
+//        String url = "http://192.168.1.1/api-php/parking/getParkings.php";
+//
+//        JsonObjectRequest solicitud =  new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                System.out.println("El servidor responde OK");
+//                System.out.println(response.toString());
+//                try {
+//                    adapter = new AdapterListParking(response.getJSONArray("parkings"));
+//                    recyclerView.setLayoutManager(new LinearLayoutManager(context));
+//                    recyclerView.setAdapter(adapter);
+//                } catch (JSONException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                System.out.println("El servidor responde con un error:");
+//                System.out.println(error.getMessage());
+//            }
+//        });
+//
+//        queue.add(solicitud);
+//    }
 
     public void filterParking(String searchText, JSONArray parkings) {
         if (parkings == null || searchText.isEmpty() ) {
