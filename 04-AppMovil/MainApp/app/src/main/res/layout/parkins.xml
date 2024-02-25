@@ -55,7 +55,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/NameParking"
+                    android:id="@+id/listNameParking"
                     android:layout_width="312dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -73,16 +73,31 @@
                     android:text="XXXXXXXXXXXX"
                     android:textSize="20sp"
                     android:textColor="@color/gray"
-
-
                     />
             </LinearLayout>
 
 
         </LinearLayout>
+        <Button
+            android:id="@+id/btnEditParking"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/update_parking"
+            android:layout_marginRight="60dp"
+            android:layout_gravity="bottom|end"
+            />
 
-
+        <Button
+            android:id="@+id/btnDetailParking"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/ic_users_list"
+            android:layout_gravity="bottom|end"
+            />
     </FrameLayout>
+
+
 
 
 </androidx.cardview.widget.CardView>
