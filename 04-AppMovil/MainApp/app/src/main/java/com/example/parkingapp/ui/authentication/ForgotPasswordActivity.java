@@ -18,9 +18,7 @@ import com.example.parkingapp.R;
 public class ForgotPasswordActivity extends AppCompatActivity {
     LinearLayout llEmail;
     ImageView btnBack;
-
     EditText etEmail;
-
     LinearLayout btnContinue;
     Context context;
 
@@ -66,11 +64,21 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (etEmail.getText().toString().isEmpty()) {
-                    llEmail.setBackgroundResource(R.drawable.status_error);
+                    llEmail.setBackgroundResource(R.drawable.border_gray);
+                    btnContinue.setBackgroundResource(R.drawable.btn_inactive);
                 } else {
-                    llEmail.setBackgroundResource(R.drawable.status_acti);
+                    if (validateEmail(etEmail.getText().toString())) {
+                        llEmail.setBackgroundResource(R.drawable.status_success);
+                        btnContinue.setBackgroundResource(R.drawable.btn_active);
+                    } else {
+                        btnContinue.setBackgroundResource(R.drawable.btn_inactive);
+                        llEmail.setBackgroundResource(R.drawable.status_error);
+                    }
                 }
             }
         });
+    }
+    public boolean validateEmail(String email) {
+        return email.contains("@");
     }
 }
