@@ -118,9 +118,7 @@ public class LoginActivity extends AppCompatActivity {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-            Intent intention = new Intent(context, MainActivity.class);
-            startActivity(intention);
-/*             request.requestApi(context, endpoint, method, requestBody, new Tools.ApiCallback() {
+        request.requestApi(context, endpoint, method, requestBody, new Tools.ApiCallback() {
                 @Override
                 public void onResponse(JSONObject response) {
                     System.out.println("El servidor responde OK");
@@ -135,7 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                     System.out.println("El servidor responde con un error:");
                     System.out.println(error.getMessage());
                 }
-            }); */
+            });
         }
     }
     public void forgotPassword(View view) {
