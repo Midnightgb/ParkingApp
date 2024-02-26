@@ -2,12 +2,15 @@
 header("Access-Control-Allow-Origin: * ");
 header("Access-Control-Allow-Methods: GET, POST");
 header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json");
+
 
 include '../connection.php';
 
-if (!empty($_GET['iduser']) || !empty($_GET['email'])) {
-    if (!empty($_GET['iduser'])) {
-        $iduser = $_GET['iduser'];
+
+if (!empty($_POST['iduser']) || !empty($_POST['email'])) {
+    if (!empty($_POST['iduser'])) {
+        $iduser = $_POST['iduser'];
         $consulta = $DB->prepare("SELECT * FROM user WHERE id = :idusr");
         $consulta->bindParam(':idusr', $iduser);
         $consulta->execute();
@@ -16,15 +19,15 @@ if (!empty($_GET['iduser']) || !empty($_GET['email'])) {
             $respuesta = [
                 'status' => false,
                 'message' => "<html>Cedula no registrada<html>",
-                '$_GET' => $_GET,
+                '$_POST' => $_POST,
             ];
             echo json_encode($respuesta);
             return;
         }
         $email = $datos[0]['email'];
     }
-    if (!empty($_GET['email'])) {
-        $email = $_GET['email'];
+    if (!empty($_POST['email'])) {
+        $email = $_POST['email'];
         $consulta = $DB->prepare("SELECT * FROM user WHERE email = :emusr");
         $consulta->bindParam(':emusr', $email);
         $consulta->execute();
@@ -33,7 +36,7 @@ if (!empty($_GET['iduser']) || !empty($_GET['email'])) {
             $respuesta = [
                 'status' => false,
                 'message' => "<html>Cedula no registrada<html>",
-                '$_GET' => $_GET,
+                '$_POST' => $_POST,
             ];
             echo json_encode($respuesta);
             return;
@@ -60,8 +63,7 @@ if (!empty($_GET['iduser']) || !empty($_GET['email'])) {
                 $respuesta = [
                     'status' => false,
                     'message' => "<html>El parqueadero asignado al usuario no esta activo<html>",
-                    '$_GET' => $_GET,
-                    '$_POST' => $_POST
+                    '$_POST' => $_POST,
                 ];
                 echo json_encode($respuesta);
                 return;
@@ -70,8 +72,7 @@ if (!empty($_GET['iduser']) || !empty($_GET['email'])) {
             $respuesta = [
                 'status' => false,
                 'message' => "<html>El usuario no tiene un parqueadero asignado<html>",
-                '$_GET' => $_GET,
-                '$_POST' => $_POST
+                '$_POST' => $_POST,
             ];
             echo json_encode($respuesta);
             return;
@@ -82,8 +83,8 @@ if (!empty($_GET['iduser']) || !empty($_GET['email'])) {
     // settear el parking_id en el array de datos
     $datos[0]['parking_id'] = $parking_id;
 
-    if (!empty($_GET['validatePass'])) {
-        $passToValidate = $_GET['validatePass'];
+    if (!empty($_POST['validatePass'])) {
+        $passToValidate = $_POST['validatePass'];
         $passToValidate = password_verify($passToValidate, $datos[0]['password']);
         error_log("passToValidate: " . $passToValidate);
         if ($passToValidate) {
@@ -105,8 +106,7 @@ if (!empty($_GET['iduser']) || !empty($_GET['email'])) {
         $respuesta = [
             'status' => false,
             'message' => "<html>Cedula no registrada<html>",
-            '$_GET' => $_GET,
-            '$_POST' => $_POST
+            '$_POST' => $_POST,
         ];
     }
     echo json_encode($respuesta);
@@ -114,8 +114,7 @@ if (!empty($_GET['iduser']) || !empty($_GET['email'])) {
     $respuesta = [
         'status' => false,
         'message' => "<html>Debe enviar la cedula del usuario<html>",
-        '$_GET' => $_GET,
-        '$_POST' => $_POST
+        '$_POST' => $_POST,
     ];
     echo json_encode($respuesta);
 }
