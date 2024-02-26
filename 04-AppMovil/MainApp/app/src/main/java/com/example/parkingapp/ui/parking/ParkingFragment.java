@@ -229,9 +229,9 @@ public class ParkingFragment extends Fragment {
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = "";
         if(user_rol.equalsIgnoreCase("admin")){
-             url = "http://"+ip_v4+"/api-php/parking/getParkings.php";
+             url = "http://"+ip_v4+"/API-PRQDR-02/parking/getParkings.php";
         }else{
-             url = "http://"+ip_v4+"/api-php/parking_seller/getParkingSeller.php?id="+user_id;
+             url = "http://"+ip_v4+"/API-PRQDR-02/parking_seller/getParkingSeller.php?id="+user_id;
         }
 
 
@@ -316,7 +316,7 @@ public class ParkingFragment extends Fragment {
          List<String> field_check =  check_fields();
          if (field_check != null){
             RequestQueue queue = Volley.newRequestQueue(context);
-            String url = "http://"+ip_v4+"/api-php/parking/insertParking.php";
+            String url = "http://"+ip_v4+"/API-PRQDR-02/parking/insertParking.php";
 
             StringRequest solicitud =  new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
