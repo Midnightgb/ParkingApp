@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="gone"
+        android:visibility="visible"
         >
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -358,6 +358,7 @@
             >
 
             <Button
+                android:id="@+id/volver"
                 android:layout_width="10dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
@@ -385,7 +386,7 @@
             android:gravity="center_vertical"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/time"
+                android:id="@+id/timeNow"
                 android:layout_gravity="center"
 
                 android:text="13  :  59  :  59"
@@ -428,7 +429,7 @@
                 />
 
             <TextView
-                android:id="@+id/address_parking"
+                android:id="@+id/name_parking"
 
 
                 android:layout_marginLeft="10dp"
@@ -461,20 +462,20 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/NameParking"
+                android:id="@+id/address_parking"
 
+
+                style="@style/TextBold"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
 
                 android:layout_marginLeft="10dp"
-                android:text="XXXXXXXXXXXX"
-                android:textSize="20sp"
-
-                android:layout_gravity="start"
                 android:layout_weight="1"
-                style="@style/TextBold"
                 android:fontFamily="@font/baloo2_bold"
+                android:text="XXXXXXXXXXXX"
 
 
-                />
+                android:textSize="20sp" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -494,20 +495,20 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/Plate_vehicle"
+                android:id="@+id/plate_vehicle"
 
+
+                style="@style/TextBold"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
 
                 android:layout_marginLeft="10dp"
-                android:text="XXXXXXXXXXXX"
-                android:textSize="20sp"
-
-                android:layout_gravity="start"
                 android:layout_weight="1"
-                style="@style/TextBold"
                 android:fontFamily="@font/baloo2_bold"
+                android:text="XXXXXXXXXXXX"
 
 
-                />
+                android:textSize="20sp" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -554,13 +555,13 @@
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/baloo2_bold"
-                android:text="Duracion"
+                android:text="Duraccion"
                 android:textColor="@color/gray"
 
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/durarion"
+                android:id="@+id/durariton"
 
 
                 android:layout_marginLeft="10dp"
@@ -614,7 +615,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="gone"
         >
         <LinearLayout
             android:layout_width="match_parent"
