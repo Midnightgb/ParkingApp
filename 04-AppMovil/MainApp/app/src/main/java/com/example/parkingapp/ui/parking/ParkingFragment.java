@@ -113,7 +113,7 @@ public class ParkingFragment extends Fragment {
         String jsonString = "[{\"name\":\"John\"},{\"name\":\"Alice\"}]";
         try {
             JSONArray jsonArray = new JSONArray(jsonString);
-            adapter = new AdapterListParking(jsonArray, root, ip_v4);
+            adapter = new AdapterListParking(jsonArray, root, context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -229,9 +229,12 @@ public class ParkingFragment extends Fragment {
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = "";
         if(user_rol.equalsIgnoreCase("admin")){
-             url = "http://"+ip_v4+"/API-PRQDR-02/parking/getParkings.php";
+            String endpoint = "/parking/getParkings.php";
+            url = dataConfig.getEndPoint(endpoint);
+
         }else{
-             url = "http://"+ip_v4+"/API-PRQDR-02/parking_seller/getParkingSeller.php?id="+user_id;
+            String endpoint = "/parking_seller/getParkingSeller.php?id="+user_id;
+            url = dataConfig.getEndPoint(endpoint);
         }
 
 
@@ -242,7 +245,7 @@ public class ParkingFragment extends Fragment {
                 System.out.println(response.toString());
                 try {
                     pakings_array = response.getJSONArray("parkings");
-                    adapter = new AdapterListParking(pakings_array, root, ip_v4);
+                    adapter = new AdapterListParking(pakings_array, root, context);
                     recyclerView.setLayoutManager(new LinearLayoutManager(context));
                     recyclerView.setAdapter(adapter);
                     loaderTruck.setVisibility(View.GONE);
@@ -316,7 +319,9 @@ public class ParkingFragment extends Fragment {
          List<String> field_check =  check_fields();
          if (field_check != null){
             RequestQueue queue = Volley.newRequestQueue(context);
-            String url = "http://"+ip_v4+"/API-PRQDR-02/parking/insertParking.php";
+             String endpoint = "/parking/insertParking.php";
+             String url = dataConfig.getEndPoint(endpoint);
+
 
             StringRequest solicitud =  new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
