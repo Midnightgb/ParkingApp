@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -43,10 +44,11 @@ public class UserFragment extends Fragment {
     EditText idUser;
     EditText etEmailS;
     EditText etpasswS;
-    LinearLayout btnCreateUser;
+    LinearLayout btnCreateUser ,layoutCreateUser,usersLayout;
     Spinner roles;
     Context context;
     Config dataConfig;
+    Button btntoCreate;
     private FragmentUserBinding binding;
     String user_id,user_rol;
     JSONArray user_array;
@@ -54,6 +56,7 @@ public class UserFragment extends Fragment {
     View root;
     RecyclerView recyclerView;
     EditText editText;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -67,6 +70,9 @@ public class UserFragment extends Fragment {
         btnCreateUser = binding.btnCreateUser;
         roles = binding.roles;
         idUser = binding.idUser;
+        layoutCreateUser = binding.layoutCreateUser;
+        usersLayout = binding.usersLayout;
+        btntoCreate = binding.btntoCreate;
         dataConfig = new Config(context);
         editText = root.findViewById(R.id.fildSearchParking);
         SharedPreferences archivo = context.getSharedPreferences("userParking", Context.MODE_PRIVATE);
