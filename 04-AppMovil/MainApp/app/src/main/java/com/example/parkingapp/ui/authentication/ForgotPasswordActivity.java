@@ -17,14 +17,11 @@ import com.example.parkingapp.MainActivity;
 import com.example.parkingapp.R;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
-    LinearLayout sectionInputEmail;
-    LinearLayout llEmail;
-    LinearLayout btnSendCode;
+    LinearLayout sectionInputEmail, llEmail, btnSendCode, sectionInputCode;
     EditText etEmail;
     ImageView btnBack;
     Context context;
     //section code helper
-    LinearLayout sectionInputCode;
     LinearLayout btnConfirmCode;//this is the confirm code button
     LinearLayout llResendCode;//this is the resend code button
     TextView tvUserEmail;//this is the user email displayed in the code helper
