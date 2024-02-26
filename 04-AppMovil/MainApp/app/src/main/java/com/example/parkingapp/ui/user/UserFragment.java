@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.parkingapp.databinding.FragmentUserBinding;
+import com.example.parkingapp.utils.Config;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +37,7 @@ public class UserFragment extends Fragment {
     LinearLayout btnCreateUser;
     Spinner roles;
     Context context;
+    Config dataConfig;
     private FragmentUserBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -50,6 +52,7 @@ public class UserFragment extends Fragment {
         btnCreateUser = binding.btnCreateUser;
         roles = binding.roles;
         idUser = binding.idUser;
+        dataConfig = new Config(context);
 
         btnCreateUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +78,7 @@ public class UserFragment extends Fragment {
         String rolesText = roles.getSelectedItem().toString();
         String idUserText = idUser.getText().toString();
         if (!etNombreSText.isEmpty() && !etEmailSText.isEmpty() && !etpasswSText.isEmpty()){
-            String url = "http://192.168.0.21/api-php/users/Insert.php";
+            String url = dataConfig.getEndPoint("/users/Insert.php") ;
             RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
 
             StringRequest solicitud =  new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -95,8 +98,8 @@ public class UserFragment extends Fragment {
 
                         } else {
                             Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG).show();
-                            //bordes rojos al campo idUser
-                            
+
+
                         }
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
