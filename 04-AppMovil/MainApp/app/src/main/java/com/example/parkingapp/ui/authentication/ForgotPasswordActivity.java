@@ -102,6 +102,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 }
             }
         });
+
+
     }
     public boolean validateEmail(String email) {
         return email.contains("@");
