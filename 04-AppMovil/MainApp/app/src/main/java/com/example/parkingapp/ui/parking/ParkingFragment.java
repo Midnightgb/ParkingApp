@@ -36,6 +36,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import com.example.parkingapp.R;
 import com.example.parkingapp.databinding.FragmentParkingBinding;
+import com.example.parkingapp.utils.Config;
 import com.example.parkingapp.utils.GlideImageLoader;
 
 import org.json.JSONArray;
@@ -70,7 +71,8 @@ public class ParkingFragment extends Fragment {
     WebSocket webSocket;
 
     ImageView imgGetCar, loaderTruck;
-
+    Config dataConfig;
+    String ip_v4;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -79,6 +81,8 @@ public class ParkingFragment extends Fragment {
         binding = FragmentParkingBinding.inflate(inflater, container, false);
         root = binding.getRoot();
         context = root.getContext();
+        dataConfig = new Config(context);
+        ip_v4 =  dataConfig.getIpV4();
         recyclerView = root.findViewById(R.id.recycler_view_parking_assigned);
         pakings_array = new JSONArray();
 
@@ -109,7 +113,7 @@ public class ParkingFragment extends Fragment {
         String jsonString = "[{\"name\":\"John\"},{\"name\":\"Alice\"}]";
         try {
             JSONArray jsonArray = new JSONArray(jsonString);
-            adapter = new AdapterListParking(jsonArray, root);
+            adapter = new AdapterListParking(jsonArray, root, ip_v4);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -225,9 +229,9 @@ public class ParkingFragment extends Fragment {
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = "";
         if(user_rol.equalsIgnoreCase("admin")){
-             url = "http://192.168.1.1/api-php/parking/getParkings.php";
+             url = "http://"+ip_v4+"/api-php/parking/getParkings.php";
         }else{
-             url = "http://192.168.1.1/api-php/parking_seller/getParkingSeller.php?id="+user_id;
+             url = "http://"+ip_v4+"/api-php/parking_seller/getParkingSeller.php?id="+user_id;
         }
 
 
@@ -238,7 +242,7 @@ public class ParkingFragment extends Fragment {
                 System.out.println(response.toString());
                 try {
                     pakings_array = response.getJSONArray("parkings");
-                    adapter = new AdapterListParking(pakings_array, root);
+                    adapter = new AdapterListParking(pakings_array, root, ip_v4);
                     recyclerView.setLayoutManager(new LinearLayoutManager(context));
                     recyclerView.setAdapter(adapter);
                     loaderTruck.setVisibility(View.GONE);
@@ -312,7 +316,7 @@ public class ParkingFragment extends Fragment {
          List<String> field_check =  check_fields();
          if (field_check != null){
             RequestQueue queue = Volley.newRequestQueue(context);
-            String url = "http://192.168.1.1/api-php/parking/insertParking.php";
+            String url = "http://"+ip_v4+"/api-php/parking/insertParking.php";
 
             StringRequest solicitud =  new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
@@ -384,7 +388,7 @@ public class ParkingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         OkHttpClient client = new OkHttpClient();
-        okhttp3.Request request = new okhttp3.Request.Builder().url("ws://192.168.1.1/ws/cliente_antonio").build();
+        okhttp3.Request request = new okhttp3.Request.Builder().url("ws://"+ip_v4+"/ws/cliente_antonio").build();
         WebSocketListener listener = new WebSocketListener() {
             @Override
             public void onOpen(WebSocket webSocket, okhttp3.Response response) {
