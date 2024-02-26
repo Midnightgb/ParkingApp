@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="gone"
         >
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -63,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone"
+        android:visibility="visible"
 
         >
         <LinearLayout
@@ -75,6 +75,7 @@
             >
 
             <Button
+                android:id="@+id/volver2"
                 android:layout_width="10dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
@@ -115,7 +116,7 @@
                 />
 
             <TextView
-                android:id="@+id/address_parking2"
+                android:id="@+id/NameParking2"
 
 
                 android:layout_marginLeft="10dp"
@@ -150,7 +151,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/NameParking2"
+                android:id="@+id/address_parking2"
 
 
                 android:layout_marginLeft="10dp"
