@@ -199,6 +199,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void onResponse(String response) {
                     try {
                         JSONObject datos = new JSONObject(response);
+                        System.out.println("Respuesta del servidor: " + datos.toString());
                         if (datos.getBoolean("status")) {
                             if (datos.getJSONObject("datos").getString("status").equals("inactivo")){
                                 Toast.makeText(context, "Usuario inactivo. Contacte soporte.", Toast.LENGTH_LONG).show();
@@ -223,7 +224,7 @@ public class LoginActivity extends AppCompatActivity {
                                 etPassword.setBackgroundResource(R.drawable.status_error);
                             }
                         }else {
-                            Toast.makeText(context, "Usuario no encontrado", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, datos.getString("message"), Toast.LENGTH_LONG).show();
                             etEmail.getCompoundDrawables()[0].setTint(ContextCompat.getColor(getApplicationContext(), R.color.red));
                             etEmail.setBackgroundResource(R.drawable.status_error);
                         }
