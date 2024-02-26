@@ -208,13 +208,12 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             if (datos.getJSONObject("datos").getString("password").equals("OK")) {
                                 System.out.println("Usuario autenticado");
-                                SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+                                SharedPreferences preferences = getSharedPreferences("userParking", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = preferences.edit();
                                 editor.putString("id", datos.getJSONObject("datos").getString("id"));
                                 editor.putString("name", datos.getJSONObject("datos").getString("name"));
                                 editor.putString("rol", datos.getJSONObject("datos").getString("rol"));
                                 editor.putString("email", etEmailText);
-                                editor.putString("password", etPasswordText);
                                 editor.apply();
                                 Intent intention = new Intent(context, MainActivity.class);
                                 startActivity(intention);
