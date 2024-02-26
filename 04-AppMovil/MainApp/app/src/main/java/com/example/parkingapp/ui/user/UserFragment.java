@@ -71,8 +71,6 @@ public class UserFragment extends Fragment {
         roles = binding.roles;
         idUser = binding.idUser;
         layoutCreateUser = binding.layoutCreateUser;
-        usersLayout = binding.usersLayout;
-        btntoCreate = binding.btntoCreate;
         dataConfig = new Config(context);
         editText = root.findViewById(R.id.fildSearchParking);
         SharedPreferences archivo = context.getSharedPreferences("userParking", Context.MODE_PRIVATE);
