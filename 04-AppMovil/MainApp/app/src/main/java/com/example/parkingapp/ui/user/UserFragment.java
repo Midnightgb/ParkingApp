@@ -1,10 +1,12 @@
 package com.example.parkingapp.ui.user;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -34,11 +36,13 @@ public class UserFragment extends Fragment {
     EditText idUser;
     EditText etEmailS;
     EditText etpasswS;
-    LinearLayout btnCreateUser;
+    LinearLayout btnCreateUser ,layoutCreateUser,usersLayout;
     Spinner roles;
     Context context;
     Config dataConfig;
+    Button btntoCreate;
     private FragmentUserBinding binding;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -52,6 +56,9 @@ public class UserFragment extends Fragment {
         btnCreateUser = binding.btnCreateUser;
         roles = binding.roles;
         idUser = binding.idUser;
+        layoutCreateUser = binding.layoutCreateUser;
+        usersLayout = binding.usersLayout;
+        btntoCreate = binding.btntoCreate;
         dataConfig = new Config(context);
 
         btnCreateUser.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +68,22 @@ public class UserFragment extends Fragment {
             }
         });
 
+        SharedPreferences sharedPreferences = context.getSharedPreferences("userParking", Context.MODE_PRIVATE);
+
+        String rol = sharedPreferences.getString("rol", null);
+
+        if (rol.equals("admin")){
+            btntoCreate.setVisibility(View.VISIBLE);
+        }else{
+            btntoCreate.setVisibility(View.GONE);
+        }
+        btntoCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layoutCreateUser.setVisibility(View.VISIBLE);
+                usersLayout.setVisibility(View.GONE);
+            }
+        });
 
         return root;
     }
