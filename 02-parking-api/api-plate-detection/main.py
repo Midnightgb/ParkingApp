@@ -1,6 +1,7 @@
 import base64
 from typing import Dict
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+import base64
 
 from detect_plate import analysis_image
 
@@ -23,12 +24,11 @@ async def websocket_endpoint(websocket: WebSocket, client_id: str):
     await websocket.accept()
     try:
         if 'camara' in client_id:
-            # Verifica si ya hay una conexión para esa cámara
             existing_connection = next((conn for conn in connection_camaras if conn[0] == client_id), None)
             if existing_connection:
-                existing_connection[1] = websocket  # Sobrescribe la conexión existente
+                existing_connection[1] = websocket 
             else:
-                connection_camaras.append([client_id, websocket])  # Agrega una nueva conexión
+                connection_camaras.append([client_id, websocket]) 
             data_img = await websocket.receive_text()
             if data_img:
                 print(f"data: {data_img}")
@@ -37,13 +37,17 @@ async def websocket_endpoint(websocket: WebSocket, client_id: str):
                     f.write(image_bytes)
                 placas_text, url_image = analysis_image()
                 print(placas_text)
-                print(len(connection_camaras))
+                print(url_image)
                 camera_now = (camera_now + 1)
-                print(camera_now)
-                if validationPlateFound(placas_text):
+                send_request = validationPlateFound(placas_text)
+                if send_request:
                     text_cliente = nombre_end_camera+","+url_image
+                    print(cliente_get_photo)
+                    print(connections_client)
                     connection_client = connections_client.get(cliente_get_photo)
+                    print(connection_client)
                     if connection_client:
+                        print("se envian datos al cliente")
                         await connection_client.send_text(text_cliente)
                 elif camera_now < len(connection_camaras):
                     print("tomar foto")
@@ -52,6 +56,7 @@ async def websocket_endpoint(websocket: WebSocket, client_id: str):
                     print("placa no encontrada")
         elif 'cliente' in client_id:
             cliente_get_photo = client_id
+            connections_client[client_id] = websocket
             while True:
                 data = await websocket.receive_text()
                 print("Datos recibidos del WebSocket:", data)
@@ -84,7 +89,10 @@ async def get_photo():
 
 def validationPlateFound(arreglo_placas):
     for placa in arreglo_placas:
+        print(f"{placa} == {plate_to_be_found}")
         if placa == plate_to_be_found:
+            print("si igual")
             return True
     return False
+
 # wscat -c ws://192.168.1.1/ws/cliente_antonio
