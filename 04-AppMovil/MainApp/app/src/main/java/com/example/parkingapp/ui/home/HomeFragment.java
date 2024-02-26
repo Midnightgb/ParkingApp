@@ -19,37 +19,12 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
 
-    Button btnSection1;
-    Button btnSection2;
-    LinearLayout section1;
-    LinearLayout section2;
-    LinearLayout detail_parking;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         Context context = root.getContext();
-        btnSection1 = root.findViewById(R.id.btnSection1);
-        btnSection2 = root.findViewById(R.id.btnSection2);
-        section1 = root.findViewById(R.id.fragmentContainerView1);
-        section2 = root.findViewById(R.id.fragmentContainerView2);
-        detail_parking = root.findViewById(R.id.detail_parking);
-
-
-        btnSection1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchSection(section2, section1);
-            }
-        });
-
-        btnSection2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchSection(detail_parking, section2);
-            }
-        });
 
         return root;
     }

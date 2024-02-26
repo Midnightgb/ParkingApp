@@ -21,6 +21,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.parkingapp.R;
+import com.example.parkingapp.utils.Config;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,9 +37,12 @@ public class AdapterListParking extends RecyclerView.Adapter<AdapterListParking.
     private JSONArray listaParkings;
     View root;
     JSONObject parking_buscado;
-    public AdapterListParking(JSONArray listaParkings, View root){
+    Config dataConfig;
+
+    public AdapterListParking(JSONArray listaParkings, View root, Context context){
         this.listaParkings = listaParkings;
         this.root = root;
+        this.dataConfig = new Config(context);
     }
 
     @NonNull
@@ -207,7 +212,8 @@ public class AdapterListParking extends RecyclerView.Adapter<AdapterListParking.
                 System.out.println("Iniciando consumo");
 
                 RequestQueue queue = Volley.newRequestQueue(context);
-                String url = "http://192.168.1.1/api-php/parking/updateParking.php";
+                String endpoint = "/parking/updateParking.php";
+                String url = dataConfig.getEndPoint(endpoint);
 
                 StringRequest solicitud = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                     @Override

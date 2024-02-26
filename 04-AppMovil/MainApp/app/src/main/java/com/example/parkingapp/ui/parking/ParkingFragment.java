@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.content.SharedPreferences;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -35,6 +36,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import com.example.parkingapp.R;
 import com.example.parkingapp.databinding.FragmentParkingBinding;
+import com.example.parkingapp.utils.Config;
 import com.example.parkingapp.utils.GlideImageLoader;
 
 import org.json.JSONArray;
@@ -69,7 +71,8 @@ public class ParkingFragment extends Fragment {
     WebSocket webSocket;
 
     ImageView imgGetCar, loaderTruck;
-
+    Config dataConfig;
+    String ip_v4;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -78,16 +81,16 @@ public class ParkingFragment extends Fragment {
         binding = FragmentParkingBinding.inflate(inflater, container, false);
         root = binding.getRoot();
         context = root.getContext();
+        dataConfig = new Config(context);
+        ip_v4 =  dataConfig.getIpV4();
         recyclerView = root.findViewById(R.id.recycler_view_parking_assigned);
         pakings_array = new JSONArray();
 
 
-//        SharedPreferences archivo = getSharedPreferences("app_parking", Context.MODE_PRIVATE);
-//        user_id = archivo.getString("id", null);
-//        user_rol = archivo.getString("rol", null);
+        SharedPreferences archivo = context.getSharedPreferences("userParking", Context.MODE_PRIVATE);
+        user_id = archivo.getString("id", null);
+        user_rol = archivo.getString("rol", null);
 
-        user_id = "888";
-        user_rol = "admin";
         loaderTruck = root.findViewById(R.id.loaderTruck);
         Glide.with(context).asGif().load(R.drawable.loader_truck).into(loaderTruck);
         consumoParkings(context);
@@ -110,7 +113,7 @@ public class ParkingFragment extends Fragment {
         String jsonString = "[{\"name\":\"John\"},{\"name\":\"Alice\"}]";
         try {
             JSONArray jsonArray = new JSONArray(jsonString);
-            adapter = new AdapterListParking(jsonArray, root);
+            adapter = new AdapterListParking(jsonArray, root, context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -226,9 +229,12 @@ public class ParkingFragment extends Fragment {
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = "";
         if(user_rol.equalsIgnoreCase("admin")){
-             url = "http://192.168.1.1/api-php/parking/getParkings.php";
+            String endpoint = "/parking/getParkings.php";
+            url = dataConfig.getEndPoint(endpoint);
+
         }else{
-             url = "http://192.168.1.1/api-php/parking_seller/getParkingSeller.php?id="+user_id;
+            String endpoint = "/parking_seller/getParkingSeller.php?id="+user_id;
+            url = dataConfig.getEndPoint(endpoint);
         }
 
 
@@ -239,7 +245,7 @@ public class ParkingFragment extends Fragment {
                 System.out.println(response.toString());
                 try {
                     pakings_array = response.getJSONArray("parkings");
-                    adapter = new AdapterListParking(pakings_array, root);
+                    adapter = new AdapterListParking(pakings_array, root, context);
                     recyclerView.setLayoutManager(new LinearLayoutManager(context));
                     recyclerView.setAdapter(adapter);
                     loaderTruck.setVisibility(View.GONE);
@@ -313,7 +319,9 @@ public class ParkingFragment extends Fragment {
          List<String> field_check =  check_fields();
          if (field_check != null){
             RequestQueue queue = Volley.newRequestQueue(context);
-            String url = "http://192.168.1.1/api-php/parking/insertParking.php";
+             String endpoint = "/parking/insertParking.php";
+             String url = dataConfig.getEndPoint(endpoint);
+
 
             StringRequest solicitud =  new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
@@ -322,7 +330,7 @@ public class ParkingFragment extends Fragment {
                         System.out.println("El servidor POST responde OK");
                         JSONObject jsonObject = new JSONObject(response);
                         System.out.println(jsonObject.toString());
-                        Toast.makeText(context, "Se agrefo el parqueadero correctamente", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Se agrego el parqueadero correctamente", Toast.LENGTH_LONG).show();
                         cleanFielCrete();
                     } catch (JSONException e) {
                         System.out.println("El servidor POST responde con un error:");
@@ -385,7 +393,7 @@ public class ParkingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         OkHttpClient client = new OkHttpClient();
-        okhttp3.Request request = new okhttp3.Request.Builder().url("ws://192.168.1.1/ws/cliente_antonio").build();
+        okhttp3.Request request = new okhttp3.Request.Builder().url("ws://"+ip_v4+"/ws/cliente_antonio").build();
         WebSocketListener listener = new WebSocketListener() {
             @Override
             public void onOpen(WebSocket webSocket, okhttp3.Response response) {
