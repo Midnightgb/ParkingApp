@@ -2,7 +2,7 @@
 $server = 'localhost';
 $user = 'root';
 $pass = '';
-$dbName = 'parking';
+$dbName = 'prqdr_db_02';
 
 try{
    $DB = new PDO("mysql:host=$server;dbname=$dbName", $user, $pass);
