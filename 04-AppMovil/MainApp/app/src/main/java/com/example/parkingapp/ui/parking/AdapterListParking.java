@@ -37,12 +37,12 @@ public class AdapterListParking extends RecyclerView.Adapter<AdapterListParking.
     private JSONArray listaParkings;
     View root;
     JSONObject parking_buscado;
-    String ip_v4;
+    Config dataConfig;
 
-    public AdapterListParking(JSONArray listaParkings, View root, String ip_v4){
+    public AdapterListParking(JSONArray listaParkings, View root, Context context){
         this.listaParkings = listaParkings;
         this.root = root;
-        this.ip_v4 = ip_v4;
+        this.dataConfig = new Config(context);
     }
 
     @NonNull
@@ -212,7 +212,8 @@ public class AdapterListParking extends RecyclerView.Adapter<AdapterListParking.
                 System.out.println("Iniciando consumo");
 
                 RequestQueue queue = Volley.newRequestQueue(context);
-                String url = "http://"+ip_v4+"/api-php/parking/updateParking.php";
+                String endpoint = "/parking/updateParking.php";
+                String url = dataConfig.getEndPoint(endpoint);
 
                 StringRequest solicitud = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                     @Override
