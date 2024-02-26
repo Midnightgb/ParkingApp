@@ -16,20 +16,13 @@
 
     <string name="nameSeller">Nombre del Vendedor</string>
 
-    <string-array name="opciones">
-        <item>admin</item>
-        <item>seller</item>
-
-
-        <!-- Agrega más roles según sea necesario -->
-    </string-array>
-
     <string-array name="roles">
         <item>seller</item>
         <item>admin</item>
 
         <!-- Agrega más roles según sea necesario -->
     </string-array>
+
     <string-array name="opciones">
         <item>Activo</item>
         <item>Inactivo</item>
