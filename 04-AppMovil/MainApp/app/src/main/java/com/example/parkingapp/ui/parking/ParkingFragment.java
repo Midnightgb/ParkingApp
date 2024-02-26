@@ -35,11 +35,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.parkingapp.R;
 import com.example.parkingapp.databinding.FragmentParkingBinding;
+import com.example.parkingapp.utils.GlideImageLoader;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -58,7 +60,7 @@ public class ParkingFragment extends Fragment {
     Context context;
 
     JSONArray pakings_array;
-    Button crearParking, btnBackEditParking, btnBackCreateParking, btnAgregarParking, btnBackDetail, btnGetCar;
+    Button crearParking, btnBackEditParking, btnBackCreateParking, btnAgregarParking, btnBackDetail, btnGetCar, btnGoToGetCar, btnBackGetCar;
 
     EditText editText, field_plate;
     View root;
@@ -66,7 +68,7 @@ public class ParkingFragment extends Fragment {
     TextView field_name_parking, field_address_parking, field_truck, field_pickup_truck, field_car, field_motorcycle, label_camera, labelPlate;
     WebSocket webSocket;
 
-    ImageView imgGetCar;
+    ImageView imgGetCar, loaderTruck;
 
 
 
@@ -86,6 +88,8 @@ public class ParkingFragment extends Fragment {
 
         user_id = "888";
         user_rol = "admin";
+        loaderTruck = root.findViewById(R.id.loaderTruck);
+        Glide.with(context).asGif().load(R.drawable.loader_truck).into(loaderTruck);
         consumoParkings(context);
         editText = root.findViewById(R.id.fildSearchParking);
         crearParking = root.findViewById(R.id.btnCrearParking);
@@ -95,9 +99,14 @@ public class ParkingFragment extends Fragment {
         btnBackDetail = root.findViewById(R.id.btnBackDetail);
         field_plate = root.findViewById(R.id.field_plate);
         btnGetCar = root.findViewById(R.id.btnGetCar);
+        btnGoToGetCar = root.findViewById(R.id.btnGoToGetCar);
+        btnBackGetCar = root.findViewById(R.id.btnBackGetCar);
         label_camera = root.findViewById(R.id.labelNameCamera);
         labelPlate = root.findViewById(R.id.labelPlate);
         imgGetCar = root.findViewById(R.id.imgGetCar);
+
+
+
         String jsonString = "[{\"name\":\"John\"},{\"name\":\"Alice\"}]";
         try {
             JSONArray jsonArray = new JSONArray(jsonString);
@@ -132,12 +141,27 @@ public class ParkingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String plate = field_plate.getText().toString();
+                labelPlate.setText(plate);
 
                 if(plate.trim().isEmpty() || plate.trim().equalsIgnoreCase("")){
                     Toast.makeText(context,"Campo vacio de placa", Toast.LENGTH_LONG).show();
                 }else{
                     webSocket.send(plate);
+                    loaderTruck.setVisibility(View.VISIBLE);
                 }
+            }
+        });
+        btnGoToGetCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchSection(root.findViewById(R.id.sesionGetCar), root.findViewById(R.id.sesionListParking));
+            }
+        });
+
+        btnBackGetCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchSection(root.findViewById(R.id.sesionListParking), root.findViewById(R.id.sesionGetCar));
             }
         });
         btnBackDetail.setOnClickListener(new View.OnClickListener() {
@@ -194,6 +218,7 @@ public class ParkingFragment extends Fragment {
 
 
     public void consumoParkings(Context context){
+        loaderTruck.setVisibility(View.VISIBLE);
         System.out.println("Iniciando consumo");
 
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -215,6 +240,7 @@ public class ParkingFragment extends Fragment {
                     adapter = new AdapterListParking(pakings_array, root);
                     recyclerView.setLayoutManager(new LinearLayoutManager(context));
                     recyclerView.setAdapter(adapter);
+                    loaderTruck.setVisibility(View.GONE);
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -224,6 +250,8 @@ public class ParkingFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 System.out.println("El servidor responde con un error:");
                 System.out.println(error.getMessage());
+                loaderTruck.setVisibility(View.GONE);
+                Toast.makeText(context, "El servidor no da respuesta", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -270,9 +298,11 @@ public class ParkingFragment extends Fragment {
         LinearLayout sesionDetailParking =root.findViewById(R.id.sesionDetailParking);
         LinearLayout sesionListParking =root.findViewById(R.id.sesionListParking);
         LinearLayout sesionCreateParking =root.findViewById(R.id.sesionCreateParking);
+        LinearLayout sesionGetCar = root.findViewById(R.id.sesionGetCar);
         sesionEditParking.setVisibility(View.GONE);
         sesionDetailParking.setVisibility(View.GONE);
         sesionCreateParking.setVisibility(View.GONE);
+        sesionGetCar.setVisibility(View.GONE);
         sesionListParking.setVisibility(View.VISIBLE);
     }
 
@@ -352,9 +382,8 @@ public class ParkingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Código para establecer la conexión WebSocket
         OkHttpClient client = new OkHttpClient();
-        okhttp3.Request request = new okhttp3.Request.Builder().url("ws://tu_url_websocket").build();
+        okhttp3.Request request = new okhttp3.Request.Builder().url("ws://192.168.1.1/ws/cliente_antonio").build();
         WebSocketListener listener = new WebSocketListener() {
             @Override
             public void onOpen(WebSocket webSocket, okhttp3.Response response) {
@@ -364,34 +393,44 @@ public class ParkingFragment extends Fragment {
             @Override
             public void onMessage(WebSocket webSocket, String text) {
                 super.onMessage(webSocket, text);
-                if (text.contains(",")) {
-                    String[] parts = text.split(",");
-                    if (parts.length >= 2) {
-                        String name_camera = parts[0];
-                        label_camera.setText(name_camera);
-                        String imageUrl = parts[1];
-                        Glide.with(context)
-                                .load(imageUrl)
-                                .apply(RequestOptions.centerCropTransform())
-                                .into(imgGetCar);
+                System.out.println("se recibe un mensaje"+ text);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadCar(text);
                     }
-                } else {
-                    Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
-                }
+                });
             }
 
             @Override
             public void onClosed(WebSocket webSocket, int code, String reason) {
                 super.onClosed(webSocket, code, reason);
-                // La conexión se ha cerrado
             }
 
             @Override
             public void onFailure(WebSocket webSocket, Throwable t, okhttp3.Response response) {
                 super.onFailure(webSocket, t, response);
-                // Se ha producido un error en la conexión
             }
         };
         webSocket = client.newWebSocket(request, listener);
+    }
+
+    public void loadCar(String text){
+        if (text.contains(",")) {
+            System.out.println("por aqui ----");
+            String[] parts = text.split(",");
+            if (parts.length >= 2) {
+                System.out.println("por aqui");
+                String name_camera = parts[0];
+                System.out.println(name_camera);
+                label_camera.setText(name_camera);
+                String imageUrl = parts[1];
+                System.out.println(imageUrl);
+                GlideImageLoader.loadImageWithRotation(context, imageUrl, imgGetCar, 0);
+                loaderTruck.setVisibility(View.GONE);
+            }
+        } else {
+            Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+        }
     }
 }

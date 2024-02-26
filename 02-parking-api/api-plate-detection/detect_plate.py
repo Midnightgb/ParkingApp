@@ -38,11 +38,9 @@ def analysis_image():
 
     client = ImgurClient("134f614ab8eacd1", "fadaf1c7861652879701a219d58bb47cb541102d")
 
-    album = None # You can also enter an album ID here
+    album = None 
     image_url = image_url_github
 
-    # Here's the metadata for the upload. All of these are optional, including
-    # this config dict itself.
     config = {
         'album': album,
         'name':  'Catastrophe!',
@@ -58,17 +56,13 @@ def analysis_image():
     subscription_key = "211a2a34bfac46b8860fa706aec114b3"
     endpoint = "https://vision-placas.cognitiveservices.azure.com/"
 
-    # Cliente de Computer Vision de Azure
     computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
 
-    # Leer la imagen desde Imgur
     read_response = computervision_client.read(url_azure, raw=True)
 
-    # Obtener el ID de operación desde la URL
     read_operation_location = read_response.headers["Operation-Location"]
     operation_id = read_operation_location.split("/")[-1]
 
-    # Llamar al API "GET" y esperar a que recupere los resultados
     while True:
         read_result = computervision_client.get_read_result(operation_id)
         if read_result.status not in ['notStarted', 'running']:
@@ -81,6 +75,5 @@ def analysis_image():
                 print(line.text)
                 if len(line.text) == 7 and (line.text[3] == ' ' or line.text[3] == '-'):
                     texto_placas.append(line.text)
-                    print("Placa encontrada:", line.text)
     return texto_placas, url_azure
 
