@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.content.SharedPreferences;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -82,12 +83,10 @@ public class ParkingFragment extends Fragment {
         pakings_array = new JSONArray();
 
 
-//        SharedPreferences archivo = getSharedPreferences("app_parking", Context.MODE_PRIVATE);
-//        user_id = archivo.getString("id", null);
-//        user_rol = archivo.getString("rol", null);
+        SharedPreferences archivo = context.getSharedPreferences("userParking", Context.MODE_PRIVATE);
+        user_id = archivo.getString("id", null);
+        user_rol = archivo.getString("rol", null);
 
-        user_id = "888";
-        user_rol = "admin";
         loaderTruck = root.findViewById(R.id.loaderTruck);
         Glide.with(context).asGif().load(R.drawable.loader_truck).into(loaderTruck);
         consumoParkings(context);
@@ -322,7 +321,7 @@ public class ParkingFragment extends Fragment {
                         System.out.println("El servidor POST responde OK");
                         JSONObject jsonObject = new JSONObject(response);
                         System.out.println(jsonObject.toString());
-                        Toast.makeText(context, "Se agrefo el parqueadero correctamente", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Se agrego el parqueadero correctamente", Toast.LENGTH_LONG).show();
                         cleanFielCrete();
                     } catch (JSONException e) {
                         System.out.println("El servidor POST responde con un error:");
