@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
     private String nombre_camara;
 
     private Button btn_logout;
+    private boolean imageNotSent = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,10 +158,12 @@ public class MainActivity extends AppCompatActivity {
                     cameraDevice = camera;
                     createCameraPreview();
                     captureImage();
+
                 }
 
                 @Override
                 public void onDisconnected(@NonNull CameraDevice camera) {
+                    System.out.println("hola ---");
                     cameraDevice.close();
                 }
 
@@ -233,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            imageNotSent = true;
                             openCamera();
                         }
                     });
@@ -266,22 +270,22 @@ public class MainActivity extends AppCompatActivity {
                         byte[] bytes = new byte[buffer.remaining()];
                         buffer.get(bytes);
 
-                        // Convertir los bytes de la imagen a Base64
                         String base64Image = Base64.encodeToString(bytes, Base64.DEFAULT);
+                        if(imageNotSent){
+                            mWebSocketClient.send(base64Image);
+                            restartCamera();
+                        }
+                        imageNotSent = false;
 
-                        // Envía el string Base64 al servidor WebSocket
-                        mWebSocketClient.send(base64Image);
 
 
                     } catch (Exception e) {
                         e.printStackTrace();
+                        Log.e(TAG, "Error al capturar la imagen: " + e.getMessage());
                     } finally {
                         if (image != null) {
                             image.close();
                         }
-
-                        // Cerrar la sesión de la cámara después de tomar una foto
-                        closeCameraSession();
                     }
                 }
             }, null);
@@ -290,11 +294,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
-
-
-
+    private void restartCamera() {
+        closeCameraSession();
+        connectWebSocket();
+        cameraDevice.close();
+        cameraDevice = null;
+    }
     private void closeCameraSession() {
         if (cameraCaptureSession != null) {
             try {
@@ -304,16 +309,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        if (mWebSocketClient != null) {
-//            mWebSocketClient.close();
-//        }
-//    }
-
     public void cerrarSesion() {
         SharedPreferences sharedPreferences = getSharedPreferences("app_camara", Context.MODE_PRIVATE);
 
