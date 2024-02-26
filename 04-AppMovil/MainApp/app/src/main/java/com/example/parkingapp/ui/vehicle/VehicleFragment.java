@@ -1,6 +1,7 @@
 package com.example.parkingapp.ui.vehicle;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +43,11 @@ public class VehicleFragment extends Fragment {
         context = root.getContext();
         dataConfig = new Config(context);
         recycler_view_vehicles = binding.recyclerViewVehicles;
-        String userid ="777";
+        SharedPreferences sharedPreferences = context.getSharedPreferences("userParking", Context.MODE_PRIVATE);
+
+        String id = sharedPreferences.getString("id", null);
+        System.out.println("este es el id"+id);
+        String userid =id;
         String url = dataConfig.getEndPoint("/ticket/getTicketRol.php?id="+userid);
         listaVehiculos = new JSONArray();
         adapterVehicles = new AdapterVehicles(listaVehiculos, binding.getRoot());
