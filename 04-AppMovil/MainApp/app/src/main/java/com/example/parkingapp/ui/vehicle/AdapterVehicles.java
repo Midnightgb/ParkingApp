@@ -19,7 +19,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -89,26 +88,20 @@ public class AdapterVehicles extends RecyclerView.Adapter<AdapterVehicles.ViewHo
 
 
             try {
-                Date fechaActual = new Date();
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(fechaActual);
-
-                TimeZone timeZoneColombia = TimeZone.getTimeZone("America/Bogota");
-                calendar.setTimeZone(timeZoneColombia);
-                Date fechaConZonaHoraria = calendar.getTime();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                TimeZone timeZoneColombia = TimeZone.getTimeZone("America/Bogota");
                 sdf.setTimeZone(timeZoneColombia);
+                Date fechaEntrada = sdf.parse(fecha);
+                Date fechaActual = new Date();
 
+                long diferenciaEnMilisegundos = fechaActual.getTime() - fechaEntrada.getTime();
 
-
-
-                long diferenciaEnMilisegundos = fechaActual.getTime() - fechaConZonaHoraria.getTime();
 
                 long minutosTranscurridos = diferenciaEnMilisegundos / (1000 * 60);
                 long horasTranscurridas = minutosTranscurridos / 60;
                 minutosTranscurridos = minutosTranscurridos % 60;
 
-                if (horasTranscurridas < 60) {
+                if (horasTranscurridas < 1) {
                     System.out.println("Horas transcurridas desde la fecha: " + horasTranscurridas + " horas");
 
 
