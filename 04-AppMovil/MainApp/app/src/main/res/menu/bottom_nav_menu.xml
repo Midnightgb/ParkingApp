@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_parking"
+        android:icon="@drawable/p_icon"
+        android:title="@string/title_parking" />
+
+    <item
+        android:id="@+id/navigation_vehicle"
+        android:icon="@drawable/ic_car"
+        android:title="@string/title_vehicle" />
+
+    <item
+        android:id="@+id/navigation_user"
+        android:icon="@drawable/ic_users_list"
+        android:title="@string/title_user" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_user"
+        android:title="@string/title_profile" />
+
+</menu>

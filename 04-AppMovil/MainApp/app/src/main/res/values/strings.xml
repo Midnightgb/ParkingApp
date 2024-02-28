@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">ParkingApp</string>
+    <string name="accede_a_tu">Accede a tu </string>
+    <string name="cuenta">cuenta</string>
+    <string name="email">Email</string>
+    <string name="contrase_a">Contraseña</string>
+
+    <string name="nameParking">Nombre del Parqueadero</string>
+    <string name="addressParking">Direccion del Parqueadero</string>
+    <string name="priceParking">Tarifas:</string>
+
+    <string name="priceCamioneta">Camioneta:</string>
+    <string name="priceCamion">Camion:</string>
+    <string name="priceCarro">Carro:</string>
+    <string name="priceMoto">Moto:</string>
+
+    <string name="nameSeller">Nombre del Vendedor</string>
+
+    <string-array name="roles">
+        <item>seller</item>
+        <item>admin</item>
+
+        <!-- Agrega más roles según sea necesario -->
+    </string-array>
+
+    <string-array name="opciones">
+        <item>Activo</item>
+        <item>Inactivo</item>
+    </string-array>
+
+
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="has_olvidado_la_contrase_a">¿Has olvidado la contraseña?</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_vehicle">Vehiculos</string>
+    <string name="title_ticket">Tiquetes</string>
+    <string name="title_user">Usuarios</string>
+    <string name="title_profile">Perfil</string>
+    <string name="_6_am_10pm">6am - 10pm</string>
+    <string name="moto">Moto</string>
+    <string name="carro">Carro</string>
+    <string name="camioneta">Camnioneta</string>
+    <string name="camion">Camion</string>
+    <string name="title_parking">Parqueaderos</string>
+    <string name="continuar">Continuar</string>
+    <string name="olvid_mi_contrase_a">Olvidé mi contraseña</string>
+    <string name="via_email">Email:</string>
+    <string name="ingrese_su_correo_electr_nico">Ingrese su correo electrónico</string>
+    <string name="ingrese_su_correo_electr_nico_para_enviarle_un_c_digo_de_recuperaci_n_de_contrase_a">Ingrese su correo electrónico para enviarle un código de recuperación de contraseña.</string>
+    <string name="verificar">Verificar</string>
+    <string name="el_c_digo_se_ha_enviado_a">El código se ha enviado a</string>
+    <string name="reenviar_c_digo_en">Reenviar código en</string>
+    <string name="imagen_de_persona_pensando_en_la_contrase_a">imagen de persona pensando en la contraseña</string>
+
+</resources>

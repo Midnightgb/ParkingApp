@@ -6,8 +6,8 @@
 -- Tiempo de generación: 15-10-2023 a las 19:41:54
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
-CREATE DATABASE parking;
-USE parking;
+CREATE DATABASE prqdr_db_02;
+USE prqdr_db_02;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `parking`
+-- Base de datos: `prqdr_db_02`
 --
 
 DELIMITER $$

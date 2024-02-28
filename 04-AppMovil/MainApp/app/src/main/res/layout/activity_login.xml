@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.authentication.LoginActivity"
+    android:paddingVertical="48dp"
+    android:background="@color/white"
+    android:windowSoftInputMode="adjustResize">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="119dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/accede_a_tu"
+                android:fontFamily="@font/baloo2_bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/title"
+
+                />
+            <TextView
+                android:id="@+id/tvTitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cuenta"
+                android:fontFamily="@font/baloo2_bold"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/title" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/etEmail"
+        style="@style/FormEditText"
+        android:autofillHints="emailAddress"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:layout_marginBottom="24dp"
+        android:drawableStart="@drawable/sms_icon"
+        android:layout_marginHorizontal="24dp"
+        android:focusable="true"
+        />
+
+    <EditText
+        android:id="@+id/etPassw"
+        style="@style/FormEditText"
+        android:fontFamily="@font/baloo2_regular"
+        android:background="@drawable/status_default"
+        android:autofillHints="password"
+        android:hint="@string/contrase_a"
+        android:inputType="textPassword"
+        android:layout_marginBottom="24dp"
+        android:drawableStart="@drawable/lock_icon"
+        android:drawableEnd="@drawable/ic_eye_pass"
+        android:layout_marginHorizontal="24dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/btnLogin"
+        style="@style/FormButtonInactive"
+        android:focusable="true"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="24dp"
+        android:onClick="authenticateUser"
+        android:clickable="true">
+        <!-- Aplicar cuando los campos esten llenos
+        style="@style/FormButtonActive"
+
+        -->
+
+        <TextView
+            android:id="@+id/tvLogin"
+            style="@style/TextDefault"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:fontFamily="@font/baloo2_bold"
+            android:text="@string/iniciar_sesion"
+            android:textSize="@dimen/body"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvForgotPassw"
+        style="@style/TextDefault"
+        android:text="@string/has_olvidado_la_contrase_a"
+        android:textColor="@color/primary"
+        android:textSize="@dimen/body"
+        android:layout_marginTop="24dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="forgotPassword"/>
+
+</LinearLayout>
