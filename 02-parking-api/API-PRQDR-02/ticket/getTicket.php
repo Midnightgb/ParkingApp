@@ -13,7 +13,7 @@ if (!empty($_GET['id'])) {
         $respuesta = [
                         'status' => true,
                         'message' => "OK##DATOS##GET",
-                        'datos' => $datos
+                        'datos' => $datos[0]
                     ];
     }else{
         $respuesta = [
