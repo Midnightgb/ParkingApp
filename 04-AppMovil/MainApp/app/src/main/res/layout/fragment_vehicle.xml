@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -75,6 +75,7 @@
             >
 
             <Button
+                android:id="@+id/volver2"
                 android:layout_width="10dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
@@ -115,7 +116,7 @@
                 />
 
             <TextView
-                android:id="@+id/address_parking2"
+                android:id="@+id/NameParking2"
 
 
                 android:layout_marginLeft="10dp"
@@ -150,7 +151,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/NameParking2"
+                android:id="@+id/address_parking2"
 
 
                 android:layout_marginLeft="10dp"
@@ -389,11 +390,12 @@
                 android:id="@+id/timeNow"
                 android:layout_gravity="center"
 
-                android:text="13  :  59  :  59"
+                android:text="13:59:59"
                 android:gravity="center_vertical"
 
                 style="@style/TextSubtitle"
                 android:fontFamily="@font/baloo2_bold"
+                android:textSize="40dp"
 
                 />
             <TextView
@@ -626,6 +628,7 @@
             >
 
             <Button
+                android:id="@+id/volver3"
                 android:layout_width="10dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
@@ -877,6 +880,12 @@
     </LinearLayout>
 
 
+    <ImageView
+        android:id="@+id/loaderTruck"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/loader_truck"
+        android:visibility="gone"
+        android:background="@color/white"/>
 
-
-</LinearLayout>
+</FrameLayout>

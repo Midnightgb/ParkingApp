@@ -43,7 +43,7 @@ if (!empty($_POST['id']) and !empty($_POST['date'])) {
 } else {
     $respuesta = [
         'status' => false,
-        'mesagge' => "Uno o más campos están vacíos"
+        'mesagge' => "Uno o mas campos estan vacíos"
     ];
     echo json_encode($respuesta);
 }
