@@ -5,32 +5,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.user.UserFragment">
 
     <LinearLayout
-        android:id="@+id/usersLayout"
+        android:id="@+id/sesionListUser"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="visible">
-        <Button
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Crear Usuario"
-            android:id="@+id/btntoCreate"
-            android:layout_gravity="end"
-            />
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title_user"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="40dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Usuarios"
+                android:textStyle="bold"
+                android:textSize="30sp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+            <Button
+                android:id="@+id/btnGoToGetCar"
+                android:layout_width="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_user" />
+            <Button
+                android:id="@+id/btnCrearParking"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/add" />
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@color/gray_dark"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="10dp"
+                    android:src="@drawable/search_icon" />
+
+                <EditText
+                    android:id="@+id/fildSearchParking"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="Ingrese el id del usuario"
+                    android:inputType="text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_parking_assigned"
+            android:layout_width="match_parent"
+            android:layout_height="560dp"
+            android:layout_marginTop="20dp"
+            android:padding="10dp" />
     </LinearLayout>
 
 
