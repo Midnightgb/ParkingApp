@@ -1,0 +1,17 @@
+{
+  "name": "parkingapp/api-php",
+  "description": "API for parking app",
+  "type": "api",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Julian",
+      "email": "midnight3424@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "": "src/"
+    }
+  }
+}
