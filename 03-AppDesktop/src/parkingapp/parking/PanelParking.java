@@ -18,14 +18,19 @@ import javax.swing.JTextField;
 
 import parkingapp.user.User;
 import parkingapp.util.Herramientas;
+import parkingapp.Config;
 
 public class PanelParking extends javax.swing.JPanel {
     
     private final User dataUser;
+    private Config dataConfig;
+
     public PanelParking(User userData) {
         this.dataUser = userData;
         initComponents();
         String rol = dataUser.getRol();
+        dataConfig = new Config();
+
         if (rol.equals("admin")) {
             getParkings();
         } else {
@@ -259,7 +264,9 @@ public class PanelParking extends javax.swing.JPanel {
 
     private void getParkings() {
         listParkings.removeAll();
-        String parkingsData = Herramientas.consumoGET("http://localhost/parkingAPI/parking/getParkings.php");
+        String endpoint = "/parking/getParkings.php";
+        endpoint = dataConfig.getEndPoint(endpoint);
+        String parkingsData = Herramientas.consumoGET(endpoint);
 
         JsonObject jsonObject = JsonParser.parseString(parkingsData).getAsJsonObject();
         JsonArray parkingsArray = jsonObject.getAsJsonArray("parkings");
@@ -396,7 +403,9 @@ public class PanelParking extends javax.swing.JPanel {
 
     private void getParking(String idParking){
         System.out.println("Obteniendo parking con id: "+idParking+"...");
-        String parkingData = Herramientas.consumoGET("http://localhost/parkingAPI/parking/getParking.php?id="+idParking);
+        String endpoint = "/parking/getParking.php?id=";
+        endpoint = dataConfig.getEndPoint(endpoint);
+        String parkingData = Herramientas.consumoGET(endpoint+idParking);
         System.out.println(parkingData);
         JsonObject jsonObject = JsonParser.parseString(parkingData).getAsJsonObject();
         System.out.println(jsonObject);
@@ -629,7 +638,9 @@ public class PanelParking extends javax.swing.JPanel {
                 postData.put("camion", truckUpdate);
                 postData.put("carro", carUpdate);
                 postData.put("moto", bikeUpdate);
-                String response = Herramientas.consumoPOST("http://localhost/parkingAPI/parking/updateParking.php", postData);
+                String endpoint = "/parking/updateParking.php";
+                endpoint = dataConfig.getEndPoint(endpoint);
+                String response = Herramientas.consumoPOST(endpoint, postData);
                 System.out.println(response);
                 System.out.println("Datos a guardar: "+id+" "+address+" "+status+" "+van+" "+truck+" "+car+" "+bike);
                 

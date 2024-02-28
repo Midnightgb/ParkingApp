@@ -12,12 +12,14 @@ import java.io.IOException;
 
 import parkingapp.user.User;
 import parkingapp.util.Herramientas;
+import parkingapp.Config;
 
 public class LostPassword extends javax.swing.JFrame {
-    
+    private Config dataConfig;
+
     public LostPassword() {
         initComponents();
-        
+        dataConfig = new Config();
     }
 
     @SuppressWarnings("unchecked")
@@ -157,7 +159,9 @@ public class LostPassword extends javax.swing.JFrame {
             try{
                 Map<String, String> getData = new HashMap<>();
                 getData.put("iduser", cedula);
-                String getUser = Herramientas.consumoGET("http://localhost/parkingAPI/users/getUser.php", getData);
+                String endpoint = "/users/getUser.php";
+                endpoint = dataConfig.getEndPoint(endpoint);
+                String getUser = Herramientas.consumoGET(endpoint, getData);
                 System.out.println(getUser);
                 JsonObject jsonObject = JsonParser.parseString(getUser).getAsJsonObject();
                 boolean status = jsonObject.get("status").getAsBoolean();
