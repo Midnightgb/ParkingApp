@@ -4,16 +4,20 @@ import com.google.gson.JsonParser;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
+import parkingapp.Config;
 import parkingapp.MainFrame;
 import parkingapp.user.User;
 import parkingapp.util.Herramientas;
 
 public class LoginFrame extends javax.swing.JFrame {
     private String getUser;
+    private Config dataConfig;
+
     public LoginFrame() {
         initComponents();
         panelAlert.setVisible(false);
         loginButton.requestFocus();
+        dataConfig = new Config();
     }
 
     @SuppressWarnings("unchecked")
@@ -248,7 +252,9 @@ public class LoginFrame extends javax.swing.JFrame {
         getData.put("iduser", id);
         getData.put("validatePass", password);
         showLoading();
-        getUser = Herramientas.consumoGET("http://localhost/parkingAPI/users/getUser.php", getData);
+        String endpoint = "/users/getUser.php";
+        endpoint = dataConfig.getEndPoint(endpoint);
+        getUser = Herramientas.consumoGET(endpoint, getData);
         System.out.println("User: " + getUser);
         hideLoading();
 

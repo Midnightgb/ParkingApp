@@ -7,12 +7,15 @@ import java.util.Map;
 
 import parkingapp.user.User;
 import parkingapp.util.Herramientas;
+import parkingapp.Config;
 
 public class CodeConfirmed extends javax.swing.JFrame {
     private User user;
+    private Config dataConfig;
     public CodeConfirmed(User userData) {
         initComponents();
         this.user = userData;
+        dataConfig = new Config();
     }
 
     @SuppressWarnings("unchecked")
@@ -175,7 +178,9 @@ public class CodeConfirmed extends javax.swing.JFrame {
             postData.put("iduser", iduser);
             postData.put("password", password);
             postData.put("action", "updatePassword");
-            String UpdateUser = Herramientas.consumoPOST("http://localhost/parkingAPI/users/Update.php", postData);
+            String endpoint = "/users/Update.php";
+            endpoint = dataConfig.getEndPoint(endpoint);
+            String UpdateUser = Herramientas.consumoPOST(endpoint, postData);
             System.out.println("User: " + UpdateUser);
             
             JsonObject jsonObject = JsonParser.parseString(UpdateUser).getAsJsonObject();
