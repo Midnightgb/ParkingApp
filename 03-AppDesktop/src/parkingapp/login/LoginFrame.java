@@ -8,6 +8,8 @@ import parkingapp.Config;
 import parkingapp.MainFrame;
 import parkingapp.user.User;
 import parkingapp.util.Herramientas;
+import javax.swing.ImageIcon;
+import java.awt.Image;
 
 public class LoginFrame extends javax.swing.JFrame {
     private String getUser;
@@ -18,6 +20,9 @@ public class LoginFrame extends javax.swing.JFrame {
         panelAlert.setVisible(false);
         loginButton.requestFocus();
         dataConfig = new Config();
+        ImageIcon imgIcon = new ImageIcon(getClass().getResource("/parkingapp/resources/images/icons8-estacionamiento-64.png"));
+        Image img = imgIcon.getImage();
+        this.setIconImage(img);
     }
 
     @SuppressWarnings("unchecked")
@@ -30,6 +35,7 @@ public class LoginFrame extends javax.swing.JFrame {
         cedulaInput = new javax.swing.JTextField();
         imgLogo = new javax.swing.JLabel();
         contraseniaOlvidada = new javax.swing.JLabel();
+        separadorContra1 = new javax.swing.JSeparator();
         loginButton = new javax.swing.JButton();
         separadorContra = new javax.swing.JSeparator();
         separadorCedula = new javax.swing.JSeparator();
@@ -151,7 +157,8 @@ public class LoginFrame extends javax.swing.JFrame {
                                     .addComponent(contraseniaOlvidada, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginLayout.createSequentialGroup()
                                         .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(17, 17, 17)))
+                                        .addGap(17, 17, 17))
+                                    .addComponent(separadorContra1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(72, 72, 72))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginLayout.createSequentialGroup()
                                 .addComponent(panelAlert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -196,7 +203,9 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(contraseniaOlvidada)
-                .addGap(18, 18, 18)
+                .addGap(2, 2, 2)
+                .addComponent(separadorContra1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelAlert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
         );
@@ -215,7 +224,7 @@ public class LoginFrame extends javax.swing.JFrame {
             .addGroup(panelLoginLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         setVisible(true);
@@ -385,5 +394,6 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JPanel panelLogin;
     private javax.swing.JSeparator separadorCedula;
     private javax.swing.JSeparator separadorContra;
+    private javax.swing.JSeparator separadorContra1;
     // End of variables declaration//GEN-END:variables
 }
