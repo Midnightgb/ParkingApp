@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.parkingapp.R;
 import com.example.parkingapp.databinding.FragmentUserBinding;
 import com.example.parkingapp.ui.parking.AdapterListParking;
@@ -44,11 +46,11 @@ public class UserFragment extends Fragment {
     EditText idUser;
     EditText etEmailS;
     EditText etpasswS;
-    LinearLayout btnCreateUser ,layoutCreateUser,usersLayout;
+    LinearLayout btnCreateUser ,layoutCreateUser, layoutListUser, layoutAssignUser;
     Spinner roles;
     Context context;
     Config dataConfig;
-    Button btntoCreate;
+    Button btnCreateUserSesion, btnBackCreate, btnBackEditUser, btnBackDetailUser, btnBackAssignUser;
     private FragmentUserBinding binding;
     String user_id,user_rol;
     JSONArray user_array;
@@ -56,6 +58,9 @@ public class UserFragment extends Fragment {
     View root;
     RecyclerView recyclerView;
     EditText editText;
+    ImageView loaderTruck;
+
+    UserFragment userFragment;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -68,24 +73,35 @@ public class UserFragment extends Fragment {
         etEmailS = binding.etEmailS;
         etpasswS = binding.etpasswS;
         btnCreateUser = binding.btnCreateUser;
+        btnBackEditUser = binding.btnBackEditUser;
+        btnBackDetailUser = binding.btnBackDetailUser;
+        btnBackAssignUser = binding.btnBackAssignUser;
+        btnBackCreate = binding.btnBackCreate;
+        userFragment = this;
         roles = binding.roles;
         idUser = binding.idUser;
+        loaderTruck = binding.loaderTruck;
+        Glide.with(context).asGif().load(R.drawable.loader_truck).into(loaderTruck);
+
         layoutCreateUser = binding.layoutCreateUser;
+        layoutAssignUser = binding.layoutAssignUser;
+        btnCreateUserSesion = binding.btnCreateUserSesion;
         dataConfig = new Config(context);
         editText = root.findViewById(R.id.fildSearchParking);
         SharedPreferences archivo = context.getSharedPreferences("userParking", Context.MODE_PRIVATE);
         user_id = archivo.getString("id", null);
         user_rol = archivo.getString("rol", null);
         recyclerView = root.findViewById(R.id.recycler_view_parking_assigned);
+        layoutListUser = root.findViewById(R.id.layoutListUser);
         user_array = new JSONArray();
         String jsonString = "[{\"name\":\"John\"},{\"name\":\"Alice\"}]";
         try {
             JSONArray jsonArray = new JSONArray(jsonString);
-            adapter = new AdapterListUser(jsonArray, root, context);
+            adapter = new AdapterListUser(jsonArray, root, context, userFragment);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        consumoParkings(context);
+        consumoUsers(context);
 
         btnCreateUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +109,39 @@ public class UserFragment extends Fragment {
                 createUser(v);
             }
         });
+
+        btnCreateUserSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchSection(layoutCreateUser, layoutListUser);
+            }
+        });
+        btnBackCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchSection(layoutListUser, layoutCreateUser);
+            }
+        });
+        btnBackEditUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchSection(root.findViewById(R.id.layoutListUser), root.findViewById(R.id.layoutEditUser));
+            }
+        });
+        btnBackDetailUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchSection(root.findViewById(R.id.layoutListUser), root.findViewById(R.id.layoutDetailUser));
+            }
+        });
+
+        btnBackAssignUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchSection(layoutListUser, layoutAssignUser);
+            }
+        });
+
 
         editText.addTextChangedListener(new TextWatcher() {
 
@@ -119,7 +168,7 @@ public class UserFragment extends Fragment {
     public void filterParking(String searchText, JSONArray users) {
         if (searchText == null || searchText.isEmpty()) {
             if(users == null){
-                consumoParkings(context);
+                consumoUsers(context);
                 adapter.updateData(users);
             }
 
@@ -179,6 +228,7 @@ public class UserFragment extends Fragment {
 
 
                         }
+                        consumoUsers(context);
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
 
@@ -213,7 +263,8 @@ public class UserFragment extends Fragment {
     }
 
 
-    public void consumoParkings(Context context){
+    public void consumoUsers(Context context){
+        loaderTruck.setVisibility(View.VISIBLE);
         System.out.println("Iniciando consumo");
         RequestQueue queue = Volley.newRequestQueue(context);
         String endpoint = "/users/getUsers.php?id="+user_id;
@@ -225,10 +276,10 @@ public class UserFragment extends Fragment {
                 System.out.println(response.toString());
                 try {
                     user_array = response.getJSONArray("users");
-                    adapter = new AdapterListUser(user_array, root, context);
+                    adapter = new AdapterListUser(user_array, root, context, userFragment);
                     recyclerView.setLayoutManager(new LinearLayoutManager(context));
                     recyclerView.setAdapter(adapter);
-//                    loaderTruck.setVisibility(View.GONE);
+                    loaderTruck.setVisibility(View.GONE);
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -244,5 +295,13 @@ public class UserFragment extends Fragment {
         });
 
         queue.add(solicitud);
+    }
+    public void switchSection(View section, View previousSection) {
+        if (section.getVisibility() == View.GONE) {
+            section.setVisibility(View.VISIBLE);
+            previousSection.setVisibility(View.GONE);
+        } else {
+            section.setVisibility(View.GONE);
+        }
     }
 }
