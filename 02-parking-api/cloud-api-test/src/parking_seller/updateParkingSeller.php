@@ -13,7 +13,7 @@ if (!empty($_POST['user_id']) and !empty($_POST['parking_id'])) {
     
 
     try {
-        $query = "UPDATE parking_seller (parking_id, user_id) VALUES (:pargid, :usid)";
+        $query = "UPDATE public.parking_seller (parking_id, user_id) VALUES (:pargid, :usid)";
         $consulta = $DB->prepare($query);
         $consulta->bindParam(':pargid', $parking_id);
         $consulta->bindParam(':usid', $user_id);

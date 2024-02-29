@@ -6,12 +6,15 @@ import androidx.core.content.ContextCompat;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,12 +42,14 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText etEmail, etPassword;
     LinearLayout btnLogin;
-    TextView tvForgotPassw;
+    TextView tvForgotPassw, tvLogin;
     String etEmailText, etPasswordText;
     Boolean emailValid = false;
     Context context;
 
     Config dataConfig;
+    boolean loginButtonActive = false;
+    ProgressBar loadingIndicator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +59,9 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassw);
         btnLogin = findViewById(R.id.btnLogin);
+        tvLogin = findViewById(R.id.tvLogin);
         tvForgotPassw = findViewById(R.id.tvForgotPassw);
+        loadingIndicator = findViewById(R.id.loadingIndicator);
         etEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -107,13 +114,13 @@ public class LoginActivity extends AppCompatActivity {
                      if (!etEmailText.isEmpty()) {
                           emailValid = validateEmail(etEmailText);
                           if (!emailValid) {
-                            // El correo no es válido
+                            etEmail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sms_icon, 0, 0, 0);
                             etEmail.getCompoundDrawables()[0].setTint(ContextCompat.getColor(getApplicationContext(), R.color.red));
                             etEmail.setBackgroundResource(R.drawable.status_error);
                           } else {
-                            // El correo es válido
-                            etEmail.getCompoundDrawables()[0].setTint(ContextCompat.getColor(getApplicationContext(), R.color.green));
+                            etEmail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sms_icon, 0, 0, 0);
                             etEmail.setBackgroundResource(R.drawable.status_success);
+                            etEmail.getCompoundDrawables()[0].setTint(ContextCompat.getColor(getApplicationContext(), R.color.green));
                             etPasswordText = etPassword.getText().toString();
                             if (!etEmailText.isEmpty() && !etPasswordText.isEmpty()){
                                  btnLogin.setBackgroundResource(R.drawable.btn_active);
@@ -188,12 +195,17 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     public void authenticateUser(View view) {
-        System.out.println("Autenticando usuario");
+        if (loginButtonActive) {
+            System.out.println("Ya se ha enviado una petición de autenticación");
+            return;
+        }
         if (emailValid && !etEmailText.isEmpty() && !etPasswordText.isEmpty()) {
+            System.out.println("Enviando petición de autenticación");
             String endpoint = "/users/getUser.php";
             String url = dataConfig.getEndPoint(endpoint);
             RequestQueue queue = Volley.newRequestQueue(context);
             System.out.println("URL: " + url);
+            alternateLoaderVisibility();
             StringRequest request =  new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -205,6 +217,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(context, "Usuario inactivo. Contacte soporte.", Toast.LENGTH_LONG).show();
                                 etEmail.getCompoundDrawables()[0].setTint(ContextCompat.getColor(getApplicationContext(), R.color.red));
                                 etEmail.setBackgroundResource(R.drawable.status_error);
+                                alternateLoaderVisibility();
                                 return;
                             }
                             if (datos.getJSONObject("datos").getString("password").equals("OK")) {
@@ -218,23 +231,33 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.apply();
                                 Intent intention = new Intent(context, MainActivity.class);
                                 startActivity(intention);
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        alternateLoaderVisibility();
+                                    }
+                                }, 2000); // 2000 ms = 2s
                             } else {
                                 Toast.makeText(context, "Contraseña incorrecta", Toast.LENGTH_LONG).show();
                                 etPassword.getCompoundDrawables()[0].setTint(ContextCompat.getColor(getApplicationContext(), R.color.red));
                                 etPassword.setBackgroundResource(R.drawable.status_error);
+                                alternateLoaderVisibility();
                             }
                         }else {
                             Toast.makeText(context, datos.getString("message"), Toast.LENGTH_LONG).show();
                             etEmail.getCompoundDrawables()[0].setTint(ContextCompat.getColor(getApplicationContext(), R.color.red));
                             etEmail.setBackgroundResource(R.drawable.status_error);
+                            alternateLoaderVisibility();
                         }
                     } catch (JSONException e) {
+                        alternateLoaderVisibility();
                         throw new RuntimeException(e);
                     }
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    alternateLoaderVisibility();
                     System.out.println("El servidor POST responde con un error:");
                     System.out.println(error.getMessage());
                 }
@@ -258,5 +281,25 @@ public class LoginActivity extends AppCompatActivity {
 
     public boolean validateEmail(String email) {
         return email.contains("@");
+    }
+
+    public void alternateLoaderVisibility() {
+        if (loadingIndicator.getVisibility() == View.VISIBLE) {
+            loginButtonActive = false;
+            loadingIndicator.setVisibility(View.GONE);
+            tvLogin.setVisibility(View.VISIBLE);
+            System.out.println("Ocultando indicador de carga");
+            System.out.println("Habilitando botón de login");
+            System.out.println("Mostrando texto de login");
+            System.out.println("LoginButtonActive: " + loginButtonActive);
+        } else {
+            loginButtonActive = true;
+            loadingIndicator.setVisibility(View.VISIBLE);
+            tvLogin.setVisibility(View.GONE);
+            System.out.println("Mostrando indicador de carga");
+            System.out.println("Deshabilitando botón de login");
+            System.out.println("Ocultando texto de login");
+            System.out.println("LoginButtonActive: " + loginButtonActive);
+        }
     }
 }

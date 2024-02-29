@@ -15,9 +15,9 @@ if (!empty($_POST['id']) && !empty($_POST['status'])) {
 
     try {
         if($status == "activo"){
-            $query = "UPDATE ticket SET status = 'inactivo' WHERE id = :d";
+            $query = "UPDATE public.ticket SET status = 'inactivo' WHERE id = :d";
         }else{
-            $query = "UPDATE ticket SET status = 'activo' WHERE id = :d";
+            $query = "UPDATE public.ticket SET status = 'activo' WHERE id = :d";
         }
         
         $consulta = $DB->prepare($query);

@@ -15,7 +15,7 @@ if (!empty($_POST['name']) and !empty($_POST['address'])) {
     $moto = $_POST['moto'];
 
     try {
-        $query = "INSERT INTO parking (name, address, camioneta, camion, carro, moto) VALUES (:nme, :ad, :cmt, :cmo, :cr, :mt)";
+        $query = "INSERT INTO public.parking (name, address, camioneta, camion, carro, moto) VALUES (:nme, :ad, :cmt, :cmo, :cr, :mt)";
         $consulta = $DB->prepare($query);
         $consulta->bindParam(':nme', $name);
         $consulta->bindParam(':ad', $address);
