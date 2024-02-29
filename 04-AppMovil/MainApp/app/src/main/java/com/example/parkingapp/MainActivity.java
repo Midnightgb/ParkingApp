@@ -1,5 +1,7 @@
 package com.example.parkingapp;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -30,6 +32,14 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
+        SharedPreferences sharedPreferences = getSharedPreferences("userParking", Context.MODE_PRIVATE);
+        String userRoleKey = sharedPreferences.getString("rol", null);
+        System.out.println("userRoleKey");
+        System.out.println(userRoleKey);
+        assert userRoleKey != null;
+        if(!userRoleKey.equals("admin")){
+            navView.getMenu().removeItem(R.id.navigation_user);
+        }
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_parking, R.id.navigation_vehicle, R.id.navigation_user, R.id.navigation_profile)
                 .build();
