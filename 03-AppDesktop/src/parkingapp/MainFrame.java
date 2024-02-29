@@ -2,6 +2,7 @@ package parkingapp;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.awt.Image;
 import parkingapp.vehicle.PanelVehicles;
 import parkingapp.user.PanelUsers;
 import parkingapp.ticket.*;
@@ -9,22 +10,27 @@ import parkingapp.parking.PanelParking;
 
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.ImageIcon;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import parkingapp.user.User;
 import parkingapp.util.Herramientas;
 import parkingapp.login.LoginFrame;
+import parkingapp.Config;
 
 public class MainFrame extends javax.swing.JFrame {
     private JButton pastButton;
     public User dataUser;
     private String idUser;
+    private Config dataConfig;
     public MainFrame(User userData) {
         initComponents();
         this.dataUser = userData;
         this.idUser = String.valueOf(dataUser.getId());
-
+        ImageIcon imgIcon = new ImageIcon(getClass().getResource("/parkingapp/resources/images/icons8-estacionamiento-64.png"));
+        Image img = imgIcon.getImage();
+        this.setIconImage(img);
         currentUser.setText(idUser);
         pastButton = mainButton;
         System.out.println("ID: "+idUser);
@@ -40,6 +46,7 @@ public class MainFrame extends javax.swing.JFrame {
                 parkingBtn.setText("Parqueadero");
                 usersBtn.setVisible(false);
             }
+            dataConfig = new Config();
         }
         MainPanel mainPanel = new MainPanel(dataUser);
         mainPanel.setSize(contentPanel.getSize());
@@ -485,8 +492,9 @@ public class MainFrame extends javax.swing.JFrame {
         try{
             Map<String, String> getData = new HashMap<>();
             getData.put("iduser", idUser);
-
-            String datos = Herramientas.consumoGET("http://localhost/parkingAPI/users/getUser.php", getData);
+            String endpoint = "/users/getUser.php";
+            endpoint = dataConfig.getEndPoint(endpoint);
+            String datos = Herramientas.consumoGET(endpoint, getData);
             System.out.println("Datos: "+datos);
             if (datos.equals("")){
                 Herramientas.alerta("Error al obtener los datos del usuario", false);

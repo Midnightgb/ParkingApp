@@ -7,7 +7,7 @@
 
 
 if (!empty($_GET['id'])) {
-    $consulta = $DB->query("SELECT * FROM ticket WHERE id = ".$_GET['id']);
+    $consulta = $DB->query("SELECT * FROM public.ticket WHERE id = ".$_GET['id']);
     $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
     if (sizeof($datos)>0) {
         $respuesta = [

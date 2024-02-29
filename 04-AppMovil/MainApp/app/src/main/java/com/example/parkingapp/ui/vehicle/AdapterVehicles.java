@@ -85,23 +85,31 @@ public class AdapterVehicles extends RecyclerView.Adapter<AdapterVehicles.ViewHo
             String fecha = vehicle.optString("entry_date");
             String nameParking = vehicle.optString("parking_name");
             String addressParking = vehicle.optString("parking_addres");
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+
 
             try {
-
-                Date fechaParser = sdf.parse(fecha);
-
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                TimeZone timeZoneColombia = TimeZone.getTimeZone("America/Bogota");
+                sdf.setTimeZone(timeZoneColombia);
+                Date fechaEntrada = sdf.parse(fecha);
                 Date fechaActual = new Date();
 
+                long diferenciaEnMilisegundos = fechaActual.getTime() - fechaEntrada.getTime();
 
-                long diferenciaEnMilisegundos = fechaActual.getTime() - fechaParser.getTime();
+
+                long minutosTranscurridos = diferenciaEnMilisegundos / (1000 * 60);
+                long horasTranscurridas = minutosTranscurridos / 60;
+                minutosTranscurridos = minutosTranscurridos % 60;
+
+                if (horasTranscurridas < 1) {
+                    System.out.println("Horas transcurridas desde la fecha: " + horasTranscurridas + " horas");
 
 
-                long horasTranscurridas = diferenciaEnMilisegundos / (1000 * 60 * 60);
-
-                System.out.println("Horas transcurridas desde la fecha: " + horasTranscurridas);
-                time.setText(horasTranscurridas + " horas");
+                    time.setText(minutosTranscurridos + " minutos");
+                } else {
+                    System.out.println("Horas transcurridas desde la fecha: " + horasTranscurridas + " horas o más");
+                    time.setText(horasTranscurridas + " horas");
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -136,6 +144,8 @@ public class AdapterVehicles extends RecyclerView.Adapter<AdapterVehicles.ViewHo
                     switchSection(layout_vehicles,layout_ticket);
                 }
             });
+
+
 
         }
 
