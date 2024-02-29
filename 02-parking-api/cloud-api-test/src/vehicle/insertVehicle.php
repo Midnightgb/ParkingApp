@@ -12,7 +12,7 @@ if (!empty($_POST['plate']) && !empty($_POST['category']) && !empty($_POST['owne
     $owner = $_POST['owner'];
 
     try {
-        $query = "INSERT INTO vehicle (plate, category, name_owner) VALUES (:plt, :ctid, :owr)";
+        $query = "INSERT INTO public.vehicle (plate, category, name_owner) VALUES (:plt, :ctid, :owr)";
         $consulta = $DB->prepare($query);
         $consulta->bindParam(':plt', $plate);
         $consulta->bindParam(':ctid', $category);

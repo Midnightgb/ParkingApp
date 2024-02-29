@@ -13,7 +13,7 @@ if (!empty($_POST['plate']) && !empty($_POST['category'])) {
 
     try {
         
-        $query = "UPDATE vehicle SET category = :ctid, name_owner = :ownr WHERE plate = :plt";
+        $query = "UPDATE public.vehicle SET category = :ctid, name_owner = :ownr WHERE plate = :plt";
         $consulta = $DB->prepare($query);
         $consulta->bindParam(':ctid', $category);
         $consulta->bindParam(':plt', $plate);
