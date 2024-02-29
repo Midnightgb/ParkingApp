@@ -14,6 +14,7 @@ import javax.swing.JCheckBox;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import parkingapp.Config;
 import parkingapp.MainFrame;
 import parkingapp.ticket.PanelTicketView;
 import parkingapp.ticket.PanelTickets;
@@ -24,10 +25,12 @@ public class PanelVehicles extends javax.swing.JPanel {
     DefaultTableModel modelo;
     MainFrame frame;
     User dataUser;
+    private Config dataConfig;
     
     public PanelVehicles(User dataUser, MainFrame frame) {
         this.dataUser = dataUser;
         this.frame = frame; 
+        this.dataConfig = new Config();
         initComponents();
         alterInitComponents();
     }
@@ -178,8 +181,9 @@ public class PanelVehicles extends javax.swing.JPanel {
         TableVehi.getTableHeader().setForeground(Color.BLACK);
         this.TableVehi.getColumn("Actualizar").setCellRenderer(new parkingapp.util.ButtonRenderer());
         this.TableVehi.getColumn("Actualizar").setCellEditor(new parkingapp.util.ButtonEditor(new JCheckBox()));
-
-        String result = Herramientas.consumoGET("http://localhost/parkingAPI/vehicle/getVehicles.php");
+        String endpoint = "/vehicle/getVehicles.php";
+        endpoint = dataConfig.getEndPoint(endpoint);
+        String result = Herramientas.consumoGET(endpoint);
 
         System.out.println(result);
 
