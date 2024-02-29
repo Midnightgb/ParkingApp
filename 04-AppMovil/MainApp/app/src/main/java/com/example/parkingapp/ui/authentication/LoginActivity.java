@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -193,12 +194,12 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     public void authenticateUser(View view) {
-        System.out.println("Autenticando usuario");
         if (loginButtonActive) {
             System.out.println("Ya se ha enviado una petición de autenticación");
             return;
         }
         if (emailValid && !etEmailText.isEmpty() && !etPasswordText.isEmpty()) {
+            System.out.println("Enviando petición de autenticación");
             String endpoint = "/users/getUser.php";
             String url = dataConfig.getEndPoint(endpoint);
             RequestQueue queue = Volley.newRequestQueue(context);
@@ -220,7 +221,6 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             if (datos.getJSONObject("datos").getString("password").equals("OK")) {
                                 System.out.println("Usuario autenticado");
-                                alternateLoaderVisibility();
                                 SharedPreferences preferences = getSharedPreferences("userParking", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = preferences.edit();
                                 editor.putString("id", datos.getJSONObject("datos").getString("id"));
@@ -230,6 +230,12 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.apply();
                                 Intent intention = new Intent(context, MainActivity.class);
                                 startActivity(intention);
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        alternateLoaderVisibility();
+                                    }
+                                }, 2000); // 2000 ms = 2s
                             } else {
                                 Toast.makeText(context, "Contraseña incorrecta", Toast.LENGTH_LONG).show();
                                 etPassword.getCompoundDrawables()[0].setTint(ContextCompat.getColor(getApplicationContext(), R.color.red));
