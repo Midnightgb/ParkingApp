@@ -98,3 +98,4 @@ replay_pid*
 .cxx
 local.properties
 
+/03-AppDesktop/dist/
