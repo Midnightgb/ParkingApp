@@ -72,11 +72,20 @@
 
         </LinearLayout>
         <Button
+            android:id="@+id/btnAssignParking"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_parking"
+            android:layout_marginRight="80dp"
+            android:layout_gravity="bottom|end"
+            />
+
+        <Button
             android:id="@+id/btnEditUser"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/update_parking"
-            android:layout_marginRight="60dp"
+            android:layout_marginRight="50dp"
             android:layout_gravity="bottom|end"
             />
 

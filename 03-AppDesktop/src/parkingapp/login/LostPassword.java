@@ -1,6 +1,7 @@
 package parkingapp.login;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.awt.Image;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,15 +10,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import java.io.IOException;
+import javax.swing.ImageIcon;
 
 import parkingapp.user.User;
 import parkingapp.util.Herramientas;
+import parkingapp.Config;
 
 public class LostPassword extends javax.swing.JFrame {
-    
+    private Config dataConfig;
+
     public LostPassword() {
         initComponents();
-        
+        dataConfig = new Config();
+        ImageIcon imgIcon = new ImageIcon(getClass().getResource("/parkingapp/resources/images/icons8-estacionamiento-64.png"));
+        Image img = imgIcon.getImage();
+        this.setIconImage(img);
     }
 
     @SuppressWarnings("unchecked")
@@ -157,7 +164,9 @@ public class LostPassword extends javax.swing.JFrame {
             try{
                 Map<String, String> getData = new HashMap<>();
                 getData.put("iduser", cedula);
-                String getUser = Herramientas.consumoGET("http://localhost/parkingAPI/users/getUser.php", getData);
+                String endpoint = "/users/getUser.php";
+                endpoint = dataConfig.getEndPoint(endpoint);
+                String getUser = Herramientas.consumoGET(endpoint, getData);
                 System.out.println(getUser);
                 JsonObject jsonObject = JsonParser.parseString(getUser).getAsJsonObject();
                 boolean status = jsonObject.get("status").getAsBoolean();

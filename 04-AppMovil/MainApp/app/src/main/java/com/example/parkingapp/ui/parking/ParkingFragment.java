@@ -74,6 +74,8 @@ public class ParkingFragment extends Fragment {
     Config dataConfig;
     String ip_v4;
 
+    ParkingFragment parkingFragment;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -85,6 +87,7 @@ public class ParkingFragment extends Fragment {
         ip_v4 =  dataConfig.getIpV4();
         recyclerView = root.findViewById(R.id.recycler_view_parking_assigned);
         pakings_array = new JSONArray();
+        parkingFragment = this;
 
 
         SharedPreferences archivo = context.getSharedPreferences("userParking", Context.MODE_PRIVATE);
@@ -107,13 +110,15 @@ public class ParkingFragment extends Fragment {
         label_camera = root.findViewById(R.id.labelNameCamera);
         labelPlate = root.findViewById(R.id.labelPlate);
         imgGetCar = root.findViewById(R.id.imgGetCar);
-
+        if(user_rol.equalsIgnoreCase("seller")){
+            crearParking.setVisibility(View.GONE);
+        }
 
 
         String jsonString = "[{\"name\":\"John\"},{\"name\":\"Alice\"}]";
         try {
             JSONArray jsonArray = new JSONArray(jsonString);
-            adapter = new AdapterListParking(jsonArray, root, context);
+            adapter = new AdapterListParking(jsonArray, root, context, this);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -167,6 +172,7 @@ public class ParkingFragment extends Fragment {
                 switchSection(root.findViewById(R.id.sesionListParking), root.findViewById(R.id.sesionGetCar));
             }
         });
+
         btnBackDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -245,7 +251,7 @@ public class ParkingFragment extends Fragment {
                 System.out.println(response.toString());
                 try {
                     pakings_array = response.getJSONArray("parkings");
-                    adapter = new AdapterListParking(pakings_array, root, context);
+                    adapter = new AdapterListParking(pakings_array, root, context, parkingFragment);
                     recyclerView.setLayoutManager(new LinearLayoutManager(context));
                     recyclerView.setAdapter(adapter);
                     loaderTruck.setVisibility(View.GONE);
@@ -315,6 +321,7 @@ public class ParkingFragment extends Fragment {
     }
 
     public void consumoAgregarParking(){
+        loaderTruck.setVisibility(View.VISIBLE);
         System.out.println("Iniciando consumo");
          List<String> field_check =  check_fields();
          if (field_check != null){
@@ -332,6 +339,8 @@ public class ParkingFragment extends Fragment {
                         System.out.println(jsonObject.toString());
                         Toast.makeText(context, "Se agrego el parqueadero correctamente", Toast.LENGTH_LONG).show();
                         cleanFielCrete();
+                        consumoParkings(context);
+                        loaderTruck.setVisibility(View.GONE);
                     } catch (JSONException e) {
                         System.out.println("El servidor POST responde con un error:");
                         System.out.println(e.getMessage());
