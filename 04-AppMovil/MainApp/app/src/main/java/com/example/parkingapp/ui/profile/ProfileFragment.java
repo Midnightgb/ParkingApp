@@ -40,6 +40,8 @@ public class ProfileFragment extends Fragment {
         userEmail.setText(userEmailKey);
         userName.setText(userNameKey);
 
+        logoutBtn.setOnClickListener(this::logout);
+
         return root;
     }
 
@@ -55,8 +57,7 @@ public class ProfileFragment extends Fragment {
         editor.clear();
         editor.apply();
         Intent intent = new Intent(context, LoginActivity.class);
-        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
     }
 }
