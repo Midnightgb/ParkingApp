@@ -99,3 +99,4 @@ replay_pid*
 local.properties
 
 /03-AppDesktop/dist/
+vendor/
