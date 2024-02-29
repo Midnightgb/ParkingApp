@@ -9,6 +9,115 @@
     android:layout_marginTop="10dp"
     tools:context=".ui.vehicle.VehicleFragment">
 
+    <LinearLayout
+        android:id="@+id/sesionCreateTicket"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginHorizontal="24dp"
+        >
+
+        <Button
+            android:id="@+id/btnBackCreateTicket"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/row_back"
+            />
+        <ImageView
+            android:layout_width="94dp"
+            android:layout_height="87dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_parking" />
+
+
+        <Spinner
+            android:id="@+id/plate_create_ticket"
+            style="@style/FormEditText"
+            android:background="@drawable/status_default"
+            android:drawableStart="@drawable/ic_location"
+            android:drawableTint="@color/gray"
+            android:fontFamily="@font/baloo2_regular"
+            android:spinnerMode="dropdown"
+            android:layout_marginVertical="10dp"
+
+            />
+
+        <Button
+            android:id="@+id/btnAgregarTicket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Agregar"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sesionCreatevehicle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginHorizontal="24dp"
+        >
+
+        <Button
+            android:id="@+id/btnBackCreateVehicle"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/row_back"
+            />
+        <ImageView
+            android:layout_width="94dp"
+            android:layout_height="87dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_parking" />
+
+        <EditText
+            android:id="@+id/plate_create"
+            style="@style/FormEditText"
+            android:layout_marginBottom="24dp"
+            android:autofillHints="name"
+            android:background="@drawable/status_default"
+            android:drawableStart="@drawable/ic_car"
+            android:drawableTint="@color/gray"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/baloo2_regular"
+            android:hint="Placa"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/name_owner"
+            style="@style/FormEditText"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/status_default"
+            android:drawableStart="@drawable/ic_location"
+            android:drawableTint="@color/gray"
+            android:fontFamily="@font/baloo2_regular"
+            android:hint="Nombre del dueño"
+            android:inputType="text" />
+
+        <Spinner
+            android:id="@+id/type_vehicle_create"
+            style="@style/FormEditText"
+            android:background="@drawable/status_default"
+            android:drawableStart="@drawable/ic_location"
+            android:drawableTint="@color/gray"
+            android:fontFamily="@font/baloo2_regular"
+            android:entries="@array/type_vehicle"
+            android:spinnerMode="dropdown"
+            android:layout_marginBottom="10dp"
+
+            />
+
+        <Button
+            android:id="@+id/btnAgregarVehicle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Agregar"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:id="@+id/layout_vehicles"
@@ -17,6 +126,39 @@
         android:orientation="vertical"
         android:visibility="visible"
         >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="40dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vehiculos En el parkeadero"
+                android:textSize="@dimen/subtitle"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+            <Button
+                android:id="@+id/btnCrearTicket"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/add" />
+            <Button
+                android:id="@+id/btnCrearVehiculo"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_car" />
+
+        </LinearLayout>
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
