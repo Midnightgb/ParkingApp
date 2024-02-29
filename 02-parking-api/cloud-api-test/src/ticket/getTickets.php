@@ -6,7 +6,7 @@ header("Content-Type: application/json");
 
 include '../connection.php';
 
-$query = $DB->query("SELECT t.*, p.name AS parking_name FROM ticket t JOIN parking_seller ps ON t.parking_id = ps.id_parking_seller JOIN parking p ON ps.parking_id = p.id");
+$query = $DB->query("SELECT t.*, p.name AS parking_name FROM public.ticket t JOIN public.parking_seller ps ON t.parking_id = ps.id_parking_seller JOIN public.parking p ON ps.parking_id = p.id");
 $data = $query->fetchAll(PDO::FETCH_ASSOC);
 
 $response['tickets'] = $data;

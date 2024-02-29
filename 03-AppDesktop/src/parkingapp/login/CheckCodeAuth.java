@@ -1,4 +1,6 @@
 package parkingapp.login;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
@@ -16,6 +18,9 @@ public class CheckCodeAuth extends javax.swing.JFrame {
         initComponents();
         this.codigo = codigo;
         this.user = userData;
+        ImageIcon imgIcon = new ImageIcon(getClass().getResource("/parkingapp/resources/images/icons8-estacionamiento-64.png"));
+        Image img = imgIcon.getImage();
+        this.setIconImage(img);
     }
 
    

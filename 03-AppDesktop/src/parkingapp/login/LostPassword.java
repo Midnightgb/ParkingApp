@@ -1,6 +1,7 @@
 package parkingapp.login;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.awt.Image;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import java.io.IOException;
+import javax.swing.ImageIcon;
 
 import parkingapp.user.User;
 import parkingapp.util.Herramientas;
@@ -20,6 +22,9 @@ public class LostPassword extends javax.swing.JFrame {
     public LostPassword() {
         initComponents();
         dataConfig = new Config();
+        ImageIcon imgIcon = new ImageIcon(getClass().getResource("/parkingapp/resources/images/icons8-estacionamiento-64.png"));
+        Image img = imgIcon.getImage();
+        this.setIconImage(img);
     }
 
     @SuppressWarnings("unchecked")

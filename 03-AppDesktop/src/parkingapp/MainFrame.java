@@ -2,6 +2,7 @@ package parkingapp;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.awt.Image;
 import parkingapp.vehicle.PanelVehicles;
 import parkingapp.user.PanelUsers;
 import parkingapp.ticket.*;
@@ -9,6 +10,7 @@ import parkingapp.parking.PanelParking;
 
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.ImageIcon;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -26,7 +28,9 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         this.dataUser = userData;
         this.idUser = String.valueOf(dataUser.getId());
-
+        ImageIcon imgIcon = new ImageIcon(getClass().getResource("/parkingapp/resources/images/icons8-estacionamiento-64.png"));
+        Image img = imgIcon.getImage();
+        this.setIconImage(img);
         currentUser.setText(idUser);
         pastButton = mainButton;
         System.out.println("ID: "+idUser);
