@@ -8,9 +8,9 @@ header("Content-Type: application/json");
 include '../connection.php';
 
 
-if (!empty($_POST['iduser']) || !empty($_POST['email'])) {
-    if (!empty($_POST['iduser'])) {
-        $iduser = $_POST['iduser'];
+if (!empty($_POST['iduser']) || !empty($_POST['email']) || !empty($_GET['iduser']) || !empty($_GET['email'])){
+    if (!empty($_POST['iduser']) || !empty($_GET['iduser'])) {
+        $iduser = isset($_POST['iduser']) ? $_POST['iduser'] : (isset($_GET['iduser']) ? $_GET['iduser'] : null);
         $consulta = $DB->prepare("SELECT * FROM user WHERE id = :idusr");
         $consulta->bindParam(':idusr', $iduser);
         $consulta->execute();
@@ -26,8 +26,8 @@ if (!empty($_POST['iduser']) || !empty($_POST['email'])) {
         }
         $email = $datos[0]['email'];
     }
-    if (!empty($_POST['email'])) {
-        $email = $_POST['email'];
+    if (!empty($_POST['email']) || !empty($_GET['email'])) {
+        $email = isset($_POST['email']) ? $_POST['email'] : (isset($_GET['email']) ? $_GET['email'] : null);
         $consulta = $DB->prepare("SELECT * FROM user WHERE email = :emusr");
         $consulta->bindParam(':emusr', $email);
         $consulta->execute();
@@ -83,8 +83,8 @@ if (!empty($_POST['iduser']) || !empty($_POST['email'])) {
     // settear el parking_id en el array de datos
     $datos[0]['parking_id'] = $parking_id;
 
-    if (!empty($_POST['validatePass'])) {
-        $passToValidate = $_POST['validatePass'];
+    if (!empty($_POST['validatePass']) || !empty($_GET['validatePass'])) {
+        $passToValidate = isset($_POST['validatePass']) ? $_POST['validatePass'] : (isset($_GET['validatePass']) ? $_GET['validatePass'] : null);
         $passToValidate = password_verify($passToValidate, $datos[0]['password']);
         error_log("passToValidate: " . $passToValidate);
         if ($passToValidate) {
