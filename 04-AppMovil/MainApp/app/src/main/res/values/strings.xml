@@ -52,5 +52,6 @@
     <string name="el_c_digo_se_ha_enviado_a">El código se ha enviado a</string>
     <string name="reenviar_c_digo_en">Reenviar código en</string>
     <string name="imagen_de_persona_pensando_en_la_contrase_a">imagen de persona pensando en la contraseña</string>
+    <string name="cerrar_sesi_n">Cerrar sesión</string>
 
 </resources>

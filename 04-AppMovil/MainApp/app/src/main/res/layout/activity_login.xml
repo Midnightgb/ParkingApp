@@ -51,6 +51,7 @@
         android:inputType="textEmailAddress"
         android:layout_marginBottom="24dp"
         android:drawableStart="@drawable/sms_icon"
+        android:textCursorDrawable="@color/black"
         android:layout_marginHorizontal="24dp"
         android:focusable="true"
         />

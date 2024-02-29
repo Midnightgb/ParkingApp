@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -113,13 +114,13 @@ public class LoginActivity extends AppCompatActivity {
                      if (!etEmailText.isEmpty()) {
                           emailValid = validateEmail(etEmailText);
                           if (!emailValid) {
-                            // El correo no es válido
+                            etEmail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sms_icon, 0, 0, 0);
                             etEmail.getCompoundDrawables()[0].setTint(ContextCompat.getColor(getApplicationContext(), R.color.red));
                             etEmail.setBackgroundResource(R.drawable.status_error);
                           } else {
-                            // El correo es válido
-                            etEmail.getCompoundDrawables()[0].setTint(ContextCompat.getColor(getApplicationContext(), R.color.green));
+                            etEmail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sms_icon, 0, 0, 0);
                             etEmail.setBackgroundResource(R.drawable.status_success);
+                            etEmail.getCompoundDrawables()[0].setTint(ContextCompat.getColor(getApplicationContext(), R.color.green));
                             etPasswordText = etPassword.getText().toString();
                             if (!etEmailText.isEmpty() && !etPasswordText.isEmpty()){
                                  btnLogin.setBackgroundResource(R.drawable.btn_active);

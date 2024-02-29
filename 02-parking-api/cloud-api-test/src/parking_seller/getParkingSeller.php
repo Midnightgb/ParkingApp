@@ -8,7 +8,7 @@
     if (!empty($_GET['id'])) {
         $user_id = $_GET['id'];
 
-        $consulta_vendedor = $DB->query("SELECT * FROM parking_seller WHERE user_id = $user_id");
+        $consulta_vendedor = $DB->query("SELECT * public.FROM parking_seller WHERE user_id = $user_id");
         $datos_vendedor = $consulta_vendedor->fetchAll(PDO::FETCH_ASSOC);
 
         if (sizeof($datos_vendedor) > 0) {
