@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.parkingapp.R;
 import com.example.parkingapp.utils.Config;
 
@@ -38,10 +40,12 @@ public class AdapterListParking extends RecyclerView.Adapter<AdapterListParking.
     View root;
     JSONObject parking_buscado;
     Config dataConfig;
+    ParkingFragment parkingFragment;
 
-    public AdapterListParking(JSONArray listaParkings, View root, Context context){
+    public AdapterListParking(JSONArray listaParkings, View root, Context context, ParkingFragment parkingFragment){
         this.listaParkings = listaParkings;
         this.root = root;
+        this.parkingFragment = parkingFragment;
         this.dataConfig = new Config(context);
     }
 
@@ -84,6 +88,8 @@ public class AdapterListParking extends RecyclerView.Adapter<AdapterListParking.
 
         Spinner spinner_select;
 
+        ImageView loaderTruck;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -110,7 +116,12 @@ public class AdapterListParking extends RecyclerView.Adapter<AdapterListParking.
             edit_field_pickup_truck = root.findViewById(R.id.edit_field_pickup_truck);
             sesionEditParking = root.findViewById(R.id.sesionEditParking);
             edit_btnAgregarParking = root.findViewById(R.id.edit_btnAgregarParking);
+            loaderTruck = root.findViewById(R.id.loaderTruck);
+            Glide.with(context).asGif().load(R.drawable.loader_truck).into(loaderTruck);
             spinner_select = root.findViewById(R.id.editRoles);
+
+
+
             System.out.println(sesionDetailParking);
 
             if (sesionListParking != null){
@@ -207,6 +218,8 @@ public class AdapterListParking extends RecyclerView.Adapter<AdapterListParking.
         }
 
         public void consumoEditParking() {
+            loaderTruck.setVisibility(View.VISIBLE);
+
             List<String> list_fields_edit = check_fields();
             if (parking_buscado != null || list_fields_edit !=null) {
                 System.out.println("Iniciando consumo");
@@ -224,6 +237,9 @@ public class AdapterListParking extends RecyclerView.Adapter<AdapterListParking.
                             System.out.println(jsonObject.toString());
                             Toast.makeText(context, "Los cambios fueron realizados", Toast.LENGTH_LONG).show();
                             cleanFieldEdit();
+                            parkingFragment.consumoParkings(context);
+                            loaderTruck.setVisibility(View.GONE);
+
                         } catch (JSONException e) {
                             System.out.println("El servidor POST responde con un error:");
                             System.out.println(e.getMessage());
