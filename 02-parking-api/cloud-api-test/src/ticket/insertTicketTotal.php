@@ -2,6 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST");
 header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json");
 
 include '../connection.php';
 
@@ -11,7 +12,7 @@ if (!empty($_POST['id']) and !empty($_POST['date'])) {
     try {
         $id = $_POST['id'];
         $date = $_POST['date'];
-        $query = "CALL CalculateTicketTotalWithCustomExitTimeAndExitDate(:id2, :date1)";
+        $query = "SELECT CalculateTicketTotalWithCustomExitTimeAndExitDate(:id2, :date1)";
         $consulta = $DB->prepare($query);
         $consulta->bindParam(':id2', $id, PDO::PARAM_INT);
         $consulta->bindParam(':date1', $date, PDO::PARAM_STR);

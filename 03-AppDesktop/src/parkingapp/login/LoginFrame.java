@@ -303,6 +303,7 @@ public class LoginFrame extends javax.swing.JFrame {
             int idUserInt = Integer.parseInt(idUser);
             User user = new User(idUserInt, name, email, rol, statusUser, parking);
             System.out.println("User Parking: " + user.getParking());
+            System.out.println("User status: " + user.getEstado());
             MainFrame frame = new MainFrame(user);
             frame.setVisible(true);
             this.setVisible(false);
