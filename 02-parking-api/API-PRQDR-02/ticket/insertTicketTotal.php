@@ -14,21 +14,21 @@ if (!empty($_POST['id']) and !empty($_POST['date'])) {
         $date = $_POST['date'];
         try {
             // Obtener la hora de entrada del ticket
-            $query = "SELECT entry_date FROM public.ticket WHERE id = :id";
+            $query = "SELECT entry_date FROM ticket WHERE id = :id";
             $stmt = $DB->prepare($query);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
             $entry_time = $stmt->fetchColumn();
 
             // Obtener la categoría del vehículo del ticket
-            $query = "SELECT v.category FROM public.ticket AS t INNER JOIN public.vehicle AS v ON t.plate = v.plate WHERE t.id = :id";
+            $query = "SELECT v.category FROM ticket AS t INNER JOIN vehicle AS v ON t.plate = v.plate WHERE t.id = :id";
             $stmt = $DB->prepare($query);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
             $veh_category = $stmt->fetchColumn();
 
             // Obtener la tarifa por hora para la categoría de vehículo desde la tabla 'parking'
-            $query = "SELECT " . $veh_category . " FROM public.parking WHERE id = (SELECT parking_id FROM public.parking_seller WHERE id_parking_seller = (SELECT parking_id FROM public.ticket WHERE id = :id))";
+            $query = "SELECT " . $veh_category . " FROM parking WHERE id = (SELECT parking_id FROM parking_seller WHERE id_parking_seller = (SELECT parking_id FROM ticket WHERE id = :id))";
             $stmt = $DB->prepare($query);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
@@ -38,7 +38,7 @@ if (!empty($_POST['id']) and !empty($_POST['date'])) {
             $total_cost = ceil((strtotime($date) - strtotime($entry_time)) / 3600) * $vehicle_rate;
 
             // Actualizar la hora de salida y el campo 'total' en la tabla 'ticket'
-            $query = "UPDATE public.ticket SET exit_date = :date, total = :total_cost WHERE id = :id";
+            $query = "UPDATE ticket SET exit_date = :date, total = :total_cost WHERE id = :id";
             $stmt = $DB->prepare($query);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->bindParam(':date', $date, PDO::PARAM_STR);
