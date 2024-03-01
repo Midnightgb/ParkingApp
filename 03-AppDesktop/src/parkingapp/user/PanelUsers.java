@@ -26,6 +26,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import parkingapp.MainFrame;
 import parkingapp.util.Herramientas;
+import parkingapp.Config;
 
 
 
@@ -40,6 +41,7 @@ public class PanelUsers extends javax.swing.JPanel {
     MainFrame frame;
     String idUser;
     String filtro;
+    private Config dataConfig;
 
     public PanelUsers(String idUser,MainFrame frame) {
         consumo = new Herramientas() {};
@@ -47,6 +49,7 @@ public class PanelUsers extends javax.swing.JPanel {
         noassignedUsers = new ArrayList<>();
         inactiveUsers= new ArrayList<>();
         assignedUsers=new ArrayList<>();
+        dataConfig = new Config();
         
         this.idUser=idUser;
         this.frame=frame;
@@ -238,8 +241,9 @@ public class PanelUsers extends javax.swing.JPanel {
 
     public void llenarArreglos() {
         
-         
-        String consult = consumo.consumoGET("http://localhost/parkingAPI/users/getUsers.php");
+        String endpoint = "/users/getUsers.php";
+        endpoint = dataConfig.getEndPoint(endpoint);
+        String consult = consumo.consumoGET(endpoint);
         Gson gson = new Gson();
 
         // Parsear la respuesta JSON
@@ -257,7 +261,10 @@ public class PanelUsers extends javax.swing.JPanel {
             String parking = "0";
             User user = new User(id, nombre, correo, rol, estado, parking);
             
-            String consultparkins = consumo.consumoGET("http://localhost/parkingAPI/parking_seller/getParkingSellers.php");
+            
+            String endpoint2 = "/parking_seller/getParkingSellers.php";
+            endpoint2 = dataConfig.getEndPoint(endpoint);
+            String consultparkins = consumo.consumoGET(endpoint2);
         
             // Separar usuarios activos e inactivos
             if(rol.contentEquals("seller")){
@@ -302,7 +309,9 @@ public class PanelUsers extends javax.swing.JPanel {
     
     public void mostrarUsuariosEnTabla(ArrayList<User> users) {
         model.setRowCount(0); // Limpiar la tabla
-        String consultparkins = consumo.consumoGET("http://localhost/parkingAPI/parking_seller/getParkingSellers.php");
+        String endpoint = "/parking_seller/getParkingSellers.php";
+        endpoint = dataConfig.getEndPoint(endpoint);
+        String consultparkins = consumo.consumoGET(endpoint);
         
         for (User user : users) {
             
@@ -434,8 +443,11 @@ public class PanelUsers extends javax.swing.JPanel {
             insertData.put("email", temp.getCorreo());
             insertData.put("status", estado);
             insertData.put("rol", temp.getRol());
+            
+            String endpoint = "/users/Update.php";
+            endpoint = dataConfig.getEndPoint(endpoint);
 
-            String actualizar=Herramientas.insert("http://localhost/parkingAPI/users/Update.php", insertData);
+            String actualizar=Herramientas.insert(endpoint, insertData);
             if(actualizar!=null){
                 System.out.println(actualizar);
                 JsonObject jsonObject = JsonParser.parseString(actualizar).getAsJsonObject();

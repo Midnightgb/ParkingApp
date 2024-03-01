@@ -54,6 +54,11 @@ public class AdapterVehicles extends RecyclerView.Adapter<AdapterVehicles.ViewHo
         return listaVehiculos.length();
     }
 
+    public void updateData(JSONArray newlistaVehiculos) {
+        this.listaVehiculos = newlistaVehiculos;
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         Context context;
         LinearLayout layout_vehicles,layout_ticket;

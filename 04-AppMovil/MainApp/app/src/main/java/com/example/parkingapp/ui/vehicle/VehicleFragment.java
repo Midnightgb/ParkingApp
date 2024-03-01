@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,8 +61,12 @@ public class VehicleFragment extends Fragment {
     private Handler handler;
     private  TextView timeNow;
     ImageView loaderTruck;
-    EditText plate_create,name_owner;
+    EditText plate_create,name_owner,search_vehicle;
     Spinner type_vehicle_create,plate_create_ticket;
+    LinearLayout sesionCreateVehicle;
+
+    String userid;
+    String rol;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -96,7 +103,8 @@ public class VehicleFragment extends Fragment {
         btnAgregarTicket = binding.btnAgregarTicket;
         btnBackCreateTicket = binding.btnBackCreateTicket;
         plate_create_ticket = binding.plateCreateTicket;
-
+        search_vehicle = binding.searchVehicle;
+        sesionCreateVehicle = binding.sesionCreatevehicle;
 
 
 
@@ -106,8 +114,8 @@ public class VehicleFragment extends Fragment {
         startUpdateThread();
         SharedPreferences sharedPreferences = context.getSharedPreferences("userParking", Context.MODE_PRIVATE);
 
-        String userid = sharedPreferences.getString("id", null);
-        String rol = sharedPreferences.getString("rol", null);
+        userid = sharedPreferences.getString("id", null);
+        rol = sharedPreferences.getString("rol", null);
         System.out.println("este es el id"+userid);
 
 
@@ -205,6 +213,25 @@ public class VehicleFragment extends Fragment {
                 switchSection(binding.layoutVehicles, binding.sesionCreateTicket);
                 listaVehiculos = new JSONArray();
                 consumirApi(url);
+            }
+        });
+        search_vehicle.addTextChangedListener(new TextWatcher() {
+
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // No se utiliza en este caso
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // No se utiliza en este caso
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filterVehicle( search_vehicle.getText().toString(),listaVehiculos);
+
             }
         });
 
@@ -559,56 +586,67 @@ public class VehicleFragment extends Fragment {
     }
 
     public void crearVehiculo(String url){
-        loaderTruck.setVisibility(View.VISIBLE);
-        RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
-        StringRequest solicitud =  new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String status = jsonObject.getString("status");
-                    String message = jsonObject.getString("message");;
-                    if(status.equals("true")){
-                        loaderTruck.setVisibility(View.GONE);
-                        Toast.makeText(context,message,Toast.LENGTH_LONG).show();
-                        name_owner.setText("");
-                        plate_create.setText("");
-                        type_vehicle_create.setSelection(0);
-                        binding.layoutVehicles.setVisibility(View.VISIBLE);
-                    }else{
-                        loaderTruck.setVisibility(View.GONE);
-                        plate_create.getCompoundDrawables()[0].setTint(ContextCompat.getColor(context, R.color.red));
-                        plate_create.setBackgroundResource(R.drawable.status_error);
-                        Toast.makeText(context,"Placa repetida",Toast.LENGTH_LONG).show();
-                        binding.sesionCreatevehicle.setVisibility(View.VISIBLE);
+        if(plate_create.getText().toString().isEmpty() || name_owner.getText().toString().isEmpty()){
+            Toast.makeText(context.getApplicationContext(),"Todos los campos son obligatorios",Toast.LENGTH_LONG).show();
+            sesionCreateVehicle.setVisibility(View.VISIBLE);
+            plate_create.getCompoundDrawables()[0].setTint(ContextCompat.getColor(context, R.color.red));
+            plate_create.setBackgroundResource(R.drawable.status_error);
+            name_owner.getCompoundDrawables()[0].setTint(ContextCompat.getColor(context, R.color.red));
+            name_owner.setBackgroundResource(R.drawable.status_error);
+        }else {
 
+
+            loaderTruck.setVisibility(View.VISIBLE);
+            RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
+            StringRequest solicitud = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String status = jsonObject.getString("status");
+                        String message = jsonObject.getString("message");
+                        ;
+                        if (status.equals("true")) {
+                            loaderTruck.setVisibility(View.GONE);
+                            Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                            name_owner.setText("");
+                            plate_create.setText("");
+                            type_vehicle_create.setSelection(0);
+                            binding.layoutVehicles.setVisibility(View.VISIBLE);
+                        } else {
+                            loaderTruck.setVisibility(View.GONE);
+                            plate_create.getCompoundDrawables()[0].setTint(ContextCompat.getColor(context, R.color.red));
+                            plate_create.setBackgroundResource(R.drawable.status_error);
+                            Toast.makeText(context, "Placa repetida", Toast.LENGTH_LONG).show();
+                            binding.sesionCreatevehicle.setVisibility(View.VISIBLE);
+
+                        }
+
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
                     }
 
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
                 }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("El servidor GET responde con un error:");
+                    System.out.println(error.getMessage());
+                    Toast.makeText(context.getApplicationContext(), "Error al crear al usuario", Toast.LENGTH_LONG).show();
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("plate", plate_create.getText().toString());
+                    params.put("owner", name_owner.getText().toString());
+                    params.put("category", type_vehicle_create.getSelectedItem().toString());
+                    return params;
+                }
+            };
 
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println("El servidor GET responde con un error:");
-                System.out.println(error.getMessage());
-                Toast.makeText(context.getApplicationContext(),"Error al crear al usuario",Toast.LENGTH_LONG).show();
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("plate", plate_create.getText().toString());
-                params.put("owner", name_owner.getText().toString());
-                params.put("category", type_vehicle_create.getSelectedItem().toString());
-                return params;
-            }
+            queue.add(solicitud);
         }
-                ;
-
-        queue.add(solicitud);
     }
 
     public void buscaridParking(String plate,String userid){
@@ -700,5 +738,32 @@ public class VehicleFragment extends Fragment {
             }
         };
         queue.add(solicitud);
+    }
+
+    public void filterVehicle(String searchText, JSONArray vehicles) {
+        if (searchText == null || searchText.isEmpty()) {
+            if(vehicles == null){
+                consumirApi(dataConfig.getEndPoint("/ticket/getTicketRol.php?id="+userid));
+                adapterVehicles.updateData(vehicles);
+            }
+
+        }
+
+        JSONArray filteredParkings = new JSONArray();
+
+        for (int i = 0; i < vehicles.length(); i++) {
+            try {
+                JSONObject vehicle = vehicles.getJSONObject(i);
+                String plate = vehicle.getString("plate");
+
+                if (plate.toLowerCase().contains(searchText.toLowerCase())) {
+                    filteredParkings.put(vehicle);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        adapterVehicles.updateData(filteredParkings);
     }
 }

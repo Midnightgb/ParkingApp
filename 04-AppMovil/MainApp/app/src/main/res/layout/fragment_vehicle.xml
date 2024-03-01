@@ -176,6 +176,7 @@
                     android:layout_gravity="center"
                     android:src="@drawable/search_icon" />
                 <EditText
+                    android:id="@+id/search_vehicle"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:hint="Placa del vehiculo"
@@ -795,7 +796,7 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_gravity="center"
-
+                android:src="@drawable/qr"
 
                 android:background="@color/gray"
                 />

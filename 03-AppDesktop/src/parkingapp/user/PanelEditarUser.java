@@ -14,6 +14,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.Border;
 import parkingapp.MainFrame;
 import parkingapp.util.Herramientas;
+import parkingapp.Config;
 
 /**
  *
@@ -23,9 +24,12 @@ public class PanelEditarUser extends javax.swing.JPanel {
 
     User user;
     MainFrame frame;
+    private Config dataConfig;
+    
     public PanelEditarUser(User user,MainFrame frame) {
         this.user=user;
         this.frame=frame;
+        dataConfig = new Config();
         initComponents();
         initaltercomponents();
     }
@@ -205,8 +209,10 @@ public class PanelEditarUser extends javax.swing.JPanel {
             insertData.put("email", email);
             insertData.put("status", estadoo);
             insertData.put("rol", user.getRol());
-
-            String actualizar=Herramientas.insert("http://localhost/parkingAPI/users/Update.php", insertData);
+            
+            String endpoint = "/users/Update.php";
+            endpoint = dataConfig.getEndPoint(endpoint);
+            String actualizar=Herramientas.insert(endpoint, insertData);
             if(actualizar!=null){
                 System.out.println(actualizar);
                 JsonObject jsonObject = JsonParser.parseString(actualizar).getAsJsonObject();
