@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.user.customer.SearchUservehicle"
+    android:orientation="vertical"
+    android:layout_margin="10dp">
+    <Button
+        android:id="@+id/btnBackGetVehiclePlate"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/white"
+        android:drawableBottom="@drawable/icon_back" />
+    <LinearLayout
+        android:id="@+id/layoutGetVehiclePlate"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingresa la plata de tu vehiculo"
+            android:textSize="30sp"
+            android:gravity="center"/>
+        <EditText
+            android:id="@+id/plateGetVehicle"
+            style="@style/FormEditText"
+            android:layout_height="140dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/plate_designed"
+            android:gravity="center"
+            android:fontFamily="@font/baloo2_regular"
+            android:hint="XXX-XXX"
+            android:inputType="text"
+            android:textSize="70dp"
+            android:textStyle="bold"
+            android:maxLength="6"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="20dp"
+            />
+        <Button
+            android:id="@+id/btnGetDetailVehicle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="normal"
+            android:textSize="20sp"
+            android:text="buscar"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layoutGetVehicleDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        tools:ignore="MissingConstraints">
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            >
+            <TextView
+                android:text="Información"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="0.9"
+                android:gravity="center"
+                style="@style/TextTitle"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:background="@drawable/circle"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:layout_marginBottom="30dp">
+            <TextView
+                android:id="@+id/timeNow"
+                android:layout_gravity="center"
+                android:text="13:59:59"
+                android:gravity="center_vertical"
+                style="@style/TextSubtitle"
+                android:fontFamily="@font/baloo2_bold"
+                android:textSize="40dp"
+                />
+            <TextView
+                android:id="@+id/textView"
+                android:fontFamily="@font/baloo2_regular"
+                android:text="horas  : minutos : segundos"
+                android:gravity="center"
+                style="@style/TextDefault"
+                android:textColor="@color/gray"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:text="Responsable:"
+                android:layout_width="115dp"
+                android:layout_weight="1"
+                style="@style/TextSubtitle"
+                android:fontFamily="@font/baloo2_bold"
+                android:layout_gravity="start"
+                android:textColor="@color/gray"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:id="@+id/nameOwer"
+                android:layout_marginLeft="10dp"
+                android:text="XXXXXXXXXXXX"
+                android:textSize="20sp"
+                android:gravity=""
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                style="@style/TextBold"
+                android:fontFamily="@font/baloo2_bold"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextSubtitle"
+                android:layout_width="115dp"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo2_bold"
+                android:text="Categoría:"
+                android:textColor="@color/gray"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/category_vehicle"
+                style="@style/TextBold"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo2_bold"
+                android:text="XXXXXXXXXXXX"
+                android:textSize="20sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextSubtitle"
+                android:layout_width="115dp"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo2_bold"
+                android:text="Placa:"
+                android:textColor="@color/gray"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/plate_vehicle"
+                style="@style/TextBold"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo2_bold"
+                android:text="XXXXXXXXXXXX"
+                android:textSize="20sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextSubtitle"
+                android:layout_width="115dp"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo2_bold"
+                android:text="Fecha:"
+                android:textColor="@color/gray"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/date_entry"
+                android:layout_marginLeft="10dp"
+                android:text="XXXXXXXXXXXX"
+                android:textSize="20sp"
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                style="@style/TextBold"
+                android:fontFamily="@font/baloo2_bold"
+
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextSubtitle"
+                android:layout_width="115dp"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo2_bold"
+                android:text="Estado:"
+                android:textColor="@color/gray"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/statusTiket"
+                android:layout_marginLeft="10dp"
+                android:text="XXXXXXXXXXXX"
+                android:textSize="20sp"
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                style="@style/TextBold"
+                android:fontFamily="@font/baloo2_bold"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
