@@ -12,6 +12,7 @@ import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
+import parkingapp.Config;
 import parkingapp.MainFrame;
 import parkingapp.user.User;
 import parkingapp.util.Herramientas;
@@ -21,9 +22,10 @@ public class PanelTicketUpdate extends javax.swing.JPanel {
     User dataUser;
     String idTicket;
     MainFrame frame;
+    private Config dataConfig;
     public PanelTicketUpdate(User dataUser, MainFrame frame, String idTicket) {
         this.frame = frame;
-        
+        this.dataConfig = new Config();
         this.idTicket = idTicket;
         this.dataUser = dataUser;
         initComponents();
@@ -328,8 +330,9 @@ public class PanelTicketUpdate extends javax.swing.JPanel {
         insertData.put("exit_date", exit_date);
         insertData.put("total", total);
         insertData.put("status", status);
-        
-        String respuesta = Herramientas.consumoPOST("http://localhost/parkingAPI/ticket/updateTicket.php", insertData);
+        String endpoint = "/ticket/updateTicket.php";
+        endpoint = dataConfig.getEndPoint(endpoint);
+        String respuesta = Herramientas.consumoPOST(endpoint, insertData);
         System.out.println(respuesta);
         if(respuesta != null){
             alerta("Se Actualizo correctamente", "/parkingapp/resources/gifs/midPriority.gif");
@@ -379,15 +382,15 @@ public class PanelTicketUpdate extends javax.swing.JPanel {
         this.setBackground(java.awt.Color.WHITE);
         Map<String, String> viewData = new HashMap<>();
         viewData.put("id", idTicket);
-        String result = Herramientas.consumoGET("http://localhost/parkingAPI/ticket/getTicket.php", viewData);
+        String endpoint = "/ticket/getTicket.php";
+        endpoint = dataConfig.getEndPoint(endpoint);
+        String result = Herramientas.consumoGET(endpoint, viewData);
         System.out.println(result);
         
          
         JsonObject jsonObject = JsonParser.parseString(result).getAsJsonObject();
-        JsonArray ticketArray = jsonObject.getAsJsonArray("datos");
+        JsonObject userObject = jsonObject.getAsJsonObject("datos");
         
-        for (JsonElement element : ticketArray){
-            JsonObject userObject = element.getAsJsonObject();
             String id = userObject.get("id").getAsString();
             String parking_id = userObject.get("parking_id").getAsString();
             String plate = userObject.get("plate").getAsString();
@@ -424,8 +427,6 @@ public class PanelTicketUpdate extends javax.swing.JPanel {
             this.revalidate();
            this.repaint();
            
-            
-        }
     }
     
     public void alerta(String text, String url){
@@ -439,7 +440,9 @@ public class PanelTicketUpdate extends javax.swing.JPanel {
     public void cargarComBox(){
         jComboBox1.removeAllItems();
         jComboBox2.removeAllItems();
-        String result = Herramientas.consumoGET("http://localhost/parkingAPI/vehicle/getVehicles.php");
+        String endpoint = "/vehicle/getVehicles.php";
+        endpoint = dataConfig.getEndPoint(endpoint);
+        String result = Herramientas.consumoGET(endpoint);
         System.out.println(result);
         
          
@@ -454,8 +457,9 @@ public class PanelTicketUpdate extends javax.swing.JPanel {
             
             jComboBox1.addItem(parking_id);
         }
-        
-        String data = Herramientas.consumoGET("http://localhost/parkingAPI/ticket/getUserParking.php");
+        String endpointGet = "/ticket/getUserParking.php";
+        endpointGet = dataConfig.getEndPoint(endpointGet);
+        String data = Herramientas.consumoGET(endpointGet);
         System.out.println(data);
         
          

@@ -116,4 +116,12 @@
         android:focusable="true"
         android:onClick="forgotPassword"/>
 
+    <Button
+        android:id="@+id/btnGetVehicle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Consultar tu vehiculo"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"/>
+
 </LinearLayout>

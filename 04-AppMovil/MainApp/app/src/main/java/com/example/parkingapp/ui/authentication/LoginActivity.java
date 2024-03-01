@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -28,6 +29,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.parkingapp.MainActivity;
 import com.example.parkingapp.R;
+import com.example.parkingapp.ui.user.customer.SearchUservehicle;
 import com.example.parkingapp.utils.Config;
 
 
@@ -50,6 +52,8 @@ public class LoginActivity extends AppCompatActivity {
     Config dataConfig;
     boolean loginButtonActive = false;
     ProgressBar loadingIndicator;
+
+    Button btnGetVehicle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
         tvLogin = findViewById(R.id.tvLogin);
         tvForgotPassw = findViewById(R.id.tvForgotPassw);
         loadingIndicator = findViewById(R.id.loadingIndicator);
+        btnGetVehicle = findViewById(R.id.btnGetVehicle);
         etEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -185,6 +190,14 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+        btnGetVehicle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SearchUservehicle.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         etPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
