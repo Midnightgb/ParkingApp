@@ -68,5 +68,6 @@
     <string name="buscar">buscar</string>
     <string name="buscar_parqueadero">Buscar parqueadero</string>
     <string name="buscar_usuario">Buscar usuario</string>
+    <string name="guardar_cambios">Guardar cambios</string>
 
 </resources>

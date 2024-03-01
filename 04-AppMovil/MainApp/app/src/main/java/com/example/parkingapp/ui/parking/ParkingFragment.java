@@ -63,7 +63,7 @@ public class ParkingFragment extends Fragment {
     Context context;
 
     JSONArray pakings_array;
-    Button btnBackEditParking, btnAgregarParking, btnBackDetail, btnGetCar, btnBackGetCar;
+    Button btnAgregarParking, btnBackDetail, btnGetCar, btnBackGetCar;
     FloatingActionButton crearParking, btnGoToGetCar;
     EditText editText, field_plate;
     View root;
@@ -71,7 +71,7 @@ public class ParkingFragment extends Fragment {
     TextView field_name_parking, field_address_parking, field_truck, field_pickup_truck, field_car, field_motorcycle, label_camera, labelPlate;
     WebSocket webSocket;
 
-    ImageView imgGetCar, loaderTruck, btnBackCreateParking;
+    ImageView imgGetCar, loaderTruck, btnBackCreateParking, btnBackEditParking;
     Config dataConfig;
     String ip_v4;
 
