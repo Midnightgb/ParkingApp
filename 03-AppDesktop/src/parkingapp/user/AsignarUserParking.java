@@ -17,6 +17,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.Border;
 import parkingapp.MainFrame;
 import parkingapp.util.Herramientas;
+import parkingapp.Config;
+
 
 /**
  *
@@ -27,10 +29,12 @@ public class AsignarUserParking extends javax.swing.JPanel {
     User user;
     MainFrame frame;
     int idParkingSeleccionado;
+    private Config dataConfig;
     private Map<String, Integer> model = new HashMap<>();
     public AsignarUserParking(User user,MainFrame frame) {
         this.user=user;
         this.frame=frame;
+        dataConfig = new Config();
         
         initComponents();
         initaltercomponents();
@@ -172,7 +176,10 @@ public class AsignarUserParking extends javax.swing.JPanel {
             insertData.put("user_id", String.valueOf(idUsuario));
             insertData.put("parking_id", String.valueOf(idParqueadero));
 
-            String actualizar = Herramientas.insert("http://localhost/parkingAPI/parking_seller/insertParkingSeller.php", insertData);
+            String endpoint = "/parking_seller/insertParkingSeller.php";
+            endpoint = dataConfig.getEndPoint(endpoint);
+
+            String actualizar = Herramientas.insert(endpoint, insertData);
             if (actualizar != null) {
                 JsonObject jsonObject = JsonParser.parseString(actualizar).getAsJsonObject();
                 boolean status = jsonObject.get("status").getAsBoolean();
@@ -223,8 +230,10 @@ public class AsignarUserParking extends javax.swing.JPanel {
     }
     
     public void parkings(){
+        String endpoint = "/parking/getParkings.php";
+        endpoint = dataConfig.getEndPoint(endpoint);
         
-        String consult = Herramientas.consumoGET("http://localhost/parkingAPI/parking/getParkings.php");
+        String consult = Herramientas.consumoGET(endpoint);
        
         if (consult != null) { 
             
