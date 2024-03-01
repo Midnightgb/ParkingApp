@@ -26,6 +26,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import parkingapp.MainFrame;
 import parkingapp.util.Herramientas;
+import parkingapp.Config;
 
 
 
@@ -40,6 +41,7 @@ public class PanelUsers extends javax.swing.JPanel {
     MainFrame frame;
     String idUser;
     String filtro;
+    private Config dataConfig;
 
     public PanelUsers(String idUser,MainFrame frame) {
         consumo = new Herramientas() {};
@@ -47,6 +49,7 @@ public class PanelUsers extends javax.swing.JPanel {
         noassignedUsers = new ArrayList<>();
         inactiveUsers= new ArrayList<>();
         assignedUsers=new ArrayList<>();
+        dataConfig = new Config();
         
         this.idUser=idUser;
         this.frame=frame;
@@ -191,7 +194,7 @@ public class PanelUsers extends javax.swing.JPanel {
                 mostrarUsuariosEnTabla(noassignedUsers);
                 break;
         default:
-            // Puedes manejar otros casos o dejarlos en blanco según sea necesario.
+            // Puedes manejar otros casos o dejarlos en blanco según sea necesario. manolo metiendole al chatgpt
             break;
     }
     }//GEN-LAST:event_jComboBox1ActionPerformed
@@ -238,8 +241,10 @@ public class PanelUsers extends javax.swing.JPanel {
 
     public void llenarArreglos() {
         
-         
-        String consult = consumo.consumoGET("http://localhost/parkingAPI/users/getUsers.php");
+        String endpoint = "/users/getUsers.php";
+        endpoint = dataConfig.getEndPoint(endpoint);
+
+        String consult = consumo.consumoGET(endpoint);
         Gson gson = new Gson();
 
         // Parsear la respuesta JSON
@@ -257,7 +262,9 @@ public class PanelUsers extends javax.swing.JPanel {
             String parking = "0";
             User user = new User(id, nombre, correo, rol, estado, parking);
             
-            String consultparkins = consumo.consumoGET("http://localhost/parkingAPI/parking_seller/getParkingSellers.php");
+            String endpoint2 = "/parking_seller/getParkingSellers.php";
+            endpoint2 = dataConfig.getEndPoint(endpoint2);
+            String consultparkins = consumo.consumoGET(endpoint2);
         
             // Separar usuarios activos e inactivos
             if(rol.contentEquals("seller")){
@@ -266,8 +273,6 @@ public class PanelUsers extends javax.swing.JPanel {
                 } else if (estado.equals("inactivo")) {
                     inactiveUsers.add(user);
                 }
-                
-                
                 JsonObject jsonObjectps = JsonParser.parseString(consultparkins).getAsJsonObject();
                 JsonArray usersparkin = jsonObjectps.getAsJsonArray("parking_seller");
                 int cont=0;
@@ -284,25 +289,18 @@ public class PanelUsers extends javax.swing.JPanel {
                 if(cont==0){
                   noassignedUsers.add(user);  
                 }else{
-                    
                 }
-                
-                
-                 
-                
             }
-            
-            
         }
-        
-
-        
         mostrarUsuariosEnTabla(activeUsers);
     }
     
     public void mostrarUsuariosEnTabla(ArrayList<User> users) {
         model.setRowCount(0); // Limpiar la tabla
-        String consultparkins = consumo.consumoGET("http://localhost/parkingAPI/parking_seller/getParkingSellers.php");
+        String endpoint = "/parking_seller/getParkingSellers.php";
+        endpoint = dataConfig.getEndPoint(endpoint);
+        System.out.println("endpoint " + endpoint);
+        String consultparkins = consumo.consumoGET(endpoint);
         
         for (User user : users) {
             
@@ -330,35 +328,23 @@ public class PanelUsers extends javax.swing.JPanel {
                 int user_id = userParkinObject.get("user_id").getAsInt();
 
                 if(user_id==user.getId()){
-
                     cont++;
                     break;
                 }
             }
-            
-            
-            
-            
-            
             ActionListener editar = new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     editarActionPerfofed(user);
                 }
             };
-            
             btnEditar.addActionListener(editar);
-
-
-
-            
             ActionListener eliminarListener = new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     eliminarActionPerfofed(user, btnEliminar);
                 }
             };
-            
             
             btnEliminar.addActionListener(eliminarListener);
 
@@ -371,13 +357,9 @@ public class PanelUsers extends javax.swing.JPanel {
                         asignarActionPerfofed(user);
                     }
                 };
-
                 btnAsignar.removeActionListener(asignarListener);
                 btnAsignar.addActionListener(asignarListener);
-
                 // Luego, para eliminar el ActionListener
-                
-               
             }
             
             if (jComboBox1.getSelectedItem().equals("Asignados")) {
@@ -394,15 +376,12 @@ public class PanelUsers extends javax.swing.JPanel {
               
                 if(user.getEstado().equals("inactivo")){
                     btnAsignar.setEnabled(false);
-                
                 }else{
                     btnAsignar.setEnabled(true);
                 }
             }else{
                 btnAsignar.setEnabled(false);
             }
-           
-            
             model.addRow(new Object[]{user.getId(),user.getNombre(), user.getCorreo(), user.getRol(), user.getEstado(),btnEditar,btnEliminar,btnAsignar});
         }
     }
@@ -434,8 +413,11 @@ public class PanelUsers extends javax.swing.JPanel {
             insertData.put("email", temp.getCorreo());
             insertData.put("status", estado);
             insertData.put("rol", temp.getRol());
+            
+            String endpoint = "/users/Update.php";
+            endpoint = dataConfig.getEndPoint(endpoint);
 
-            String actualizar=Herramientas.insert("http://localhost/parkingAPI/users/Update.php", insertData);
+            String actualizar=Herramientas.insert(endpoint, insertData);
             if(actualizar!=null){
                 System.out.println(actualizar);
                 JsonObject jsonObject = JsonParser.parseString(actualizar).getAsJsonObject();
@@ -450,7 +432,6 @@ public class PanelUsers extends javax.swing.JPanel {
                     System.out.println(actualizar);
                     //PanelCrearUser temporaryPanel = new PanelCrearUser(idUser,frame);
                     
-                    
                     if (estado.equals("activo")) {
                         for (int i=0; i<inactiveUsers.size(); i++) {
                             if ( inactiveUsers.get(i).equals(temp) ) {
@@ -464,7 +445,6 @@ public class PanelUsers extends javax.swing.JPanel {
                                         User assignedUser = assignedUsers.get(j);
                                         assignedUser.setEstado(estado);
                                         assignedUsers.set(j, assignedUser);
-
                                         break;
                                     }
                                 }
@@ -473,12 +453,9 @@ public class PanelUsers extends javax.swing.JPanel {
                                         User assignedUser = noassignedUsers.get(j);
                                         assignedUser.setEstado(estado);
                                         noassignedUsers.set(j, assignedUser);
-
                                         break;
                                     }
                                 }
-
-                                
                                 break;
                             }
                         }
@@ -500,7 +477,6 @@ public class PanelUsers extends javax.swing.JPanel {
                                         User assignedUser = assignedUsers.get(j);
                                         assignedUser.setEstado(estado);
                                         assignedUsers.set(j, assignedUser);
-
                                         break;
                                     }
                                 }
@@ -509,18 +485,15 @@ public class PanelUsers extends javax.swing.JPanel {
                                         User assignedUser = noassignedUsers.get(j);
                                         assignedUser.setEstado(estado);
                                         noassignedUsers.set(j, assignedUser);
-
                                         break;
                                     }
                                 }
-                                
                                 break;
                             }
                         }
                         jComboBox1.setSelectedItem("Inactivos");
                         setupTable() ;
                         mostrarUsuariosEnTabla(inactiveUsers);
-                        
                     }
                 }else{
                     Herramientas.alerta(message, false);
@@ -529,10 +502,7 @@ public class PanelUsers extends javax.swing.JPanel {
             }else{
                 Herramientas.alerta("No se pudo editar el usuario", false);
             }
-
         }
-      
-    
     }
     
     public void asignarActionPerfofed(User temp){
@@ -540,10 +510,6 @@ public class PanelUsers extends javax.swing.JPanel {
         AsignarUserParking panelasignar = new AsignarUserParking(temp,frame);
         this.frame.replacePanel(panelasignar);
     }
-
-
-
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

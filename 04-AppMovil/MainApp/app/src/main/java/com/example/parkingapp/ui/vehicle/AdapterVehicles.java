@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.parkingapp.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -54,12 +55,17 @@ public class AdapterVehicles extends RecyclerView.Adapter<AdapterVehicles.ViewHo
         return listaVehiculos.length();
     }
 
+    public void updateData(JSONArray newlistaVehiculos) {
+        this.listaVehiculos = newlistaVehiculos;
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         Context context;
         LinearLayout layout_vehicles,layout_ticket;
 
         TextView Plate_vehicle,time,name_parking,address_parking,date_entry,durariton,plate_vehicle;
-        ImageView ticket;
+        FloatingActionButton ticket;
         Button volver,btn_back;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -88,7 +94,7 @@ public class AdapterVehicles extends RecyclerView.Adapter<AdapterVehicles.ViewHo
 
 
             try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                 TimeZone timeZoneColombia = TimeZone.getTimeZone("America/Bogota");
                 sdf.setTimeZone(timeZoneColombia);
                 Date fechaEntrada = sdf.parse(fecha);
@@ -121,10 +127,25 @@ public class AdapterVehicles extends RecyclerView.Adapter<AdapterVehicles.ViewHo
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("id", id);
                     editor.apply();
+                    SimpleDateFormat sdfInput = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    SimpleDateFormat sdfOutput = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
+                    try {
+
+                        Date date = sdfInput.parse(fecha);
+
+
+                        String fechaFormateada = sdfOutput.format(date);
+                        date_entry.setText(fechaFormateada);
+
+
+                    } catch (Exception e) {
+
+                        e.printStackTrace();
+                    }
                     name_parking.setText(nameParking);
                     address_parking.setText(addressParking);
-                    date_entry.setText(fecha);
+
                     durariton.setText(time.getText());
                     plate_vehicle.setText(Plate_vehicle.getText());
                     switchSection(layout_ticket, layout_vehicles);

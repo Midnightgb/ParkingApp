@@ -2,6 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST");
 header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json");
 
 include '../connection.php';
 
@@ -12,7 +13,7 @@ if (!empty($_POST['plate']) && !empty($_POST['category']) && !empty($_POST['owne
     $owner = $_POST['owner'];
 
     try {
-        $query = "INSERT INTO vehicle (plate, category, name_owner) VALUES (:plt, :ctid, :owr)";
+        $query = "INSERT INTO public.vehicle (plate, category, name_owner) VALUES (:plt, :ctid, :owr)";
         $consulta = $DB->prepare($query);
         $consulta->bindParam(':plt', $plate);
         $consulta->bindParam(':ctid', $category);

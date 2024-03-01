@@ -2,6 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST");
 header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json");
 
 include '../connection.php';
 
@@ -18,7 +19,7 @@ if (!empty($_POST['id']) and !empty($_POST['parking_id'])) {
 
 
     try {
-        $query = "UPDATE ticket SET parking_id = :pargid, plate = :plte, exit_date = :exdate, total = :toal, status = :stus WHERE id = :d";
+        $query = "UPDATE public.ticket SET parking_id = :pargid, plate = :plte, exit_date = :exdate, total = :toal, status = :stus WHERE id = :d";
         $consulta = $DB->prepare($query);
         $consulta->bindParam(':d', $id);
         $consulta->bindParam(':pargid', $parking_id);

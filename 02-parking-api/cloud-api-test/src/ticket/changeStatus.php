@@ -2,6 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST");
 header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json");
 
 include '../connection.php';
 
@@ -15,9 +16,9 @@ if (!empty($_POST['id']) && !empty($_POST['status'])) {
 
     try {
         if($status == "activo"){
-            $query = "UPDATE ticket SET status = 'inactivo' WHERE id = :d";
+            $query = "UPDATE public.ticket SET status = 'inactivo' WHERE id = :d";
         }else{
-            $query = "UPDATE ticket SET status = 'activo' WHERE id = :d";
+            $query = "UPDATE public.ticket SET status = 'activo' WHERE id = :d";
         }
         
         $consulta = $DB->prepare($query);

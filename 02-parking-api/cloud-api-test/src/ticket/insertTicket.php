@@ -2,6 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST");
 header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json");
 
 include '../connection.php';
 
@@ -11,7 +12,7 @@ if (!empty($_POST['parking_id']) and !empty($_POST['plate'])) {
     $plate = $_POST['plate'];
 
     try {
-        $query = "INSERT INTO ticket ( parking_id, plate) VALUES (:pargid, :plte)";
+        $query = "INSERT INTO public.ticket ( parking_id, plate) VALUES (:pargid, :plte)";
         $consulta = $DB->prepare($query);
         $consulta->bindParam(':pargid', $parking_id);
         $consulta->bindParam(':plte', $plate);

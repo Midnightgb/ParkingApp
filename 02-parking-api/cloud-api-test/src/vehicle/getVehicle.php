@@ -2,13 +2,14 @@
 	header("Access-Control-Allow-Origin: * ");
 	header("Access-Control-Allow-Methods: GET, POST");
 	header("Access-Control-Allow-Headers: Content-Type");
+    header("Content-Type: application/json");
 
     include '../connection.php';
 
 
 if (!empty($_GET['plate'])) {
     
-    $query = "SELECT * FROM vehicle WHERE plate = :plt";
+    $query = "SELECT * FROM public.vehicle WHERE plate = :plt";
     $consulta = $DB->prepare($query);
     $consulta->bindParam(':plt', $_GET['plate'], PDO::PARAM_INT);
     $consulta->execute();

@@ -2,69 +2,52 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="20dp"
-    android:layout_marginTop="5dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    android:layout_margin="7dp"
+    android:layout_marginBottom="30dp"
+    app:cardElevation="5dp"
+    android:background="@color/white">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="80dp">
-
         <LinearLayout
-            android:layout_width="391dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:paddingHorizontal="10dp"
-            >
-
-
-
+            android:paddingHorizontal="10dp">
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="vertical"
-                android:layout_marginTop="10dp">
-
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp">
                 <TextView
                     android:id="@+id/Plate_vehicle"
-                    android:layout_width="312dp"
-
                     android:text="XXXXXXXXXXXX"
-                    android:fontFamily="@font/baloo2_bold"
                     style="@style/TextSubtitle"
-                    />
-
+                    android:layout_gravity="start"/>
                 <TextView
                     android:id="@+id/time"
-                    android:layout_width="312dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    style="@style/TextDefault"
+                    android:layout_gravity="start"
                     android:text="XXXXXXXXXXXX"
-                    android:textSize="20sp"
-                    android:textColor="@color/gray"
-
-
-                    />
+                    android:textSize="@dimen/body"
+                    android:textColor="@color/gray" />
             </LinearLayout>
-            <ImageView
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/ticket"
-
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ticket_icon"
-                android:layout_gravity="center"
-                android:clickable="true"
-
-
-                />
-
-
+                android:layout_marginBottom="3dp"
+                android:backgroundTint="@color/light_blue"
+                app:tint="@color/black"
+                app:fabCustomSize="40dp"
+                app:srcCompat="@drawable/eye_svgrepo_com"
+                app:elevation="3dp"
+                android:layout_gravity="center|end"
+                android:layout_marginStart="100dp" />
         </LinearLayout>
-
-
     </FrameLayout>
-
-
-
 </androidx.cardview.widget.CardView>

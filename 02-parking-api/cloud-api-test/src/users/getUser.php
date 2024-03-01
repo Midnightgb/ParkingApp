@@ -86,8 +86,8 @@ if (!empty($_POST['iduser']) || !empty($_POST['email']) || !empty($_GET['iduser'
     // setear el parking_id en el array de datos
     $datos[0]['parking_id'] = $parking_id;
 
-    if (!empty($_POST['validatePass'])) {
-        $passToValidate = $_POST['validatePass'];
+    if (!empty($_POST['validatePass']) || !empty($_GET['validatePass'])) {
+        $passToValidate = isset($_POST['validatePass']) ? $_POST['validatePass'] : (isset($_GET['validatePass']) ? $_GET['validatePass'] : null);
         $passToValidate = password_verify($passToValidate, $datos[0]['password']);
         error_log("passToValidate: " . $passToValidate);
         if ($passToValidate) {

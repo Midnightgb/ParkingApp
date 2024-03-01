@@ -1,59 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.user.UserFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".ui.user.UserFragment">
-
-    <LinearLayout
-        android:id="@+id/sesionListUser"
+    android:background="@color/white">
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="visible">
+        android:layout_height="match_parent">
         <LinearLayout
+            android:id="@+id/layoutListUser"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="40dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Usuarios"
-                android:textStyle="bold"
-                android:textSize="30sp"/>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-            <Button
-                android:id="@+id/btnGoToGetCar"
-                android:layout_width="30dp"
-                android:layout_marginRight="10dp"
-                android:layout_height="30dp"
-                android:background="@drawable/ic_user" />
-            <Button
-                android:id="@+id/btnCrearParking"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/add" />
-        </LinearLayout>
-
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:background="@color/gray_dark"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/usuarios"
+                    android:textStyle="bold"
+                    style="@style/TextBold"
+                    android:textSize="@dimen/subtitle"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btnCreateUserSesion"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:fabCustomSize="40dp"
+                    android:layout_marginBottom="3dp"
+                    android:backgroundTint="@color/light_blue"
+                    app:tint="@color/black"
+                    app:srcCompat="@drawable/add"
+                    app:elevation="3dp"
+                    android:layout_gravity="bottom|end"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/status_default"
+                android:backgroundTint="@color/white_50"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="10dp">
 
                 <ImageView
                     android:layout_width="20dp"
@@ -65,130 +67,474 @@
                 <EditText
                     android:id="@+id/fildSearchParking"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:hint="Ingrese el id del usuario"
+                    android:layout_height="match_parent"
+                    android:hint="@string/buscar_usuario"
                     android:inputType="text"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    style="@style/FormEditText"
+                    android:backgroundTint="@color/white_50"
+                    android:fontFamily="@font/baloo2_bold"
+                    android:layout_gravity="center"
+                    android:textSize="@dimen/body" />
             </LinearLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_parking_assigned"
-            android:layout_width="match_parent"
-            android:layout_height="560dp"
-            android:layout_marginTop="20dp"
-            android:padding="10dp" />
-    </LinearLayout>
 
-
-
-
-    <LinearLayout
-        android:id="@+id/layoutCreateUser"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="gone"
-        >
-        <ImageView
-            android:layout_width="94dp"
-            android:layout_height="87dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_person" />
-
-        <EditText
-            android:id="@+id/idUser"
-            style="@style/FormEditText"
-            android:layout_marginBottom="24dp"
-            android:autofillHints="name"
-            android:background="@drawable/status_default"
-            android:drawableStart="@drawable/ic_person"
-            android:drawableTint="@color/gray"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/baloo2_regular"
-            android:hint="cedula"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/etNombreS"
-            style="@style/FormEditText"
-            android:layout_marginBottom="24dp"
-            android:autofillHints="name"
-            android:background="@drawable/status_default"
-            android:drawableStart="@drawable/ic_person"
-            android:drawableTint="@color/gray"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/baloo2_regular"
-            android:hint="@string/nameSeller"
-            android:inputType="text" />
-
-        <!-- Cuando este lleno con un dato y se pase a otro label, activar este color
-         android:drawableTint="@color/black"
-
-         Cuando este focus el label, activar este estilo y color al icono
-         android:background="@drawable/status_acti"
-         android:drawableTint="@color/primary"
-         -->
-
-        <EditText
-            android:id="@+id/etEmailS"
-            style="@style/FormEditText"
-            android:layout_marginBottom="24dp"
-            android:autofillHints="emailAddress"
-            android:background="@drawable/status_default"
-            android:drawableStart="@drawable/sms_icon"
-            android:drawableTint="@color/gray"
-            android:fontFamily="@font/baloo2_regular"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress" />
-
-
-        <EditText
-            android:id="@+id/etpasswS"
-            style="@style/FormEditText"
-            android:layout_marginBottom="24dp"
-            android:autofillHints="password"
-            android:background="@drawable/status_default"
-            android:drawableStart="@drawable/lock_icon"
-            android:drawableTint="@color/gray"
-            android:fontFamily="@font/baloo2_regular"
-            android:hint="@string/contrase_a"
-            android:inputType="textPassword" />
-
-        <Spinner
-            android:id="@+id/roles"
-            style="@style/FormEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/status_default"
-            android:entries="@array/roles"
-            android:spinnerMode="dropdown"
-            />
-
-        <LinearLayout
-            android:id="@+id/btnCreateUser"
-            style="@style/FormButtonInactive"
-            android:focusable="true"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="24dp"
-            android:clickable="true"
-            >
-            <!-- Aplicar cuando los campos esten llenos
-            style="@style/FormButtonActive"
-
-            -->
-
-            <TextView
-                style="@style/TextDefault"
-                android:textColor="@color/white"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:fontFamily="@font/baloo2_bold"
-                android:text="Crear user"
-                android:textSize="@dimen/body"
-                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_parking_assigned"
+                android:layout_width="match_parent"
+                android:layout_height="534dp"
+                android:layout_marginHorizontal="5dp" />
         </LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layoutEditUser"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="@dimen/subtitle">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/btnBackEditUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_back"
+                    android:layout_gravity="center"
+                    android:clickable="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Editar usuario"
+                    android:layout_marginStart="10dp"
+                    android:layout_gravity="center"
+                    style="@style/TextSubtitle"/>
+            </LinearLayout>
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:src="@drawable/user_edit_svgrepo_com"
+                android:layout_marginVertical="15dp"/>
+            <EditText
+                android:id="@+id/nameUserEdit"
+                style="@style/FormEditText"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/status_default"
+                android:drawableStart="@drawable/ic_location"
+                android:drawableTint="@color/gray"
+                android:fontFamily="@font/baloo2_regular"
+                android:hint="Nombre del usuario"
+                android:inputType="text" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+            <EditText
+                android:id="@+id/emailEdituser"
+                style="@style/FormEditText"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/status_default"
+                android:drawableStart="@drawable/sms_icon"
+                android:drawableTint="@color/gray"
+                android:autofillHints="emailAddress"
+                android:fontFamily="@font/baloo2_regular"
+                android:hint="Ingresa el correo electronico"
+                android:inputType="textEmailAddress" />
+            <EditText
+                android:id="@+id/passwordUserEdit"
+                style="@style/FormEditText"
+                android:layout_marginBottom="24dp"
+                android:autofillHints="password"
+                android:background="@drawable/status_default"
+                android:drawableStart="@drawable/lock_icon"
+                android:drawableTint="@color/gray"
+                android:fontFamily="@font/baloo2_regular"
+                android:hint="Ingresa la contraseña"
+                android:inputType="textPassword" />
+            <Spinner
+                android:id="@+id/userRoleEdit"
+                style="@style/FormEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/status_default"
+                android:entries="@array/roles"
+                android:spinnerMode="dropdown" />
+            <Spinner
+                android:id="@+id/userStatusEdit"
+                style="@style/FormEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/status_default"
+                android:entries="@array/opciones"
+                android:spinnerMode="dropdown" />
+            <Button
+                android:id="@+id/btnConfirmUserEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_active"
+                android:fontFamily="@font/baloo2_bold"
+                android:text="@string/guardar_cambios"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutCreateUser"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginVertical="@dimen/subtitle">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/btnBackCreate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_back"
+                    android:layout_gravity="center"
+                    android:clickable="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Crear usuario"
+                    android:layout_marginStart="10dp"
+                    android:layout_gravity="center"
+                    style="@style/TextSubtitle"/>
+            </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                app:cardCornerRadius="50dp"
+                app:cardBackgroundColor="@color/light_blue"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="24dp">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:padding="20dp"
+                    app:cardCornerRadius="50dp"
+                    app:cardBackgroundColor="@color/primary"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_person" />
+                </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
+
+            <EditText
+                android:id="@+id/idUser"
+                style="@style/FormEditText"
+                android:autofillHints="name"
+                android:background="@drawable/status_default"
+                android:drawableStart="@drawable/ic_person"
+                android:drawableTint="@color/gray"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/baloo2_regular"
+                android:hint="cedula"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/etNombreS"
+                style="@style/FormEditText"
+                android:layout_marginBottom="24dp"
+                android:autofillHints="name"
+                android:background="@drawable/status_default"
+                android:drawableStart="@drawable/ic_person"
+                android:drawableTint="@color/gray"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/baloo2_regular"
+                android:hint="@string/nameSeller"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/etEmailS"
+                style="@style/FormEditText"
+                android:layout_marginBottom="24dp"
+                android:autofillHints="emailAddress"
+                android:background="@drawable/status_default"
+                android:drawableStart="@drawable/sms_icon"
+                android:drawableTint="@color/gray"
+                android:fontFamily="@font/baloo2_regular"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress" />
+
+
+            <EditText
+                android:id="@+id/etpasswS"
+                style="@style/FormEditText"
+                android:layout_marginBottom="24dp"
+                android:autofillHints="password"
+                android:background="@drawable/status_default"
+                android:drawableStart="@drawable/lock_icon"
+                android:drawableTint="@color/gray"
+                android:fontFamily="@font/baloo2_regular"
+                android:hint="@string/contrase_a"
+                android:inputType="textPassword" />
+
+            <Spinner
+                android:id="@+id/roles"
+                style="@style/FormEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/status_default"
+                android:entries="@array/roles"
+                android:spinnerMode="dropdown"
+                />
+
+            <LinearLayout
+                android:id="@+id/btnCreateUser"
+                android:elevation="10dp"
+                android:layout_width="match_parent"
+                style="@style/FormButtonActive"
+                android:focusable="true"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="24dp"
+                android:clickable="true">
+                <TextView
+                    style="@style/TextDefault"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:fontFamily="@font/baloo2_bold"
+                    android:text="Crear usuario"
+                    android:textSize="@dimen/body"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutDetailUser"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginHorizontal="24dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+                <ImageView
+                    android:id="@+id/btnBackDetailUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_back"
+                    android:layout_gravity="center"
+                    android:clickable="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Detalle usuario"
+                    android:layout_marginStart="10dp"
+                    android:layout_gravity="center"
+                    style="@style/TextSubtitle"/>
+            </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                app:cardCornerRadius="50dp"
+                app:cardBackgroundColor="@color/light_blue"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="@dimen/subtitle"
+                android:layout_marginHorizontal="24dp">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:padding="20dp"
+                    app:cardCornerRadius="50dp"
+                    app:cardBackgroundColor="@color/primary"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/icon_users"
+                        app:tint="@color/black"/>
+                </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
+            <EditText
+                android:id="@+id/idUserDetail"
+                style="@style/FormEditText"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/status_default"
+                android:drawableStart="@drawable/ic_location"
+                android:drawableTint="@color/gray"
+                android:fontFamily="@font/baloo2_regular"
+                android:hint="Nombre del usuario"
+                android:inputType="text" />
+            <EditText
+                android:id="@+id/nameUserDetail"
+                style="@style/FormEditText"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/status_default"
+                android:drawableStart="@drawable/ic_location"
+                android:drawableTint="@color/gray"
+                android:fontFamily="@font/baloo2_regular"
+                android:hint="Nombre del usuario"
+                android:inputType="text" />
+            <EditText
+                android:id="@+id/emailDetailuser"
+                style="@style/FormEditText"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/status_default"
+                android:drawableStart="@drawable/ic_money"
+                android:drawableTint="@color/gray"
+                android:fontFamily="@font/baloo2_regular"
+                android:hint="Ingresa el correo electronico"
+                android:inputType="textEmailAddress" />
+            <EditText
+                android:id="@+id/userRoleDetail"
+                style="@style/FormEditText"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/status_default"
+                android:drawableStart="@drawable/ic_money"
+                android:drawableTint="@color/gray"
+                android:fontFamily="@font/baloo2_regular"
+                android:hint="Ingresa el correo electronico"
+                android:inputType="textEmailAddress" />
+            <EditText
+                android:id="@+id/userStatusDetail"
+                style="@style/FormEditText"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/status_default"
+                android:drawableStart="@drawable/ic_money"
+                android:drawableTint="@color/gray"
+                android:fontFamily="@font/baloo2_regular"
+                android:hint="Ingresa el correo electronico"
+                android:inputType="textEmailAddress" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutAssignUser"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginHorizontal="24dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+                <ImageView
+                    android:id="@+id/btnBackAssignUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_back"
+                    android:layout_gravity="center"
+                    android:clickable="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Asignar parqueadero"
+                    android:layout_marginStart="10dp"
+                    android:layout_gravity="center"
+                    style="@style/TextSubtitle"/>
+            </LinearLayout>
+            <ImageView
+                android:layout_width="94dp"
+                android:layout_height="87dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_parking" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:id="@+id/labelIdSeller"
+                    android:layout_marginRight="20dp"
+                    style="@style/TextDefault"
+                    android:text="id Vendedor"
+                    android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/labelNameSeller"
+                    style="@style/TextDefault"
+                    android:text="Nombre vendedor"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/panelAssign"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <Spinner
+                    android:id="@+id/parkingListAssign"
+                    style="@style/FormEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/status_default"
+                    android:spinnerMode="dropdown" />
+                <Button
+                    android:id="@+id/btnConfirmAssignParking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/FormButtonActive"
+                    android:text="Asignar"
+                    android:layout_marginBottom="20dp"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/panelUnassign"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/idParkingAssign"
+                    style="@style/FormEditText"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/status_default"
+                    android:drawableStart="@drawable/ic_location"
+                    android:drawableTint="@color/gray"
+                    android:fontFamily="@font/baloo2_regular"
+                    android:hint="Sin parqueadero asignado"
+                    android:inputType="text" />
+                <EditText
+                    android:id="@+id/nameParkingAssign"
+                    style="@style/FormEditText"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/status_default"
+                    android:drawableStart="@drawable/ic_money"
+                    android:drawableTint="@color/gray"
+                    android:fontFamily="@font/baloo2_regular"
+                    android:hint="Sin parqueadero asignado"
+                    android:inputType="textEmailAddress" />
+
+                <!--                 <Button-->
+                <!--                     android:id="@+id/btnConfirmUnassignParking"-->
+                <!--                     android:layout_width="wrap_content"-->
+                <!--                     android:layout_height="wrap_content"-->
+                <!--                     android:text="desasignar"-->
+                <!--                     android:layout_marginBottom="20dp"-->
+                <!--                     android:layout_gravity="center"/>-->
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/loaderTruck"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/loader_truck"
+        android:visibility="gone"
+        android:background="@color/white"/>
+</FrameLayout>

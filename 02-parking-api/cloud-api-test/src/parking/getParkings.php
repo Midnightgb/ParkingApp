@@ -6,7 +6,7 @@ header("Content-Type: application/json");
 
 include '../connection.php';
 
-$query = $DB->query("SELECT * FROM parking");
+$query = $DB->query("SELECT * FROM public.parking");
 $data = $query->fetchAll(PDO::FETCH_ASSOC);
 
 $response['parkings'] = $data;

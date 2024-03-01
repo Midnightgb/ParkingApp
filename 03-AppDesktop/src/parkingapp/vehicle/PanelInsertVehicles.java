@@ -9,14 +9,18 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
+import parkingapp.Config;
 import parkingapp.MainFrame;
 import parkingapp.user.User;
 import parkingapp.util.Herramientas;
 
 public class PanelInsertVehicles extends javax.swing.JPanel {
     MainFrame frame;
+    private Config dataConfig;
+
     public PanelInsertVehicles(User dataUser, MainFrame frame) {
         this.frame = frame;
+        this.dataConfig = new Config();
         initComponents();
         alterInitCoponenst();
     }
@@ -262,7 +266,9 @@ public class PanelInsertVehicles extends javax.swing.JPanel {
         insertData.put("plate", plate);
         insertData.put("owner", name_seller);
         insertData.put("category", category);
-        String respuesta = Herramientas.consumoPOST("http://localhost/parkingAPI/vehicle/insertVehicle.php", insertData);
+        String endpoint = "/vehicle/insertVehicle.php";
+        endpoint = dataConfig.getEndPoint(endpoint);
+        String respuesta = Herramientas.consumoPOST(endpoint, insertData);
         System.out.println(respuesta);
         if(respuesta!=null){
             JsonObject jsonObject = JsonParser.parseString(respuesta).getAsJsonObject();

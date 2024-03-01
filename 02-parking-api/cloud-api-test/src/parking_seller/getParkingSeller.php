@@ -2,13 +2,14 @@
     header("Access-Control-Allow-Origin: * ");
     header("Access-Control-Allow-Methods: GET, POST");
     header("Access-Control-Allow-Headers: Content-Type");
+    header("Content-Type: application/json");
 
     include '../connection.php';
 
     if (!empty($_GET['id'])) {
         $user_id = $_GET['id'];
 
-        $consulta_vendedor = $DB->query("SELECT * FROM parking_seller WHERE user_id = $user_id");
+        $consulta_vendedor = $DB->query("SELECT * FROM public.parking_seller WHERE user_id = $user_id");
         $datos_vendedor = $consulta_vendedor->fetchAll(PDO::FETCH_ASSOC);
 
         if (sizeof($datos_vendedor) > 0) {
@@ -17,7 +18,7 @@
             foreach ($datos_vendedor as $vendedor_info) {
                 $parking_id = $vendedor_info['parking_id'];
 
-                $consulta_parking = $DB->query("SELECT * FROM parking WHERE id = $parking_id");
+                $consulta_parking = $DB->query("SELECT * FROM public.parking WHERE id = $parking_id");
                 $datos_parking = $consulta_parking->fetchAll(PDO::FETCH_ASSOC);
 
                 if (sizeof($datos_parking) > 0) {

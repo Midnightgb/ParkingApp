@@ -10,8 +10,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
-    >
+    android:background="@color/white">
 
     <LinearLayout
         android:id="@+id/sesionListParking"
@@ -19,50 +18,55 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="visible">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="40dp">
-
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="20dp">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/TextBold"
                 android:text="Parqueaderos"
-                android:textStyle="bold"
-                android:textSize="@dimen/subtitle"/>
-
+                android:textSize="@dimen/subtitle" />
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
-            <Button
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btnGoToGetCar"
-                android:layout_width="30dp"
-                android:layout_marginRight="10dp"
-                android:layout_height="30dp"
-                android:background="@drawable/car_image"/>
-            <Button
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:fabCustomSize="40dp"
+                android:layout_marginBottom="3dp"
+                android:backgroundTint="@color/light_blue"
+                app:tint="@color/black"
+                app:srcCompat="@drawable/ic_find_car"
+                app:elevation="3dp"
+                android:layout_gravity="bottom|end"/>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btnCrearParking"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/add" />
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:fabCustomSize="40dp"
+                android:layout_marginBottom="3dp"
+                android:backgroundTint="@color/light_blue"
+                app:tint="@color/black"
+                app:srcCompat="@drawable/add"
+                app:elevation="3dp"
+                android:layout_gravity="bottom|end"/>
         </LinearLayout>
-
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:background="@drawable/status_default"
+            android:backgroundTint="@color/white_50"
             android:orientation="horizontal"
-            android:layout_margin="10dp"
-            android:background="@drawable/btn_inactive"
-            android:padding="10dp">
+            android:layout_marginHorizontal="10dp">
 
             <ImageView
                 android:layout_width="20dp"
@@ -73,20 +77,22 @@
 
             <EditText
                 android:id="@+id/fildSearchParking"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:hint="Ingrese el nombre del parqueadero"
+                android:hint="@string/buscar_parqueadero"
                 android:inputType="text"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/body"
+                android:fontFamily="@font/baloo2_bold"
+                android:textStyle="bold"
+                style="@style/FormEditText"
+                android:backgroundTint="@color/white_50"
+                android:layout_gravity="center"/>
         </LinearLayout>
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_parking_assigned"
             android:layout_width="match_parent"
-            android:layout_height="560dp"
-            android:layout_marginHorizontal="15dp"/>
+            android:layout_height="534dp"
+            android:layout_marginHorizontal="5dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -95,20 +101,34 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone"
-        android:layout_marginHorizontal="24dp"
-        >
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/btnBackCreateParking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_back"
+                android:clickable="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Crear parqueadero"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                style="@style/TextSubtitle"/>
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/btnBackCreateParking"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/row_back"
-            />
         <ImageView
-            android:layout_width="94dp"
-            android:layout_height="87dp"
+            android:layout_width="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_parking" />
+            android:src="@drawable/ic_parking_home" />
 
         <EditText
             android:id="@+id/field_name_parking"
@@ -143,54 +163,87 @@
             android:textColor="@color/black"
             android:textSize="@dimen/titlePrice"/>
 
-        <EditText
-            android:id="@+id/field_pickup_truck"
-            style="@style/FormEditText"
-            android:layout_marginBottom="24dp"
-            android:autofillHints="password"
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:layout_gravity="center"
+            android:rowCount="3"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
             android:background="@drawable/status_default"
-            android:drawableStart="@drawable/ic_money"
-            android:drawableTint="@color/gray"
-            android:fontFamily="@font/baloo2_regular"
-            android:hint="@string/priceCamioneta"
-            android:inputType="number" />
-        <EditText
-            android:id="@+id/field_truck"
-            style="@style/FormEditText"
-            android:layout_marginBottom="24dp"
-            android:autofillHints="password"
-            android:background="@drawable/status_default"
-            android:drawableStart="@drawable/ic_money"
-            android:drawableTint="@color/gray"
-            android:fontFamily="@font/baloo2_regular"
-            android:hint="@string/priceCamion"
-            android:inputType="number" />
-        <EditText
-            android:id="@+id/field_car"
-            style="@style/FormEditText"
-            android:layout_marginBottom="24dp"
-            android:autofillHints="password"
-            android:background="@drawable/status_default"
-            android:drawableStart="@drawable/ic_money"
-            android:drawableTint="@color/gray"
-            android:fontFamily="@font/baloo2_regular"
-            android:hint="@string/priceCarro"
-            android:inputType="number" />
-        <EditText
-            android:id="@+id/field_motorcycle"
-            style="@style/FormEditText"
-            android:layout_marginBottom="24dp"
-            android:autofillHints="password"
-            android:background="@drawable/status_default"
-            android:drawableStart="@drawable/ic_money"
-            android:drawableTint="@color/gray"
-            android:fontFamily="@font/baloo2_regular"
-            android:hint="@string/priceMoto"
-            android:inputType="number" />
+            android:backgroundTint="@color/white_50">
+            <TextView
+                android:text="Camioneta"
+                style="@style/TextBold"
+                android:textSize="20sp"/>
+            <TextView
+                android:text="Camion"
+                style="@style/TextBold"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/field_pickup_truck"
+                android:layout_width="150dp"
+                style="@style/FormEditText"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/status_default"
+                android:drawableStart="@drawable/ic_money"
+                android:drawableTint="@color/gray"
+                android:fontFamily="@font/baloo2_regular"
+                android:hint="@string/priceCamioneta"
+                android:inputType="number" />
+            <EditText
+                android:id="@+id/field_truck"
+                style="@style/FormEditText"
+                android:layout_width="150dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginStart="10dp"
+                android:autofillHints="password"
+                android:background="@drawable/status_default"
+                android:drawableStart="@drawable/ic_money"
+                android:drawableTint="@color/gray"
+                android:fontFamily="@font/baloo2_regular"
+                android:hint="@string/priceCamion"
+                android:inputType="number" />
+            <TextView
+                android:text="Moto"
+                style="@style/TextBold"
+                android:textSize="20sp"/>
+            <TextView
+                android:text="Carro"
+                style="@style/TextBold"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/field_car"
+                style="@style/FormEditText"
+                android:layout_marginBottom="10dp"
+                android:layout_width="150dp"
+                android:autofillHints="password"
+                android:background="@drawable/status_default"
+                android:drawableStart="@drawable/ic_money"
+                android:drawableTint="@color/gray"
+                android:fontFamily="@font/baloo2_regular"
+                android:hint="@string/priceCarro"
+                android:inputType="number" />
+            <EditText
+                android:id="@+id/field_motorcycle"
+                style="@style/FormEditText"
+                android:layout_width="150dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:autofillHints="password"
+                android:background="@drawable/status_default"
+                android:drawableStart="@drawable/ic_money"
+                android:drawableTint="@color/gray"
+                android:fontFamily="@font/baloo2_regular"
+                android:hint="@string/priceMoto"
+                android:inputType="number" />
+        </GridLayout>
         <Button
             android:id="@+id/btnAgregarParking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/FormButtonActive"
             android:text="Agregar"
             android:layout_gravity="center"/>
     </LinearLayout>
@@ -202,14 +255,11 @@
         android:orientation="vertical"
         android:visibility="gone"
         android:padding="10dp">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp"
-            >
-
+            android:padding="10dp">
             <Button
                 android:id="@+id/btnBackDetail"
                 android:layout_width="10dp"
@@ -218,9 +268,7 @@
                 android:layout_weight="0.1"
                 android:backgroundTint="@color/white"
                 android:drawableBottom="@drawable/icon_back"
-                android:layout_marginRight="15dp"/>
-
-
+                android:layout_marginEnd="15dp"/>
             <TextView
                 android:text="Detalle del parqueadero"
                 android:layout_gravity="center"
@@ -233,27 +281,25 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="150dp"
             android:layout_margin="10dp"
-            android:background="@drawable/img_parking"
+            android:background="@drawable/img_parkingtest"
             />
 
         <TextView
             android:id="@+id/NameParking"
             android:text="Nombre del parqueadero"
-            android:layout_margin="5dp"
             style="@style/TextSubtitle"
             android:layout_width="match_parent"
-            />
+            android:paddingHorizontal="10dp"/>
 
         <TextView
             android:id="@+id/AddresParking"
             android:layout_width="match_parent"
             android:text="Direccion del parqueadero"
             android:textSize="20sp"
-            android:fontFamily="@font/baloo2_regular"
             style="@style/TextDefault"
-            />
+            android:paddingHorizontal="10dp"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -264,40 +310,33 @@
             android:textSize="20sp"
             android:textColor="@color/primary"
             android:background="@drawable/card_border"
-            style="@style/TextBold"
-            />
+            style="@style/TextBold"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="20dp"
-            android:layout_marginTop="10dp">
+            android:padding="15dp">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_weight="0.5">
                 <TextView
+                    style="@style/TextBold"
                     android:text="@string/moto"
                     android:textSize="20sp"
-                    android:layout_margin="5dp"
-                    android:gravity="center"
-                    style="@style/TextBold"/>
-
+                    android:layout_margin="5dp"/>
                 <TextView
                     android:id="@+id/priceMoto"
-                    android:text="$ 00000"
+                    style="@style/TextDefault"
+                    android:text="$0000"
+                    android:textSize="30sp"
                     android:background="@drawable/border_radius_bg_blue"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/baloo2_regular"
                     android:textColor="@color/primary"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:paddingHorizontal="10dp"
-                    android:paddingVertical="5dp"
-                    style="@style/TextTitle" />
-
-
+                    android:paddingVertical="5dp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -306,34 +345,27 @@
                 android:orientation="vertical"
                 android:layout_weight="0.5">
                 <TextView
-                    android:text="@string/priceCarro"
+                    android:text="@string/carro"
+                    style="@style/TextBold"
                     android:textSize="20sp"
-                    android:layout_margin="5dp"
-                    android:gravity="center"
-                    style="@style/TextBold"/>
-
+                    android:layout_margin="5dp"/>
                 <TextView
+                    style="@style/TextDefault"
                     android:id="@+id/PriceCar"
-                    android:text="$ 00000"
+                    android:text="$0000"
+                    android:textSize="30sp"
                     android:background="@drawable/border_radius_bg_blue"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/baloo2_regular"
                     android:textColor="@color/primary"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:paddingHorizontal="10dp"
-                    android:paddingVertical="5dp"
-                    style="@style/TextTitle" />
-
-
+                    android:paddingVertical="5dp"/>
             </LinearLayout>
-            </LinearLayout>
+        </LinearLayout>
             <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="20dp"
-
-            >
+            android:padding="15dp">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -341,27 +373,21 @@
                 android:layout_weight="0.5"
                 >
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Camioneta"
+                    style="@style/TextBold"
+                    android:text="@string/camioneta"
                     android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:layout_margin="5dp"
-                    android:gravity="center"/>
+                    android:layout_margin="5dp"/>
 
                 <TextView
                     android:id="@+id/PriceVan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="$ 00000"
+                    style="@style/TextDefault"
+                    android:text="$ 0000"
                     android:textSize="30sp"
                     android:background="@drawable/border_radius_bg_blue"
-                    android:layout_gravity="center"
                     android:textColor="@color/primary"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:paddingHorizontal="10dp"
-                    android:paddingVertical="5dp"
-                    />
+                    android:paddingVertical="5dp"/>
 
             </LinearLayout>
 
@@ -372,33 +398,24 @@
                 android:layout_weight="0.5"
                 >
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Camion"
+                    style="@style/TextBold"
+                    android:text="@string/camion"
                     android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:layout_margin="5dp"
-                    android:gravity="center"/>
+                    android:layout_margin="5dp"/>
 
                 <TextView
                     android:id="@+id/PriceTruck"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="$ 00000"
+                    style="@style/TextDefault"
+                    android:text="$ 0000"
                     android:textSize="30sp"
                     android:background="@drawable/border_radius_bg_blue"
-                    android:layout_gravity="center"
                     android:textColor="@color/primary"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:paddingHorizontal="10dp"
-                    android:paddingVertical="5dp"
-                    />
+                    android:paddingVertical="5dp"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
-
-
 
     <LinearLayout
         android:id="@+id/sesionEditParking"
@@ -407,19 +424,34 @@
         android:orientation="vertical"
         android:visibility="gone"
         android:layout_marginHorizontal="24dp"
-        >
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="60dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+            <ImageView
+                android:id="@+id/btnBackEditParking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_back"
+                android:clickable="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Editar parqueadero"
+                style="@style/TextBold"
+                android:textSize="@dimen/subtitle"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="center"/>
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/btnBackEditParking"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/row_back"
-            />
         <ImageView
-            android:layout_width="94dp"
-            android:layout_height="87dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_parking" />
+            android:src="@drawable/parking_svgrepo_com" />
 
         <EditText
             android:id="@+id/edit_field_name_parking"
@@ -445,51 +477,83 @@
             android:hint="@string/addressParking"
             android:inputType="text" />
 
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:layout_gravity="center"
+            android:rowCount="3"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:background="@drawable/status_default"
+            android:backgroundTint="@color/white_50">
+            <TextView
+                android:text="Camioneta"
+                style="@style/TextBold"
+                android:textSize="20sp"/>
+            <TextView
+                android:text="Camion"
+                style="@style/TextBold"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/edit_field_pickup_truck"
+                android:layout_width="150dp"
+                style="@style/FormEditText"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/status_default"
+                android:drawableStart="@drawable/ic_money"
+                android:drawableTint="@color/gray"
+                android:fontFamily="@font/baloo2_regular"
+                android:hint="@string/priceCamioneta"
+                android:inputType="number" />
+            <EditText
+                android:id="@+id/edit_field_truck"
+                style="@style/FormEditText"
+                android:layout_width="150dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginStart="10dp"
+                android:autofillHints="password"
+                android:background="@drawable/status_default"
+                android:drawableStart="@drawable/ic_money"
+                android:drawableTint="@color/gray"
+                android:fontFamily="@font/baloo2_regular"
+                android:hint="@string/priceCamion"
+                android:inputType="number" />
+            <TextView
+                android:text="Moto"
+                style="@style/TextBold"
+                android:textSize="20sp"/>
+            <TextView
+                android:text="Carro"
+                style="@style/TextBold"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/edit_field_car"
+                style="@style/FormEditText"
+                android:layout_marginBottom="10dp"
+                android:layout_width="150dp"
+                android:autofillHints="password"
+                android:background="@drawable/status_default"
+                android:drawableStart="@drawable/ic_money"
+                android:drawableTint="@color/gray"
+                android:fontFamily="@font/baloo2_regular"
+                android:hint="@string/priceCarro"
+                android:inputType="number" />
+            <EditText
+                android:id="@+id/edit_field_motorcycle"
+                style="@style/FormEditText"
+                android:layout_width="150dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:autofillHints="password"
+                android:background="@drawable/status_default"
+                android:drawableStart="@drawable/ic_money"
+                android:drawableTint="@color/gray"
+                android:fontFamily="@font/baloo2_regular"
+                android:hint="@string/priceMoto"
+                android:inputType="number" />
+        </GridLayout>
 
-        <EditText
-            android:id="@+id/edit_field_pickup_truck"
-            style="@style/FormEditText"
-            android:layout_marginBottom="24dp"
-            android:autofillHints="password"
-            android:background="@drawable/status_default"
-            android:drawableStart="@drawable/ic_money"
-            android:drawableTint="@color/gray"
-            android:fontFamily="@font/baloo2_regular"
-            android:hint="@string/priceCamioneta"
-            android:inputType="number" />
-        <EditText
-            android:id="@+id/edit_field_truck"
-            style="@style/FormEditText"
-            android:layout_marginBottom="24dp"
-            android:autofillHints="password"
-            android:background="@drawable/status_default"
-            android:drawableStart="@drawable/ic_money"
-            android:drawableTint="@color/gray"
-            android:fontFamily="@font/baloo2_regular"
-            android:hint="@string/priceCamion"
-            android:inputType="number" />
-        <EditText
-            android:id="@+id/edit_field_car"
-            style="@style/FormEditText"
-            android:layout_marginBottom="24dp"
-            android:autofillHints="password"
-            android:background="@drawable/status_default"
-            android:drawableStart="@drawable/ic_money"
-            android:drawableTint="@color/gray"
-            android:fontFamily="@font/baloo2_regular"
-            android:hint="@string/priceCarro"
-            android:inputType="number" />
-        <EditText
-            android:id="@+id/edit_field_motorcycle"
-            style="@style/FormEditText"
-            android:layout_marginBottom="24dp"
-            android:autofillHints="password"
-            android:background="@drawable/status_default"
-            android:drawableStart="@drawable/ic_money"
-            android:drawableTint="@color/gray"
-            android:fontFamily="@font/baloo2_regular"
-            android:hint="@string/priceMoto"
-            android:inputType="number" />
         <Spinner
             android:id="@+id/editRoles"
             style="@style/FormEditText"
@@ -503,10 +567,9 @@
             android:id="@+id/edit_btnAgregarParking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Editar"
+            android:text="Guardar cambios"
             android:layout_gravity="center"/>
     </LinearLayout>
-
 
     <LinearLayout
         android:id="@+id/sesionGetCar"
@@ -535,12 +598,11 @@
 
 
             <TextView
-                android:text="Buscar carro"
+                android:text="Buscar vehiculo"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="0.9"
-                style="@style/TextSubtitle"
-                />
+                style="@style/TextSubtitle"/>
 
         </LinearLayout>
 
@@ -592,7 +654,8 @@
             android:id="@+id/btnGetCar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="buscar carro"
+            android:text="Buscar vehiculo"
+            android:background="@drawable/btn_active"
             android:layout_gravity="center"/>
     </LinearLayout>
 </LinearLayout>

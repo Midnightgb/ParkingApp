@@ -6,12 +6,16 @@ import androidx.core.content.ContextCompat;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +29,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.parkingapp.MainActivity;
 import com.example.parkingapp.R;
+import com.example.parkingapp.ui.user.customer.SearchUservehicle;
 import com.example.parkingapp.utils.Config;
 
 
@@ -39,22 +44,51 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText etEmail, etPassword;
     LinearLayout btnLogin;
-    TextView tvForgotPassw;
+    TextView tvForgotPassw, tvLogin;
     String etEmailText, etPasswordText;
     Boolean emailValid = false;
     Context context;
 
     Config dataConfig;
+    boolean loginButtonActive = false;
+    ProgressBar loadingIndicator;
+
+    Button btnGetVehicle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         context = getApplicationContext();
+        SharedPreferences sharedPreferences = getSharedPreferences("userParking", Context.MODE_PRIVATE);
+        String isLogged = sharedPreferences.getString("isUserLogged", "false");
+        if (isLogged.equals("true")) {
+            String userIdKey = sharedPreferences.getString("id", null);
+            String userNameKey = sharedPreferences.getString("name", null);
+            String userRoleKey = sharedPreferences.getString("rol", null);
+            String userEmailKey = sharedPreferences.getString("email", null);
+            if (userIdKey != null && userNameKey != null && userRoleKey != null && userEmailKey != null) {
+                System.out.println("Se encontraron datos de usuario en SharedPreferences");
+                System.out.println("ID: " + userIdKey);
+                System.out.println("Nombre: " + userNameKey);
+                System.out.println("Rol: " + userRoleKey);
+                System.out.println("Correo: " + userEmailKey);
+                Intent intention = new Intent(context, MainActivity.class);
+                startActivity(intention);
+            }else {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("isUserLogged", "false");
+                editor.apply();
+                System.out.println("No se encontraron datos de usuario en SharedPreferences");
+            }
+        }
         dataConfig = new Config(context);
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassw);
         btnLogin = findViewById(R.id.btnLogin);
+        tvLogin = findViewById(R.id.tvLogin);
         tvForgotPassw = findViewById(R.id.tvForgotPassw);
+        loadingIndicator = findViewById(R.id.loadingIndicator);
+        btnGetVehicle = findViewById(R.id.btnGetVehicle);
         etEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -107,13 +141,13 @@ public class LoginActivity extends AppCompatActivity {
                      if (!etEmailText.isEmpty()) {
                           emailValid = validateEmail(etEmailText);
                           if (!emailValid) {
-                            // El correo no es válido
+                            etEmail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sms_icon, 0, 0, 0);
                             etEmail.getCompoundDrawables()[0].setTint(ContextCompat.getColor(getApplicationContext(), R.color.red));
                             etEmail.setBackgroundResource(R.drawable.status_error);
                           } else {
-                            // El correo es válido
-                            etEmail.getCompoundDrawables()[0].setTint(ContextCompat.getColor(getApplicationContext(), R.color.green));
+                            etEmail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sms_icon, 0, 0, 0);
                             etEmail.setBackgroundResource(R.drawable.status_success);
+                            etEmail.getCompoundDrawables()[0].setTint(ContextCompat.getColor(getApplicationContext(), R.color.green));
                             etPasswordText = etPassword.getText().toString();
                             if (!etEmailText.isEmpty() && !etPasswordText.isEmpty()){
                                  btnLogin.setBackgroundResource(R.drawable.btn_active);
@@ -156,6 +190,14 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+        btnGetVehicle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SearchUservehicle.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         etPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -188,12 +230,17 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     public void authenticateUser(View view) {
-        System.out.println("Autenticando usuario");
+        if (loginButtonActive) {
+            System.out.println("Ya se ha enviado una petición de autenticación");
+            return;
+        }
         if (emailValid && !etEmailText.isEmpty() && !etPasswordText.isEmpty()) {
+            System.out.println("Enviando petición de autenticación");
             String endpoint = "/users/getUser.php";
             String url = dataConfig.getEndPoint(endpoint);
             RequestQueue queue = Volley.newRequestQueue(context);
             System.out.println("URL: " + url);
+            alternateLoaderVisibility();
             StringRequest request =  new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -205,6 +252,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(context, "Usuario inactivo. Contacte soporte.", Toast.LENGTH_LONG).show();
                                 etEmail.getCompoundDrawables()[0].setTint(ContextCompat.getColor(getApplicationContext(), R.color.red));
                                 etEmail.setBackgroundResource(R.drawable.status_error);
+                                alternateLoaderVisibility();
                                 return;
                             }
                             if (datos.getJSONObject("datos").getString("password").equals("OK")) {
@@ -215,26 +263,37 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.putString("name", datos.getJSONObject("datos").getString("name"));
                                 editor.putString("rol", datos.getJSONObject("datos").getString("rol"));
                                 editor.putString("email", etEmailText);
+                                editor.putString("isUserLogged", "true");
                                 editor.apply();
                                 Intent intention = new Intent(context, MainActivity.class);
                                 startActivity(intention);
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        alternateLoaderVisibility();
+                                    }
+                                }, 2000); // 2000 ms = 2s
                             } else {
                                 Toast.makeText(context, "Contraseña incorrecta", Toast.LENGTH_LONG).show();
                                 etPassword.getCompoundDrawables()[0].setTint(ContextCompat.getColor(getApplicationContext(), R.color.red));
                                 etPassword.setBackgroundResource(R.drawable.status_error);
+                                alternateLoaderVisibility();
                             }
                         }else {
                             Toast.makeText(context, datos.getString("message"), Toast.LENGTH_LONG).show();
                             etEmail.getCompoundDrawables()[0].setTint(ContextCompat.getColor(getApplicationContext(), R.color.red));
                             etEmail.setBackgroundResource(R.drawable.status_error);
+                            alternateLoaderVisibility();
                         }
                     } catch (JSONException e) {
+                        alternateLoaderVisibility();
                         throw new RuntimeException(e);
                     }
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    alternateLoaderVisibility();
                     System.out.println("El servidor POST responde con un error:");
                     System.out.println(error.getMessage());
                 }
@@ -258,5 +317,17 @@ public class LoginActivity extends AppCompatActivity {
 
     public boolean validateEmail(String email) {
         return email.contains("@");
+    }
+
+    public void alternateLoaderVisibility() {
+        if (loadingIndicator.getVisibility() == View.VISIBLE) {
+            loginButtonActive = false;
+            loadingIndicator.setVisibility(View.GONE);
+            tvLogin.setVisibility(View.VISIBLE);
+        } else {
+            loginButtonActive = true;
+            loadingIndicator.setVisibility(View.VISIBLE);
+            tvLogin.setVisibility(View.GONE);
+        }
     }
 }

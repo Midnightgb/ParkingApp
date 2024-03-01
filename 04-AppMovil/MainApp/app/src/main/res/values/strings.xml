@@ -28,6 +28,13 @@
         <item>Inactivo</item>
     </string-array>
 
+    <string-array name="type_vehicle">
+        <item>camioneta</item>
+        <item>camion</item>
+        <item>carro</item>
+        <item>moto</item>
+    </string-array>
+
 
     <string name="iniciar_sesion">Iniciar sesión</string>
     <string name="has_olvidado_la_contrase_a">¿Has olvidado la contraseña?</string>
@@ -40,7 +47,7 @@
     <string name="_6_am_10pm">6am - 10pm</string>
     <string name="moto">Moto</string>
     <string name="carro">Carro</string>
-    <string name="camioneta">Camnioneta</string>
+    <string name="camioneta">Camioneta</string>
     <string name="camion">Camion</string>
     <string name="title_parking">Parqueaderos</string>
     <string name="continuar">Continuar</string>
@@ -52,5 +59,15 @@
     <string name="el_c_digo_se_ha_enviado_a">El código se ha enviado a</string>
     <string name="reenviar_c_digo_en">Reenviar código en</string>
     <string name="imagen_de_persona_pensando_en_la_contrase_a">imagen de persona pensando en la contraseña</string>
+    <string name="cerrar_sesi_n">Cerrar sesión</string>
+    <string name="consulta_tu_vehiculo">Consulta tu vehiculo</string>
+    <string name="bienvenido">Bienvenido</string>
+    <string name="usuarios">Usuarios</string>
+    <string name="ingrese_el_id_del_usuario">Ingrese el id del usuario</string>
+    <string name="ingresa_la_placa_de_tu_vehiculo">Ingresa la placa de tu vehiculo</string>
+    <string name="buscar">buscar</string>
+    <string name="buscar_parqueadero">Buscar parqueadero</string>
+    <string name="buscar_usuario">Buscar usuario</string>
+    <string name="guardar_cambios">Guardar cambios</string>
 
 </resources>

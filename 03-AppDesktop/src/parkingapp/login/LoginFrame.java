@@ -4,16 +4,25 @@ import com.google.gson.JsonParser;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
+import parkingapp.Config;
 import parkingapp.MainFrame;
 import parkingapp.user.User;
 import parkingapp.util.Herramientas;
+import javax.swing.ImageIcon;
+import java.awt.Image;
 
 public class LoginFrame extends javax.swing.JFrame {
     private String getUser;
+    private Config dataConfig;
+
     public LoginFrame() {
         initComponents();
         panelAlert.setVisible(false);
         loginButton.requestFocus();
+        dataConfig = new Config();
+        ImageIcon imgIcon = new ImageIcon(getClass().getResource("/parkingapp/resources/images/icons8-estacionamiento-64.png"));
+        Image img = imgIcon.getImage();
+        this.setIconImage(img);
     }
 
     @SuppressWarnings("unchecked")
@@ -26,6 +35,7 @@ public class LoginFrame extends javax.swing.JFrame {
         cedulaInput = new javax.swing.JTextField();
         imgLogo = new javax.swing.JLabel();
         contraseniaOlvidada = new javax.swing.JLabel();
+        separadorContra1 = new javax.swing.JSeparator();
         loginButton = new javax.swing.JButton();
         separadorContra = new javax.swing.JSeparator();
         separadorCedula = new javax.swing.JSeparator();
@@ -143,11 +153,12 @@ public class LoginFrame extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginLayout.createSequentialGroup()
-                                .addGroup(loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(contraseniaOlvidada, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(contraseniaOlvidada, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginLayout.createSequentialGroup()
                                         .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(17, 17, 17)))
+                                        .addGap(17, 17, 17))
+                                    .addComponent(separadorContra1, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(72, 72, 72))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginLayout.createSequentialGroup()
                                 .addComponent(panelAlert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -192,7 +203,9 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(contraseniaOlvidada)
-                .addGap(18, 18, 18)
+                .addGap(2, 2, 2)
+                .addComponent(separadorContra1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelAlert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
         );
@@ -211,7 +224,7 @@ public class LoginFrame extends javax.swing.JFrame {
             .addGroup(panelLoginLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         setVisible(true);
@@ -248,7 +261,9 @@ public class LoginFrame extends javax.swing.JFrame {
         getData.put("iduser", id);
         getData.put("validatePass", password);
         showLoading();
-        getUser = Herramientas.consumoGET("http://localhost/parkingAPI/users/getUser.php", getData);
+        String endpoint = "/users/getUser.php";
+        endpoint = dataConfig.getEndPoint(endpoint);
+        getUser = Herramientas.consumoGET(endpoint, getData);
         System.out.println("User: " + getUser);
         hideLoading();
 
@@ -288,6 +303,7 @@ public class LoginFrame extends javax.swing.JFrame {
             int idUserInt = Integer.parseInt(idUser);
             User user = new User(idUserInt, name, email, rol, statusUser, parking);
             System.out.println("User Parking: " + user.getParking());
+            System.out.println("User status: " + user.getEstado());
             MainFrame frame = new MainFrame(user);
             frame.setVisible(true);
             this.setVisible(false);
@@ -379,5 +395,6 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JPanel panelLogin;
     private javax.swing.JSeparator separadorCedula;
     private javax.swing.JSeparator separadorContra;
+    private javax.swing.JSeparator separadorContra1;
     // End of variables declaration//GEN-END:variables
 }
