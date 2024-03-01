@@ -47,7 +47,6 @@ public class UserFragment extends Fragment {
     Spinner roles;
     Context context;
     Config dataConfig;
-    Button btnBackCreate, btnBackEditUser, btnBackDetailUser, btnBackAssignUser;
     FloatingActionButton btnCreateUserSesion;
     private FragmentUserBinding binding;
     String user_id,user_rol;
@@ -55,7 +54,7 @@ public class UserFragment extends Fragment {
     AdapterListUser adapter;
     View root;
     RecyclerView recyclerView;
-    ImageView loaderTruck;
+    ImageView loaderTruck, btnBackEditUser, btnBackCreate, btnBackDetailUser, btnBackAssignUser;
     UserFragment userFragment;
 
 
