@@ -93,7 +93,7 @@ public class AdapterVehicles extends RecyclerView.Adapter<AdapterVehicles.ViewHo
 
 
             try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                 TimeZone timeZoneColombia = TimeZone.getTimeZone("America/Bogota");
                 sdf.setTimeZone(timeZoneColombia);
                 Date fechaEntrada = sdf.parse(fecha);
@@ -126,10 +126,25 @@ public class AdapterVehicles extends RecyclerView.Adapter<AdapterVehicles.ViewHo
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("id", id);
                     editor.apply();
+                    SimpleDateFormat sdfInput = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    SimpleDateFormat sdfOutput = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
+                    try {
+
+                        Date date = sdfInput.parse(fecha);
+
+
+                        String fechaFormateada = sdfOutput.format(date);
+                        date_entry.setText(fechaFormateada);
+
+
+                    } catch (Exception e) {
+
+                        e.printStackTrace();
+                    }
                     name_parking.setText(nameParking);
                     address_parking.setText(addressParking);
-                    date_entry.setText(fecha);
+
                     durariton.setText(time.getText());
                     plate_vehicle.setText(Plate_vehicle.getText());
                     switchSection(layout_ticket, layout_vehicles);
