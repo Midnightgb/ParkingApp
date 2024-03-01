@@ -14,7 +14,14 @@ if (!empty($_POST['iduser']) || !empty($_GET['iduser'])) {
     $password = isset($_POST['password']) ? $_POST['password'] : (isset($_GET['password']) ? $_GET['password'] : null);
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
     $rol = isset($_POST['rol']) ? $_POST['rol'] : (isset($_GET['rol']) ? $_GET['rol'] : null);
-
+    $respuesta = [
+        'id' => $id,
+        'name'=> $name,
+        'email'=> $email,
+        'password'=> $hashed_password,
+        'rol'=> $rol
+        ];
+        echo json_encode($respuesta);
     try {
         $query = "SELECT * FROM public.user WHERE id = :idsr";
         $consulta = $DB->prepare($query);

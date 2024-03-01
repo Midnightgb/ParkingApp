@@ -2,6 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST");
 header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json");
 
 include '../connection.php';
 
@@ -74,9 +75,9 @@ if (!empty($_POST['iduser'])) {
 
         if (!empty($password)) {
             $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-            $query_update_user = "UPDATE public.user SET name = :cstne, email = :eml, password = :pswrd, rol = :rl, status = :sts WHERE id = :idsr";
+            $query_update_user = "UPDATE user SET name = :cstne, email = :eml, password = :pswrd, rol = :rl, status = :sts WHERE id = :idsr";
         } else{
-            $query_update_user = "UPDATE public.user SET name = :cstne, email = :eml, rol = :rl, status = :sts WHERE id = :idsr";
+            $query_update_user = "UPDATE user SET name = :cstne, email = :eml, rol = :rl, status = :sts WHERE id = :idsr";
         }
         // El usuario existe, procedemos a actualizarlo
         $consulta_update_user = $DB->prepare($query_update_user);
