@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
+import parkingapp.Config;
 import parkingapp.MainFrame;
 import parkingapp.user.User;
 
@@ -26,10 +27,13 @@ public class PanelTickets extends javax.swing.JPanel {
     User dataUser;
     DefaultTableModel modelo;
     MainFrame frame;
+    private Config dataConfig;
+
     public PanelTickets(User dataUser, MainFrame frame) {
         this.dataUser = dataUser;
         this.tabbed = tabbed;
         this.frame = frame;
+        this.dataConfig = new Config();
         initComponents();
         alternInitComponents();
 
@@ -279,9 +283,13 @@ public class PanelTickets extends javax.swing.JPanel {
     
     public void chargeByRole(String tipo){
          if("admin".equals(dataUser.getRol())){
-            fillTable("http://localhost/parkingAPI/ticket/getTickets.php", -100, tipo);
+            String endpoint = "/ticket/getTickets.php";
+            endpoint = dataConfig.getEndPoint(endpoint);
+            fillTable(endpoint, -100, tipo);
         }else{
-            fillTable("http://localhost/parkingAPI/ticket/getTicketRol.php", dataUser.getId(), tipo);
+            String endpoint = "/ticket/getTicketRol.php";
+            endpoint = dataConfig.getEndPoint(endpoint);
+            fillTable(endpoint, dataUser.getId(), tipo);
         }
     }
     
@@ -365,7 +373,9 @@ public class PanelTickets extends javax.swing.JPanel {
                             Map<String, String> insertData = new HashMap<>();
                             insertData.put("id", idString);
                             insertData.put("status", estado);
-                            String respuesta = Herramientas.consumoPOST("http://localhost/parkingAPI/ticket/changeStatus.php", insertData);
+                            String endpoint = "/ticket/changeStatus.php";
+                            endpoint = dataConfig.getEndPoint(endpoint);
+                            String respuesta = Herramientas.consumoPOST(endpoint, insertData);
                             System.out.println(respuesta);
                         } catch (NumberFormatException ex) {
                             System.out.println("Error al convertir ID a entero: " + ex.getMessage());

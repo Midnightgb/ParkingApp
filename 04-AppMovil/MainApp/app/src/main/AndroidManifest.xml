@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -15,37 +16,32 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.user.customer.SearchUservehicle"
+            android:exported="false" />
+        <activity
             android:name=".ui.parking.ListaParking"
             android:exported="false" />
-      
         <activity
             android:name=".ui.user.seller.EditSeller"
             android:exported="false" />
-      
         <activity
             android:name=".ui.user.seller.CreateSeller"
             android:exported="false" />
-      
         <activity
             android:name=".ui.parking.CreateParking"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".ui.authentication.ResetPasswordActivity"
             android:exported="false" />
-      
         <activity
             android:name=".ui.authentication.ForgotPasswordActivity"
             android:exported="false" />
-      
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.parking.ParkingAssigned"
             android:exported="false" />
-      
         <activity
             android:name=".ui.authentication.LoginActivity"
             android:exported="true">
@@ -55,7 +51,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

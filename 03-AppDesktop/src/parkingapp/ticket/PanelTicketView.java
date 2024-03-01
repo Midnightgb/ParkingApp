@@ -33,24 +33,27 @@ import java.awt.*;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
 import java.sql.Timestamp;
+import parkingapp.Config;
 
 
 public class PanelTicketView extends javax.swing.JPanel {
     User dataUser;
     String idTicket;
     MainFrame frame;
-    JsonArray ticketArray;
+    JsonObject userObject;
     String sqlDateTime;
     JLabel label;
     JSpinner dateSpinner;
     SimpleDateFormat dateFormat;
+    private Config dataConfig;
     
     public PanelTicketView(User dataUser, MainFrame frame,String idTicket) {
-        this.ticketArray = ticketArray;
+        this.userObject = userObject;
         this.sqlDateTime = "";
         this.frame = frame;
         this.idTicket = idTicket;
         this.dataUser = dataUser;
+        this.dataConfig = new Config();
         initComponents();
         alternInitComponents();
     }
@@ -311,9 +314,8 @@ public class PanelTicketView extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Map<String, String> insertData = new HashMap<>();
-        for (JsonElement element : ticketArray){
-                JsonObject userObject = element.getAsJsonObject();
-                String id = userObject.get("id").getAsString();
+        if(userObject != null){
+                      String id = userObject.get("id").getAsString();
                 String parking_id = userObject.get("parking_id").getAsString();
                 String plate = userObject.get("plate").getAsString();
                 String entry_date = userObject.get("entry_date").getAsString();
@@ -325,11 +327,13 @@ public class PanelTicketView extends javax.swing.JPanel {
                     sqlDateTime = dateFormat.format(selectedDateTime);
                 }
                 insertData.put("date", sqlDateTime);
-            
         }
-
+      
+           
         System.out.println(insertData);
-        String respuesta = Herramientas.consumoPOST("http://localhost/parkingAPI/ticket/insertTicketTotal.php", insertData);
+        String endpoint = "/ticket/insertTicketTotal.php";
+        endpoint = dataConfig.getEndPoint(endpoint);
+        String respuesta = Herramientas.consumoPOST(endpoint, insertData);
         crearpdf();
         jButton1.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -389,15 +393,15 @@ public class PanelTicketView extends javax.swing.JPanel {
         this.setBackground(java.awt.Color.WHITE);
         Map<String, String> viewData = new HashMap<>();
         viewData.put("id", idTicket);
-        String result = Herramientas.consumoGET("http://localhost/parkingAPI/ticket/getTicket.php", viewData);
+        String endpoint = "/ticket/getTicket.php";
+        endpoint = dataConfig.getEndPoint(endpoint);
+        String result = Herramientas.consumoGET(endpoint, viewData);
         System.out.println(result);
         
          
         JsonObject jsonObject = JsonParser.parseString(result).getAsJsonObject();
-        ticketArray = jsonObject.getAsJsonArray("datos");
-        
-        for (JsonElement element : ticketArray){
-            JsonObject userObject = element.getAsJsonObject();
+        userObject = jsonObject.getAsJsonObject("datos");
+       
             String id = userObject.get("id").getAsString();
             String parking_id = userObject.get("parking_id").getAsString();
             String plate = userObject.get("plate").getAsString();
@@ -442,7 +446,6 @@ public class PanelTicketView extends javax.swing.JPanel {
            this.repaint();
            
             
-        }
     }
     
     
@@ -481,12 +484,13 @@ public class PanelTicketView extends javax.swing.JPanel {
             // Datos de la factura
             Map<String, String> viewData = new HashMap<>();
             viewData.put("id", idTicket);
-            String result = Herramientas.consumoGET("http://localhost/parkingAPI/ticket/getTicket.php", viewData);
+            String endpoint = "/ticket/getTicket.php";
+            endpoint = dataConfig.getEndPoint(endpoint);
+            String result = Herramientas.consumoGET(endpoint, viewData);
 
             JsonObject jsonObject = JsonParser.parseString(result).getAsJsonObject();
-            ticketArray = jsonObject.getAsJsonArray("datos");
-            for (JsonElement element : ticketArray) {
-                JsonObject userObject = element.getAsJsonObject();
+            JsonObject userObject = jsonObject.getAsJsonObject("datos");
+
                 String id = userObject.get("id").getAsString();
                 String parking_id = userObject.get("parking_id").getAsString();
                 String plate = userObject.get("plate").getAsString();
@@ -518,7 +522,7 @@ public class PanelTicketView extends javax.swing.JPanel {
                 );
 
                 document.add(facturaData);
-            }
+           
 
             
             document.add(new Paragraph("\n"));

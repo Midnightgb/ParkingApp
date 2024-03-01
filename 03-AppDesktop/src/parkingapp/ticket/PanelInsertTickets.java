@@ -10,6 +10,7 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
+import parkingapp.Config;
 import parkingapp.MainFrame;
 import parkingapp.user.User;
 import parkingapp.util.Herramientas;
@@ -18,9 +19,12 @@ import parkingapp.util.Herramientas;
 public class PanelInsertTickets extends javax.swing.JPanel {
     User dataUser;
     MainFrame frame;
+    private Config dataConfig;
+     
     public PanelInsertTickets(User dataUser, MainFrame frame) {
         this.dataUser = dataUser;
         this.frame = frame;
+        this.dataConfig = new Config();
         initComponents();
         alternInitComponents();
     }
@@ -233,7 +237,9 @@ public class PanelInsertTickets extends javax.swing.JPanel {
         String valor = parts[1];
         insertData.put("parking_id", id);
         insertData.put("plate", selectedOption_2);
-        String respuesta = Herramientas.consumoPOST("http://localhost/parkingAPI/ticket/insertTicket.php", insertData);
+        String endpoint = "/ticket/insertTicket.php";
+        endpoint = dataConfig.getEndPoint(endpoint);
+        String respuesta = Herramientas.consumoPOST(endpoint, insertData);
         System.out.println(respuesta);
         if(respuesta!=null){
             JsonObject jsonObject = JsonParser.parseString(respuesta).getAsJsonObject();
@@ -258,23 +264,30 @@ public class PanelInsertTickets extends javax.swing.JPanel {
     public void cargarComBox(){
         jComboBox1.removeAllItems();
         jComboBox2.removeAllItems();
-        String result = Herramientas.consumoGET("http://localhost/parkingAPI/vehicle/getVehicles.php");
-        System.out.println(result);
+        String endpoint = "/vehicle/getVehicles.php";
+        endpoint = dataConfig.getEndPoint(endpoint);
+        System.out.println(endpoint);
         
          
-        JsonObject jsonObject = JsonParser.parseString(result).getAsJsonObject();
+        String jsonResponse = Herramientas.consumoGET(endpoint); // Obtener la respuesta JSON de la URL
+        System.out.println(jsonResponse); // Verifica que la respuesta sea la que esperas
+
+        JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject(); // Parsear la respuesta JSON
         JsonArray ticketArray = jsonObject.getAsJsonArray("vehicles");
+    
         
         for (JsonElement element : ticketArray){
             JsonObject userObject = element.getAsJsonObject();
             String parking_id = userObject.get("plate").getAsString();
+            System.out.println("°°°°°°°°");
             String entry_date = userObject.get("name_owner").getAsString();
             String status = userObject.get("category").getAsString();
             
             jComboBox1.addItem(parking_id);
         }
-        
-        String data = Herramientas.consumoGET("http://localhost/parkingAPI/ticket/getUserParking.php");
+        String endpointGet = "/ticket/getUserParking.php";
+        endpointGet = dataConfig.getEndPoint(endpointGet);
+        String data = Herramientas.consumoGET(endpointGet);
         System.out.println(data);
         
          
