@@ -29,6 +29,8 @@ import com.bumptech.glide.Glide;
 import com.example.parkingapp.R;
 import com.example.parkingapp.ui.parking.AdapterListParking;
 import com.example.parkingapp.utils.Config;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -93,8 +95,8 @@ public class AdapterListUser extends RecyclerView.Adapter<AdapterListUser.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView listNameUser, id_user, labelIdSeller, labelNameSeller;
-        Button btnDetailUser, btnEditUser, btnConfirmUserEdit, btnAssignParking, btnConfirmAssignParking;
-
+        Button btnConfirmUserEdit, btnConfirmAssignParking;
+        FloatingActionButton btnAssignParking, btnDetailUser, btnEditUser;
         Context context;
         ImageView loaderTruck;
 
