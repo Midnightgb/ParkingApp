@@ -1,9 +1,9 @@
 <?php
-$server = 'aws-0-us-west-1.pooler.supabase.com';
-$user = 'postgres.jvxmpvbcszmmarqfhhll';
-$pass = 'pEM99xFtQpx4vLd7';
-$dbName = 'postgres';
-$port = 5432;
+$server = getenv('SERVER');
+$user = getenv('USER');
+$pass = getenv('PASS');
+$dbName = getenv('DBNAME');
+$port = getenv('DBPORT');
 try{
    $DB = new PDO("pgsql:host=$server;port=$port;dbname=$dbName;user=$user;password=$pass");
    error_log("conectado a la base de datos parking");

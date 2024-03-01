@@ -19,32 +19,35 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="visible">
+
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="357dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="40dp">
+            android:layout_marginBottom="40dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Parqueaderos"
-                android:textStyle="bold"
-                android:textSize="@dimen/subtitle"/>
+                android:textSize="@dimen/subtitle"
+                android:textStyle="bold" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
+
             <Button
                 android:id="@+id/btnGoToGetCar"
                 android:layout_width="30dp"
-                android:layout_marginRight="10dp"
                 android:layout_height="30dp"
-                android:background="@drawable/car_image"/>
+                android:layout_marginRight="10dp"
+                android:background="@drawable/car_image" />
+
             <Button
                 android:id="@+id/btnCrearParking"
                 android:layout_width="30dp"
