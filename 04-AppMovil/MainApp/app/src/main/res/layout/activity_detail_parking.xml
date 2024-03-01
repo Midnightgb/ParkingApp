@@ -59,17 +59,17 @@
         style="@style/TextDefault"
         />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="@string/_6_am_10pm"
-            android:gravity="center"
-            android:layout_margin="10dp"
-            android:textSize="20sp"
-            android:textColor="@color/primary"
-            android:background="@drawable/card_border"
-            style="@style/TextBold"
-            />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/_6_am_10pm"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:textSize="20sp"
+        android:textColor="@color/primary"
+        android:background="@drawable/card_border"
+        style="@style/TextBold"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
