@@ -449,7 +449,24 @@ public class VehicleFragment extends Fragment {
                                 binding.NameParking2.setText(name_parking.getText());
                                 binding.addressParking2.setText(address_parking.getText());
                                 Plate_vehicle2.setText(ticket.getString("plate"));
-                                date_entry2.setText(ticket.getString("entry_date"));
+                                String fecha = ticket.getString("entry_date");
+
+
+                                SimpleDateFormat sdfInput = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                SimpleDateFormat sdfOutput = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+                                try {
+
+                                    Date date = sdfInput.parse(fecha);
+
+                                    String fechaFormateada = sdfOutput.format(date);
+                                    date_entry2.setText(fechaFormateada);
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+
                                 binding.total.setText(ticket.getString("total"));
                                 durarion2.setText(durariton.getText());
                                 loaderTruck.setVisibility(View.GONE);
@@ -458,7 +475,23 @@ public class VehicleFragment extends Fragment {
                                 cambiarEstadoTicket(id);
                                 binding.NameParking3.setText(name_parking.getText());
                                 Plate_vehicle3.setText(ticket.getString("plate"));
-                                date_entry3.setText(ticket.getString("entry_date"));
+                                String fecha = ticket.getString("entry_date");
+
+
+                                SimpleDateFormat sdfInput = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                SimpleDateFormat sdfOutput = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+                                try {
+
+                                    Date date = sdfInput.parse(fecha);
+
+                                    String fechaFormateada = sdfOutput.format(date);
+                                    date_entry3.setText(fechaFormateada);
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
                                 binding.hours3.setText(durariton.getText());
                                 binding.durarion3.setText(durariton.getText());
                                 date_exit.setText(ticket.getString("exit_date"));
