@@ -64,5 +64,9 @@
     <string name="bienvenido">Bienvenido</string>
     <string name="usuarios">Usuarios</string>
     <string name="ingrese_el_id_del_usuario">Ingrese el id del usuario</string>
+    <string name="ingresa_la_placa_de_tu_vehiculo">Ingresa la placa de tu vehiculo</string>
+    <string name="buscar">buscar</string>
+    <string name="buscar_parqueadero">Buscar parqueadero</string>
+    <string name="buscar_usuario">Buscar usuario</string>
 
 </resources>

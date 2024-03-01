@@ -38,6 +38,7 @@ import com.example.parkingapp.R;
 import com.example.parkingapp.databinding.FragmentParkingBinding;
 import com.example.parkingapp.utils.Config;
 import com.example.parkingapp.utils.GlideImageLoader;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,8 +63,8 @@ public class ParkingFragment extends Fragment {
     Context context;
 
     JSONArray pakings_array;
-    Button crearParking, btnBackEditParking, btnBackCreateParking, btnAgregarParking, btnBackDetail, btnGetCar, btnGoToGetCar, btnBackGetCar;
-
+    Button btnBackEditParking, btnBackCreateParking, btnAgregarParking, btnBackDetail, btnGetCar, btnBackGetCar;
+    FloatingActionButton crearParking, btnGoToGetCar;
     EditText editText, field_plate;
     View root;
     String user_rol, user_id;

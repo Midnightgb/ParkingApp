@@ -21,50 +21,53 @@
         android:visibility="visible">
 
         <LinearLayout
-            android:layout_width="357dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
+            android:orientation="horizontal"
             android:layout_marginTop="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="40dp"
-            android:orientation="horizontal">
-
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="20dp">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/TextBold"
                 android:text="Parqueaderos"
-                android:textSize="@dimen/subtitle"
-                android:textStyle="bold" />
-
+                android:textSize="@dimen/subtitle" />
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <Button
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btnGoToGetCar"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/car_image" />
-
-            <Button
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:fabCustomSize="40dp"
+                android:layout_marginBottom="3dp"
+                android:backgroundTint="@color/light_blue"
+                app:tint="@color/black"
+                app:srcCompat="@drawable/ic_find_car"
+                app:elevation="3dp"
+                android:layout_gravity="bottom|end"/>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btnCrearParking"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/add" />
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:fabCustomSize="40dp"
+                android:layout_marginBottom="3dp"
+                android:backgroundTint="@color/light_blue"
+                app:tint="@color/black"
+                app:srcCompat="@drawable/add"
+                app:elevation="3dp"
+                android:layout_gravity="bottom|end"/>
         </LinearLayout>
-
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/status_default"
+            android:backgroundTint="@color/white_50"
             android:orientation="horizontal"
-            android:layout_margin="10dp"
-            android:background="@drawable/btn_inactive"
-            android:padding="10dp">
+            android:layout_marginHorizontal="10dp">
 
             <ImageView
                 android:layout_width="20dp"
@@ -75,20 +78,22 @@
 
             <EditText
                 android:id="@+id/fildSearchParking"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:hint="Ingrese el nombre del parqueadero"
+                android:hint="@string/buscar_parqueadero"
                 android:inputType="text"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/body"
+                android:fontFamily="@font/baloo2_bold"
+                android:textStyle="bold"
+                style="@style/FormEditText"
+                android:backgroundTint="@color/white_50"
+                android:layout_gravity="center"/>
         </LinearLayout>
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_parking_assigned"
             android:layout_width="match_parent"
-            android:layout_height="560dp"
-            android:layout_marginHorizontal="15dp"/>
+            android:layout_height="534dp"
+            android:layout_marginHorizontal="5dp"/>
     </LinearLayout>
 
     <LinearLayout

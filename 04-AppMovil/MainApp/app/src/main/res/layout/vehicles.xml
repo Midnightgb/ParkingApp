@@ -17,8 +17,9 @@
             android:orientation="horizontal"
             android:paddingHorizontal="10dp">
             <LinearLayout
-                android:layout_width="310dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="vertical"
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp">
@@ -45,7 +46,8 @@
                 app:fabCustomSize="40dp"
                 app:srcCompat="@drawable/eye_svgrepo_com"
                 app:elevation="3dp"
-                android:layout_gravity="center|end" />
+                android:layout_gravity="center|end"
+                android:layout_marginStart="100dp" />
         </LinearLayout>
     </FrameLayout>
 </androidx.cardview.widget.CardView>
