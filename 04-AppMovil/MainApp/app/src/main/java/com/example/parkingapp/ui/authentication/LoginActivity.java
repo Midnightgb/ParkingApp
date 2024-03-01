@@ -59,6 +59,28 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         context = getApplicationContext();
+        SharedPreferences sharedPreferences = getSharedPreferences("userParking", Context.MODE_PRIVATE);
+        String isLogged = sharedPreferences.getString("isUserLogged", "false");
+        if (isLogged.equals("true")) {
+            String userIdKey = sharedPreferences.getString("id", null);
+            String userNameKey = sharedPreferences.getString("name", null);
+            String userRoleKey = sharedPreferences.getString("rol", null);
+            String userEmailKey = sharedPreferences.getString("email", null);
+            if (userIdKey != null && userNameKey != null && userRoleKey != null && userEmailKey != null) {
+                System.out.println("Se encontraron datos de usuario en SharedPreferences");
+                System.out.println("ID: " + userIdKey);
+                System.out.println("Nombre: " + userNameKey);
+                System.out.println("Rol: " + userRoleKey);
+                System.out.println("Correo: " + userEmailKey);
+                Intent intention = new Intent(context, MainActivity.class);
+                startActivity(intention);
+            }else {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("isUserLogged", "false");
+                editor.apply();
+                System.out.println("No se encontraron datos de usuario en SharedPreferences");
+            }
+        }
         dataConfig = new Config(context);
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassw);
@@ -241,6 +263,7 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.putString("name", datos.getJSONObject("datos").getString("name"));
                                 editor.putString("rol", datos.getJSONObject("datos").getString("rol"));
                                 editor.putString("email", etEmailText);
+                                editor.putString("isUserLogged", "true");
                                 editor.apply();
                                 Intent intention = new Intent(context, MainActivity.class);
                                 startActivity(intention);
@@ -301,18 +324,10 @@ public class LoginActivity extends AppCompatActivity {
             loginButtonActive = false;
             loadingIndicator.setVisibility(View.GONE);
             tvLogin.setVisibility(View.VISIBLE);
-            System.out.println("Ocultando indicador de carga");
-            System.out.println("Habilitando botón de login");
-            System.out.println("Mostrando texto de login");
-            System.out.println("LoginButtonActive: " + loginButtonActive);
         } else {
             loginButtonActive = true;
             loadingIndicator.setVisibility(View.VISIBLE);
             tvLogin.setVisibility(View.GONE);
-            System.out.println("Mostrando indicador de carga");
-            System.out.println("Deshabilitando botón de login");
-            System.out.println("Ocultando texto de login");
-            System.out.println("LoginButtonActive: " + loginButtonActive);
         }
     }
 }

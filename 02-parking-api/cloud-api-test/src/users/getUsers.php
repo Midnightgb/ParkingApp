@@ -14,6 +14,7 @@ foreach ($data as $key => $value) {
     $response['users'][$key]['id'] = $value['id'];
     $response['users'][$key]['name'] = $value['name'];
     $response['users'][$key]['email'] = $value['email'];
+    $response['users'][$key]['password'] = "********";
     $response['users'][$key]['rol'] = $value['rol'];
     $response['users'][$key]['status'] = $value['status'];
 }

@@ -28,6 +28,13 @@
         <item>Inactivo</item>
     </string-array>
 
+    <string-array name="type_vehicle">
+        <item>camioneta</item>
+        <item>camion</item>
+        <item>carro</item>
+        <item>moto</item>
+    </string-array>
+
 
     <string name="iniciar_sesion">Iniciar sesión</string>
     <string name="has_olvidado_la_contrase_a">¿Has olvidado la contraseña?</string>
