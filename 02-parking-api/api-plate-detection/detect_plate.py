@@ -73,7 +73,7 @@ def analysis_image():
         for text_result in read_result.analyze_result.read_results:
             for line in text_result.lines:
                 print(line.text)
-                if len(line.text) == 7 and (line.text[3] == ' ' or line.text[3] == '-'):
+                if len(line.text) == 7 and (line.text[3] == ' ' or line.text[3] == '-' or line.text[3] == '.' or line.text[3] == '®'):
                     texto_placas.append(line.text)
     return texto_placas, url_azure
 
