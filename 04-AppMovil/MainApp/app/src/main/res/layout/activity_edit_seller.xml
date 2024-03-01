@@ -63,15 +63,21 @@
         android:hint="@string/contrase_a"
         android:inputType="textPassword" />
 
-    <Spinner
-        android:id="@+id/editroles"
-        style="@style/FormEditText"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:background="@drawable/status_default"
-        android:entries="@array/roles"
-        android:spinnerMode="dropdown" />
+        android:orientation="horizontal"
+        android:background="@drawable/status_default">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_user_question"
+            android:paddingHorizontal="10dp"/>
 
-
+        <Spinner
+            android:id="@+id/editroles"
+            style="@style/FormEditText"
+            android:entries="@array/roles"
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
 </LinearLayout>
