@@ -120,7 +120,8 @@
         android:id="@+id/btnGetVehicle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Consultar tu vehiculo"
+        style="@style/FormButtonActive"
+        android:text="@string/consulta_tu_vehiculo"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"/>
 
