@@ -34,6 +34,7 @@ import com.bumptech.glide.Glide;
 import com.example.parkingapp.R;
 import com.example.parkingapp.databinding.FragmentVehicleBinding;
 import com.example.parkingapp.utils.Config;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,11 +57,12 @@ public class VehicleFragment extends Fragment {
     Config dataConfig;
     RecyclerView recycler_view_vehicles;
     AdapterVehicles adapterVehicles;
-    Button btn_charge,volver2,btn_back2,btn_Confirm_cheged,volver3,btnBackCreateVehicle,btnCrearVehiculo,btnAgregarVehicle,btnCrearTicket,btnAgregarTicket,btnBackCreateTicket;
+    Button btn_charge,volver2,btn_back2,btn_Confirm_cheged,volver3,btnAgregarVehicle,btnAgregarTicket;
+    FloatingActionButton btnCrearVehiculo, btnCrearTicket;
     TextView name_parking,address_parking,Plate_vehicle2,date_entry2,durarion2,durariton,Plate_vehicle3,date_entry3,date_exit;
     private Handler handler;
     private  TextView timeNow;
-    ImageView loaderTruck;
+    ImageView loaderTruck, btnBackCreateTicket, btnBackCreateVehicle;
     EditText plate_create,name_owner,search_vehicle;
     Spinner type_vehicle_create,plate_create_ticket;
     LinearLayout sesionCreateVehicle;

@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginTop="10dp"
+    android:paddingTop="10dp"
+    android:background="@color/white"
     tools:context=".ui.vehicle.VehicleFragment">
 
     <LinearLayout
@@ -15,21 +16,32 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone"
-        android:layout_marginHorizontal="24dp"
-        >
+        android:layout_marginHorizontal="24dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/btnBackCreateTicket"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_back"
+                android:layout_gravity="center"
+                android:clickable="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Crear Ticket"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                style="@style/TextSubtitle"/>
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/btnBackCreateTicket"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/row_back"
-            />
         <ImageView
-            android:layout_width="94dp"
-            android:layout_height="87dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_parking" />
-
+            android:src="@drawable/ic_invoice" />
 
         <Spinner
             android:id="@+id/plate_create_ticket"
@@ -47,6 +59,7 @@
             android:id="@+id/btnAgregarTicket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/FormButtonActive"
             android:text="Agregar"
             android:layout_gravity="center"/>
     </LinearLayout>
@@ -57,15 +70,26 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone"
-        android:layout_marginHorizontal="24dp"
-        >
-
-        <Button
-            android:id="@+id/btnBackCreateVehicle"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/row_back"
-            />
+        android:layout_marginHorizontal="24dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/btnBackCreateVehicle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_back"
+                android:layout_gravity="center"
+                android:clickable="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Crear Vehiculo"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                style="@style/TextSubtitle"/>
+        </LinearLayout>
         <ImageView
             android:layout_width="94dp"
             android:layout_height="87dp"
@@ -113,62 +137,67 @@
             android:id="@+id/btnAgregarVehicle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/FormButtonActive"
             android:text="Agregar"
             android:layout_gravity="center"/>
     </LinearLayout>
 
-
-
-    <LinearLayout
+<LinearLayout
         android:id="@+id/layout_vehicles"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="visible"
-        >
+        android:visibility="visible">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="40dp">
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vehiculos en el parqueadero"
-                android:textSize="@dimen/subtitle"
-                android:textStyle="bold" />
-
+                android:text="Vehiculos Registrados"
+                style="@style/TextBold"
+                android:textSize="@dimen/subtitle"/>
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
-            <Button
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btnCrearTicket"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/add" />
-            <Button
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:fabCustomSize="40dp"
+                android:layout_marginBottom="3dp"
+                android:backgroundTint="@color/light_blue"
+                app:tint="@color/black"
+                app:srcCompat="@drawable/ic_car_registry"
+                app:elevation="3dp"
+                android:layout_gravity="bottom|end"/>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btnCrearVehiculo"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/ic_car" />
-
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:fabCustomSize="40dp"
+                android:layout_marginBottom="3dp"
+                android:backgroundTint="@color/light_blue"
+                app:tint="@color/black"
+                app:srcCompat="@drawable/ic_add_car"
+                app:elevation="3dp"
+                android:layout_gravity="bottom|end"/>
         </LinearLayout>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="10dp"
-                android:background="@color/gray_dark">
+                android:background="@drawable/status_default"
+                android:backgroundTint="@color/white_50"
+                android:layout_marginHorizontal="10dp">
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -179,44 +208,36 @@
                     android:id="@+id/search_vehicle"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
+                    style="@style/FormEditText"
+                    android:backgroundTint="@color/white_50"
+                    android:layout_gravity="center"
                     android:hint="Placa del vehiculo"
                     android:inputType="text"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-
-                    />
+                    android:fontFamily="@font/baloo2_bold"
+                    android:textSize="@dimen/body"/>
             </LinearLayout>
-
-
-        </androidx.cardview.widget.CardView>
-
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_vehicles"
             android:layout_width="match_parent"
-            android:layout_height="421dp"
+            android:layout_height="469dp"
             android:layout_marginTop="5dp"
             android:padding="10dp" />
     </LinearLayout>
-
 
     <LinearLayout
         android:id="@+id/layout_resume_ticket"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone"
-
-        >
+        android:visibility="gone">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="10dp"
-            android:background="@color/white"
-            >
-
+            android:background="@color/white">
             <Button
                 android:id="@+id/volver2"
                 android:layout_width="10dp"
@@ -226,15 +247,12 @@
                 android:backgroundTint="@color/white"
                 android:drawableBottom="@drawable/icon_back"
                 android:layout_marginRight="15dp"/>
-
-
             <TextView
                 android:text="Resumen Ticket"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="0.9"
-                style="@style/TextTitle"
-                />
+                style="@style/TextSubtitle"/>
 
         </LinearLayout>
 
@@ -244,20 +262,14 @@
             android:orientation="horizontal"
             android:layout_marginHorizontal="20dp"
             android:background="@color/white">
-
             <TextView
                 android:layout_marginLeft="10dp"
                 android:text="Parqueadero"
-                android:layout_width="115dp"
                 android:layout_weight="1"
                 style="@style/TextSubtitle"
-                android:fontFamily="@font/baloo2_bold"
                 android:layout_gravity="start"
                 android:textColor="@color/gray"
-                android:textSize="20sp"
-
-                />
-
+                android:textSize="20sp" />
             <TextView
                 android:id="@+id/NameParking2"
 
@@ -290,7 +302,6 @@
                 android:fontFamily="@font/baloo2_bold"
                 android:text="Direccion"
                 android:textColor="@color/gray"
-
                 android:textSize="20sp" />
 
             <TextView
@@ -486,14 +497,12 @@
 
     </LinearLayout>
 
-
     <LinearLayout
         android:id="@+id/layout_ticket"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone"
-        >
+        android:visibility="gone">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -513,11 +522,11 @@
 
 
             <TextView
-                android:text="@string/title_ticket"
+                android:text="Tiquete"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="0.9"
-                style="@style/TextTitle"
+                style="@style/TextSubtitle"
                 />
 
         </LinearLayout>
@@ -700,7 +709,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/baloo2_bold"
-                android:text="Duraccion"
+                android:text="Duracion"
                 android:textColor="@color/gray"
 
                 android:textSize="20sp" />
@@ -760,8 +769,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone"
-        >
+        android:visibility="gone">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -782,7 +790,7 @@
 
 
             <TextView
-                android:text="Tickete"
+                android:text="Tiquete de Pago"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="0.9"
@@ -797,9 +805,8 @@
                 android:layout_height="200dp"
                 android:layout_gravity="center"
                 android:src="@drawable/qr"
-
-                android:background="@color/gray"
-                />
+                android:background="@drawable/border_black"
+                android:elevation="2dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -891,7 +898,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/baloo2_bold"
-                    android:text="Duration"
+                    android:text="Duracion"
                     android:textColor="@color/gray"
                     android:textSize="20sp"
 
@@ -1021,7 +1028,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
 
     <ImageView
         android:id="@+id/loaderTruck"
