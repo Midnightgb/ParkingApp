@@ -7,6 +7,7 @@ import com.google.gson.JsonParser;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
+import parkingapp.Config;
 import parkingapp.MainFrame;
 import parkingapp.user.User;
 import parkingapp.util.Herramientas;
@@ -15,10 +16,12 @@ public class PanelUpdateVehicles extends javax.swing.JPanel {
     User dataUser;
     MainFrame frame;
     String plate;
+    private Config dataConfig;
     public PanelUpdateVehicles(User dataUser,MainFrame frame, String plate) {
         this.dataUser = dataUser;
         this.plate =  plate;
         this.frame = frame;
+        this.dataConfig = new Config();
         initComponents();
         alterInitCoponenst();
     }
@@ -264,8 +267,9 @@ public class PanelUpdateVehicles extends javax.swing.JPanel {
         insertData.put("plate", plate);
         insertData.put("owner", owner); 
         insertData.put("category", category); 
-       
-        String respuesta = Herramientas.consumoPOST("http://localhost/parkingAPI/vehicle/updateVehicle.php", insertData);
+       String endpoint = "/vehicle/updateVehicle.php";
+        endpoint = dataConfig.getEndPoint(endpoint);
+        String respuesta = Herramientas.consumoPOST(endpoint, insertData);
         System.out.println(respuesta);
         
         if(respuesta!=null){
@@ -344,7 +348,9 @@ public class PanelUpdateVehicles extends javax.swing.JPanel {
         
         Map<String, String> viewData = new HashMap<>();
         viewData.put("plate", plate);
-        String result = Herramientas.consumoGET("http://localhost/parkingAPI/vehicle/getVehicle.php", viewData);
+        String endpoint = "/vehicle/getVehicle.php";
+        endpoint = dataConfig.getEndPoint(endpoint);
+        String result = Herramientas.consumoGET(endpoint, viewData);
         JsonObject jsonObject = JsonParser.parseString(result).getAsJsonObject();
         JsonArray ticketArray = jsonObject.getAsJsonArray("datos");
         

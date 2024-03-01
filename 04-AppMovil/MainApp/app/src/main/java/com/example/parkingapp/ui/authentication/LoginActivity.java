@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -28,6 +29,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.parkingapp.MainActivity;
 import com.example.parkingapp.R;
+import com.example.parkingapp.ui.user.customer.SearchUservehicle;
 import com.example.parkingapp.utils.Config;
 
 
@@ -50,11 +52,35 @@ public class LoginActivity extends AppCompatActivity {
     Config dataConfig;
     boolean loginButtonActive = false;
     ProgressBar loadingIndicator;
+
+    Button btnGetVehicle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         context = getApplicationContext();
+        SharedPreferences sharedPreferences = getSharedPreferences("userParking", Context.MODE_PRIVATE);
+        String isLogged = sharedPreferences.getString("isUserLogged", "false");
+        if (isLogged.equals("true")) {
+            String userIdKey = sharedPreferences.getString("id", null);
+            String userNameKey = sharedPreferences.getString("name", null);
+            String userRoleKey = sharedPreferences.getString("rol", null);
+            String userEmailKey = sharedPreferences.getString("email", null);
+            if (userIdKey != null && userNameKey != null && userRoleKey != null && userEmailKey != null) {
+                System.out.println("Se encontraron datos de usuario en SharedPreferences");
+                System.out.println("ID: " + userIdKey);
+                System.out.println("Nombre: " + userNameKey);
+                System.out.println("Rol: " + userRoleKey);
+                System.out.println("Correo: " + userEmailKey);
+                Intent intention = new Intent(context, MainActivity.class);
+                startActivity(intention);
+            }else {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("isUserLogged", "false");
+                editor.apply();
+                System.out.println("No se encontraron datos de usuario en SharedPreferences");
+            }
+        }
         dataConfig = new Config(context);
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassw);
@@ -62,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
         tvLogin = findViewById(R.id.tvLogin);
         tvForgotPassw = findViewById(R.id.tvForgotPassw);
         loadingIndicator = findViewById(R.id.loadingIndicator);
+        btnGetVehicle = findViewById(R.id.btnGetVehicle);
         etEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -163,6 +190,14 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+        btnGetVehicle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SearchUservehicle.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         etPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -228,6 +263,7 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.putString("name", datos.getJSONObject("datos").getString("name"));
                                 editor.putString("rol", datos.getJSONObject("datos").getString("rol"));
                                 editor.putString("email", etEmailText);
+                                editor.putString("isUserLogged", "true");
                                 editor.apply();
                                 Intent intention = new Intent(context, MainActivity.class);
                                 startActivity(intention);
