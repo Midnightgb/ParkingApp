@@ -24,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.parkingapp.R;
 import com.example.parkingapp.utils.Config;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,7 +83,8 @@ public class AdapterListParking extends RecyclerView.Adapter<AdapterListParking.
         TextView name_parking, direction_parking;
 
         Context context;
-        Button btnDetailParking,  btnEditParking, edit_btnAgregarParking;
+        Button edit_btnAgregarParking;
+        FloatingActionButton btnDetailParking, btnEditParking;
         TextView label_price_motorcycle, label_price_car, label_price_truck, label_price_pickup_truck, label_name_parking, label_addres_parking, edit_field_name_parking, edit_field_address_parking, edit_field_motorcycle, edit_field_car, edit_field_truck, edit_field_pickup_truck;
         LinearLayout sesionDetailParking, sesionEditParking, sesionListParking;
 
