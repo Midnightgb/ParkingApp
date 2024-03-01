@@ -15,6 +15,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.Border;
 import parkingapp.MainFrame;
 import parkingapp.util.Herramientas;
+import parkingapp.Config;
 
 
 public class PanelCrearUser extends javax.swing.JPanel {
@@ -22,8 +23,9 @@ public class PanelCrearUser extends javax.swing.JPanel {
     
     MainFrame frame;
     String idUser;
+    private Config dataConfig;
     public PanelCrearUser(String idUser,MainFrame frame) {
-        
+        dataConfig=new Config();
         this.idUser=idUser;
         this.frame=frame;
         initComponents();
@@ -222,8 +224,10 @@ public class PanelCrearUser extends javax.swing.JPanel {
             insertData.put("email", email);
             insertData.put("password", passwordString);
             insertData.put("rol", rol);
-
-            String insertar=Herramientas.insert("http://localhost/parkingAPI/users/Insert.php", insertData);
+            
+            String endpoint = "/users/Insert.php";
+            endpoint = dataConfig.getEndPoint(endpoint);
+            String insertar=Herramientas.insert(endpoint, insertData);
             if(insertar!=null){
                 JsonObject jsonObject = JsonParser.parseString(insertar).getAsJsonObject();
                 boolean status = jsonObject.get("status").getAsBoolean();
