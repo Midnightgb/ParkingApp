@@ -107,6 +107,8 @@ public class VehicleFragment extends Fragment {
         sesionCreateVehicle = binding.sesionCreatevehicle;
 
 
+        loaderTruck.setVisibility(View.VISIBLE);
+
 
         handler = new Handler();
 
@@ -122,7 +124,7 @@ public class VehicleFragment extends Fragment {
         String url = dataConfig.getEndPoint("/ticket/getTicketRol.php?id="+userid);
         listaVehiculos = new JSONArray();
         adapterVehicles = new AdapterVehicles(listaVehiculos, binding.getRoot());
-
+        loaderTruck.setVisibility(View.VISIBLE);
         consumirApi(url);
 
         if(rol.equals("seller")){
@@ -236,7 +238,7 @@ public class VehicleFragment extends Fragment {
         });
 
 
-        loaderTruck.setVisibility(View.GONE);
+
         return root;
     }
 
@@ -263,8 +265,12 @@ public class VehicleFragment extends Fragment {
                         for (int i = 0; i < vehiculos.length(); i++) {
                             JSONObject vehicleObject = vehiculos.getJSONObject(i);
                             String plate = vehicleObject.getString("plate");
+                            System.out.println("placa"+plate);
                             vehicleList.add(plate);
+
+
                         }
+                        System.out.println(vehicleList);
                         ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, vehicleList);
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         plate_create_ticket.setAdapter(adapter);
@@ -413,7 +419,7 @@ public class VehicleFragment extends Fragment {
 
         Date fechaActual = calendar.getTime();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         sdf.setTimeZone(timeZoneColombia);
 
 
@@ -593,61 +599,68 @@ public class VehicleFragment extends Fragment {
             plate_create.setBackgroundResource(R.drawable.status_error);
             name_owner.getCompoundDrawables()[0].setTint(ContextCompat.getColor(context, R.color.red));
             name_owner.setBackgroundResource(R.drawable.status_error);
+        }else if (plate_create.getText().toString().length() > 6){
+            Toast.makeText(context.getApplicationContext(),"La placa debe tener maximo 6 caracteres",Toast.LENGTH_LONG).show();
+            sesionCreateVehicle.setVisibility(View.VISIBLE);
+            plate_create.getCompoundDrawables()[0].setTint(ContextCompat.getColor(context, R.color.red));
+            plate_create.setBackgroundResource(R.drawable.status_error);
+
         }else {
 
 
-            loaderTruck.setVisibility(View.VISIBLE);
-            RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
-            StringRequest solicitud = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        String status = jsonObject.getString("status");
-                        String message = jsonObject.getString("message");
-                        ;
-                        if (status.equals("true")) {
-                            loaderTruck.setVisibility(View.GONE);
-                            Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-                            name_owner.setText("");
-                            plate_create.setText("");
-                            type_vehicle_create.setSelection(0);
-                            binding.layoutVehicles.setVisibility(View.VISIBLE);
-                        } else {
-                            loaderTruck.setVisibility(View.GONE);
-                            plate_create.getCompoundDrawables()[0].setTint(ContextCompat.getColor(context, R.color.red));
-                            plate_create.setBackgroundResource(R.drawable.status_error);
-                            Toast.makeText(context, "Placa repetida", Toast.LENGTH_LONG).show();
-                            binding.sesionCreatevehicle.setVisibility(View.VISIBLE);
+                loaderTruck.setVisibility(View.VISIBLE);
+                RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
+                StringRequest solicitud = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String status = jsonObject.getString("status");
+                            String message = jsonObject.getString("message");
+                            ;
+                            if (status.equals("true")) {
+                                loaderTruck.setVisibility(View.GONE);
+                                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                                name_owner.setText("");
+                                plate_create.setText("");
+                                type_vehicle_create.setSelection(0);
+                                binding.layoutVehicles.setVisibility(View.VISIBLE);
+                            } else {
+                                loaderTruck.setVisibility(View.GONE);
+                                plate_create.getCompoundDrawables()[0].setTint(ContextCompat.getColor(context, R.color.red));
+                                plate_create.setBackgroundResource(R.drawable.status_error);
+                                Toast.makeText(context, "Placa repetida", Toast.LENGTH_LONG).show();
+                                binding.sesionCreatevehicle.setVisibility(View.VISIBLE);
 
+                            }
+
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
                         }
 
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
                     }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println("El servidor GET responde con un error:");
+                        System.out.println(error.getMessage());
+                        Toast.makeText(context.getApplicationContext(), "Error al crear al usuario", Toast.LENGTH_LONG).show();
+                    }
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("plate", plate_create.getText().toString());
+                        params.put("owner", name_owner.getText().toString());
+                        params.put("category", type_vehicle_create.getSelectedItem().toString());
+                        return params;
+                    }
+                };
 
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    System.out.println("El servidor GET responde con un error:");
-                    System.out.println(error.getMessage());
-                    Toast.makeText(context.getApplicationContext(), "Error al crear al usuario", Toast.LENGTH_LONG).show();
-                }
-            }) {
-                @Override
-                protected Map<String, String> getParams() {
-                    Map<String, String> params = new HashMap<>();
-                    params.put("plate", plate_create.getText().toString());
-                    params.put("owner", name_owner.getText().toString());
-                    params.put("category", type_vehicle_create.getSelectedItem().toString());
-                    return params;
-                }
-            };
-
-            queue.add(solicitud);
+                queue.add(solicitud);
+            }
         }
-    }
+
 
     public void buscaridParking(String plate,String userid){
         loaderTruck.setVisibility(View.VISIBLE);
@@ -665,8 +678,58 @@ public class VehicleFragment extends Fragment {
                         JSONObject vendedorInfo = jsonObject.getJSONObject("vendedor_info");
                         String parking_id = vendedorInfo.getString("id_parking_seller");
 
-                        String url = dataConfig.getEndPoint("/ticket/insertTicket.php");
-                        crearTicket(url,plate,parking_id);
+
+                        loaderTruck.setVisibility(View.VISIBLE);
+                        String url = dataConfig.getEndPoint("/ticket/getTickets.php");
+                        RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
+                        StringRequest solicitud2 =  new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    int count = 0;
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    JSONArray tickets = jsonObject.getJSONArray("tickets");
+                                    if (tickets.length() > 0) {
+                                        for (int i = 0; i < tickets.length(); i++) {
+                                            JSONObject ticket = tickets.getJSONObject(i);
+                                            if (ticket.getString("plate").equals(plate) && ticket.getString("status").equals("activo")) {
+                                                count++;
+
+                                                break;
+                                            }
+                                        }
+                                        if(count == 0){
+                                            System.out.println("entro");
+                                            String url = dataConfig.getEndPoint("/ticket/insertTicket.php");
+                                            crearTicket(url,plate,parking_id);
+
+                                        }else{
+                                            System.out.println("ticket activo "+plate);
+                                            loaderTruck.setVisibility(View.GONE);
+                                            binding.sesionCreateTicket.setVisibility(View.VISIBLE);
+                                            Toast.makeText(context,"El vehiculo ya tiene un ticket activo",Toast.LENGTH_LONG).show();
+                                        }
+
+
+
+                                    }
+                                    loaderTruck.setVisibility(View.GONE);
+
+
+                                } catch (JSONException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                System.out.println("El servidor GET responde con un error:");
+                                System.out.println(error.getMessage());
+
+                            }
+                        });
+
+                        queue.add(solicitud2);
 
 
 
@@ -703,9 +766,12 @@ public class VehicleFragment extends Fragment {
                     String status = jsonObject.getString("status");
                     String message = jsonObject.getString("mesagge");;
                     if(status.equals("true")){
+
+
                         loaderTruck.setVisibility(View.GONE);
                         binding.sesionCreateTicket.setVisibility(View.VISIBLE);
                         Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+
 
 
                     }else{
@@ -766,4 +832,8 @@ public class VehicleFragment extends Fragment {
 
         adapterVehicles.updateData(filteredParkings);
     }
+
+
+
+
 }
