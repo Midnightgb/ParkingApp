@@ -32,6 +32,7 @@ import com.example.parkingapp.R;
 import com.example.parkingapp.databinding.FragmentUserBinding;
 import com.example.parkingapp.ui.parking.AdapterListParking;
 import com.example.parkingapp.utils.Config;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,25 +42,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UserFragment extends Fragment {
-
-    EditText etNombreS;
-    EditText idUser;
-    EditText etEmailS;
-    EditText etpasswS;
+    EditText etEmailS, etpasswS , idUser , etNombreS , editText;
     LinearLayout btnCreateUser ,layoutCreateUser, layoutListUser, layoutAssignUser;
     Spinner roles;
     Context context;
     Config dataConfig;
-    Button btnCreateUserSesion, btnBackCreate, btnBackEditUser, btnBackDetailUser, btnBackAssignUser;
+    Button btnBackCreate, btnBackEditUser, btnBackDetailUser, btnBackAssignUser;
+    FloatingActionButton btnCreateUserSesion;
     private FragmentUserBinding binding;
     String user_id,user_rol;
     JSONArray user_array;
     AdapterListUser adapter;
     View root;
     RecyclerView recyclerView;
-    EditText editText;
     ImageView loaderTruck;
-
     UserFragment userFragment;
 
 
