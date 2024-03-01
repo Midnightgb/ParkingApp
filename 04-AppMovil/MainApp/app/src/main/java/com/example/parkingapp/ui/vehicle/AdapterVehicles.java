@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.parkingapp.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -64,7 +65,7 @@ public class AdapterVehicles extends RecyclerView.Adapter<AdapterVehicles.ViewHo
         LinearLayout layout_vehicles,layout_ticket;
 
         TextView Plate_vehicle,time,name_parking,address_parking,date_entry,durariton,plate_vehicle;
-        ImageView ticket;
+        FloatingActionButton ticket;
         Button volver,btn_back;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

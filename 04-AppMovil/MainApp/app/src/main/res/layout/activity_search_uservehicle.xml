@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.user.customer.SearchUservehicle"
     android:orientation="vertical"
-    android:layout_margin="10dp">
+    android:padding="10dp"
+    android:background="@color/white">
     <Button
         android:id="@+id/btnBackGetVehiclePlate"
         android:layout_width="50dp"
@@ -23,7 +24,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ingresa la plata de tu vehiculo"
+            android:text="@string/ingresa_la_placa_de_tu_vehiculo"
+            style="@style/TextBold"
             android:textSize="30sp"
             android:gravity="center"/>
         <EditText
@@ -33,10 +35,10 @@
             android:layout_marginBottom="24dp"
             android:background="@drawable/plate_designed"
             android:gravity="center"
-            android:fontFamily="@font/baloo2_regular"
+            android:fontFamily="@font/baloo2_bold"
             android:hint="XXX-XXX"
             android:inputType="text"
-            android:textSize="70dp"
+            android:textSize="70sp"
             android:textStyle="bold"
             android:maxLength="6"
             android:layout_marginHorizontal="30dp"
@@ -44,13 +46,12 @@
             />
         <Button
             android:id="@+id/btnGetDetailVehicle"
+            style="@style/FormButtonActive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="normal"
-            android:textSize="20sp"
-            android:text="buscar"
+            android:textSize="@dimen/subtitle"
+            android:text="@string/buscar"
             android:layout_gravity="center"/>
-
     </LinearLayout>
     <LinearLayout
         android:id="@+id/layoutGetVehicleDetail"
