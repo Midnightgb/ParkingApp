@@ -296,6 +296,7 @@ public class LoginActivity extends AppCompatActivity {
                     alternateLoaderVisibility();
                     System.out.println("El servidor POST responde con un error:");
                     System.out.println(error.getMessage());
+                    Toast.makeText(context, "Error en la conexión con el servidor", Toast.LENGTH_LONG).show();
                 }
             }){
                 protected Map<String, String> getParams(){
