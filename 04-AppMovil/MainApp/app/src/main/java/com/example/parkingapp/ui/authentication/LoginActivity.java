@@ -311,18 +311,10 @@ public class LoginActivity extends AppCompatActivity {
             loginButtonActive = false;
             loadingIndicator.setVisibility(View.GONE);
             tvLogin.setVisibility(View.VISIBLE);
-            System.out.println("Ocultando indicador de carga");
-            System.out.println("Habilitando botón de login");
-            System.out.println("Mostrando texto de login");
-            System.out.println("LoginButtonActive: " + loginButtonActive);
         } else {
             loginButtonActive = true;
             loadingIndicator.setVisibility(View.VISIBLE);
             tvLogin.setVisibility(View.GONE);
-            System.out.println("Mostrando indicador de carga");
-            System.out.println("Deshabilitando botón de login");
-            System.out.println("Ocultando texto de login");
-            System.out.println("LoginButtonActive: " + loginButtonActive);
         }
     }
 }
