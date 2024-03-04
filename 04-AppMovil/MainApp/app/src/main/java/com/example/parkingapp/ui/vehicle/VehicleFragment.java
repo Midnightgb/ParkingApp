@@ -439,38 +439,64 @@ public class VehicleFragment extends Fragment {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
                         String status = jsonObject.getString("status");
-
                         String message = jsonObject.getString("message");;
-
                         if(status.equals("true")){
-
                             JSONObject ticket = jsonObject.getJSONObject("datos");
                             if (binding.layoutResumeTicket.getVisibility() == View.VISIBLE) {
                                 binding.NameParking2.setText(name_parking.getText());
                                 binding.addressParking2.setText(address_parking.getText());
                                 Plate_vehicle2.setText(ticket.getString("plate"));
-                                date_entry2.setText(ticket.getString("entry_date"));
+                                String fecha = ticket.getString("entry_date");
+
+                                SimpleDateFormat sdfInput = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                SimpleDateFormat sdfOutput = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+                                try {
+
+                                    Date date = sdfInput.parse(fecha);
+
+                                    String fechaFormateada = sdfOutput.format(date);
+                                    date_entry2.setText(fechaFormateada);
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+
                                 binding.total.setText(ticket.getString("total"));
                                 durarion2.setText(durariton.getText());
-                                loaderTruck.setVisibility(View.GONE);
 
                             } else if (binding.layoutPayment.getVisibility() == View.VISIBLE) {
                                 cambiarEstadoTicket(id);
                                 binding.NameParking3.setText(name_parking.getText());
                                 Plate_vehicle3.setText(ticket.getString("plate"));
-                                date_entry3.setText(ticket.getString("entry_date"));
+                                String fecha = ticket.getString("entry_date");
+
+
+                                SimpleDateFormat sdfInput = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                SimpleDateFormat sdfOutput = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+                                try {
+
+                                    Date date = sdfInput.parse(fecha);
+
+                                    String fechaFormateada = sdfOutput.format(date);
+                                    date_entry3.setText(fechaFormateada);
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
                                 binding.hours3.setText(durariton.getText());
                                 binding.durarion3.setText(durariton.getText());
                                 date_exit.setText(ticket.getString("exit_date"));
                                 loaderTruck.setVisibility(View.GONE);
 
                             }
-
-
+                            loaderTruck.setVisibility(View.GONE);
                         }else{
                             Toast.makeText(context.getApplicationContext(),message,Toast.LENGTH_LONG).show();
                         }
-
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
 
@@ -716,8 +742,6 @@ public class VehicleFragment extends Fragment {
 
                                     }
                                     loaderTruck.setVisibility(View.GONE);
-
-
                                 } catch (JSONException e) {
                                     throw new RuntimeException(e);
                                 }
@@ -727,22 +751,16 @@ public class VehicleFragment extends Fragment {
                             public void onErrorResponse(VolleyError error) {
                                 System.out.println("El servidor GET responde con un error:");
                                 System.out.println(error.getMessage());
-
                             }
                         });
-
                         queue.add(solicitud2);
-
-
-
                     }else{
-
+                        loaderTruck.setVisibility(View.GONE);
+                        Toast.makeText(context.getApplicationContext(),message,Toast.LENGTH_LONG).show();
                     }
-
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -752,7 +770,6 @@ public class VehicleFragment extends Fragment {
                 Toast.makeText(context.getApplicationContext(),"Error al consultar ticket",Toast.LENGTH_LONG).show();
             }
         });
-
         queue.add(solicitud);
     }
 

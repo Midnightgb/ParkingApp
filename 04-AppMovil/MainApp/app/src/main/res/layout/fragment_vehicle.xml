@@ -221,9 +221,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_vehicles"
             android:layout_width="match_parent"
-            android:layout_height="469dp"
-            android:layout_marginTop="5dp"
-            android:padding="10dp" />
+            android:layout_height="534dp"
+            android:layout_marginHorizontal="7dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -261,6 +260,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20sp"
             android:background="@color/white">
             <TextView
                 android:layout_marginLeft="10dp"
@@ -272,19 +272,12 @@
                 android:textSize="20sp" />
             <TextView
                 android:id="@+id/NameParking2"
-
-
                 android:layout_marginLeft="10dp"
                 android:text="XXXXXXXXXXXX"
                 android:textSize="20sp"
-
                 android:layout_gravity="start"
                 android:layout_weight="1"
-                style="@style/TextBold"
-                android:fontFamily="@font/baloo2_bold"
-
-
-                />
+                style="@style/TextBold"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -432,7 +425,7 @@
             android:orientation="horizontal"
             android:layout_marginHorizontal="20dp"
             android:background="@color/white"
-            android:layout_marginVertical="40dp">
+            android:layout_marginTop="70dp">
 
             <TextView
                 style="@style/TextSubtitle"
@@ -850,6 +843,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_marginStart="10dp"
                 >
                 <TextView
                     style="@style/TextSubtitle"
@@ -922,6 +916,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:orientation="vertical"
                 >
                 <TextView
@@ -995,6 +990,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:orientation="vertical"
                 >
                 <TextView
