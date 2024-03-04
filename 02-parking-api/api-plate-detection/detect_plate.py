@@ -8,7 +8,7 @@ from datetime import datetime
 
 def analysis_image():
 
-    g = Github("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")
+    g = Github("GITHUB_TOKEN")
 
 
     repo = g.get_user("jefryne").get_repo("img_placas")
@@ -36,7 +36,7 @@ def analysis_image():
     print("URL de la imagen en GitHub:", image_url_github)
 
 
-    client = ImgurClient("134f614ab8eacd1", "fadaf1c7861652879701a219d58bb47cb541102d")
+    client = ImgurClient("TOKEN", "TOKEN")
 
     album = None 
     image_url = image_url_github
@@ -53,7 +53,7 @@ def analysis_image():
     print(image['link'])
     url_azure = image['link']
 
-    subscription_key = "211a2a34bfac46b8860fa706aec114b3"
+    subscription_key = "AZURE_TOKEN"
     endpoint = "https://vision-placas.cognitiveservices.azure.com/"
 
     computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
